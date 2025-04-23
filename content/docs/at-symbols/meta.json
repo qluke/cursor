@@ -1,0 +1,20 @@
+{
+  "title": "@ Symbols",
+  "pages": [
+    "overview",
+    "files",
+    "folders",
+    "code",
+    "docs",
+    "git",
+    "web",
+    "definitions",
+    "link",
+    "lint-errors",
+    "recent-changes",
+    "cursor-rules",
+    "notepads",
+    "summarized-composers",
+    "files-command"
+  ]
+}

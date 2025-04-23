@@ -1,0 +1,7 @@
+{
+  "title": "Editor Migration",
+  "pages": [
+    "migrate-from-vscode",
+    "migrate-from-jetbrains"
+  ]
+}

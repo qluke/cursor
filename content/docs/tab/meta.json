@@ -1,0 +1,9 @@
+{
+  "title": "Tab",
+  "pages": [
+    "overview",
+    "tab-vs-github-copilot",
+    "auto-import",
+    "advanced-features"
+  ]
+}

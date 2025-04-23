@@ -1,0 +1,10 @@
+{
+  "title": "Chat",
+  "pages": [
+    "overview",
+    "agent-mode",
+    "ask-mode",
+    "manual-mode",
+    "custom-modes"
+  ]
+}
