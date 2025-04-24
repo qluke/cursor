@@ -3,7 +3,10 @@ title: 常见问题
 description: Common Issues
 ---
 
- 
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+解决常见 Cursor 问题指南，包括网络问题、资源使用、SSH 连接和一般常见问题解答
+
 虽然我们努力使 Cursor 尽可能稳定，但有时还是会出现问题。以下是一些常见问题及解决方法。
 
 ### 网络问题（HTTP/2）
@@ -27,3 +30,151 @@ description: Common Issues
 如果你在**MacOS** 上看到内存不足的警告，请注意有些用户可能会遇到一个错误，即显示的值可能会严重不正确。如果出现这种情况，请打开活动监视器并查看 "内存 "选项卡，以了解正确的内存使用情况。
 
 如果你在 Cursor 中遇到 CPU 或内存使用率过高的问题，以下是诊断和解决问题的步骤：
+
+<Accordions>
+
+<Accordion id='check-extensions' title="如何检查扩展对性能的影响？">
+
+尽管许多扩展是有用的，但某些扩展可能会显著影响性能！
+
+**测试步骤**：  
+1. 在终端运行 `cursor --disable-extensions`，以未启用任何扩展的方式启动 Cursor。  
+2. 如果性能有所改善，逐一重新启用扩展，找出导致问题的扩展。  
+
+**使用 Extension Bisect 功能**：  
+- 该功能可帮助识别引发问题的扩展。  
+- 适用于性能问题立即显现的情况，对逐渐恶化的问题可能效果不佳。  
+
+</Accordion>
+
+<Accordion id='process-explorer' title="如何使用进程资源管理器诊断性能问题？">
+
+**进程资源管理器 (Process Explorer)** 是 Cursor 内置工具，可显示消耗资源的具体进程。
+
+**打开方法**：  
+1. 打开命令面板（Cmd/Ctrl + Shift + P）。  
+2. 输入 **Developer: Open Process Explorer**。  
+
+**诊断步骤**：  
+- 进入新窗口，查看所有进程列表，包括 Cursor 自身、扩展进程以及运行的终端。  
+- 如果某进程出现在 **extensionHost** 下：说明某扩展导致问题，尝试禁用问题扩展。  
+- 如果某进程出现在 **ptyHost** 下：说明某终端导致问题，查看运行的命令并尝试结束或诊断进程。  
+- 如果是其他进程导致的高资源占用，请在论坛中联系我们，我们将协助您进行诊断。
+
+</Accordion>
+
+<Accordion id='monitor-resources' title="如何监控系统资源？">
+
+根据您的操作系统，使用内置的系统资源监控工具（如 macOS 的活动监视器或 Windows 的任务管理器），检查问题是否特定于 Cursor，还是系统范围内的问题。
+
+**提示**：  
+- 如果资源占用仅在运行 Cursor 时异常高，问题可能与 Cursor 配置或扩展相关。  
+- 如果整个系统均出现资源不足，则可能需要优化系统设置或硬件。
+
+</Accordion>
+
+<Accordion id='minimal-installation' title="如何测试 Cursor 最小安装版本？">
+
+如果上述步骤未解决问题，您可以尝试测试 Cursor 的最小安装版本，以验证问题是否依然存在。
+
+**步骤**：  
+1. 卸载 Cursor 并清除缓存文件（如 `.cursor` 文件夹）。  
+2. 重新安装 Cursor，但不加载任何扩展或自定义配置。  
+3. 测试性能是否改善。
+
+如果问题仍然存在，请在论坛联系我们以获取进一步支持。
+
+</Accordion>
+
+</Accordions>
+ 
+### 通用 FAQ 
+
+<Accordions>
+
+<Accordion id='update-delays' title="为什么我的 Cursor 没有及时更新？">
+如果您在更新日志中看到新版本但未收到更新，这可能是因为 Cursor 采用分阶段发布策略。新版本会先向部分用户推出以确保稳定，几天后对所有用户开放。
+
+您也可以通过打开命令面板（Cmd/Ctrl + Shift + P）并输入 **Attempt Update** 手动检查更新。
+
+</Accordion>
+
+<Accordion id='github-login' title="GitHub 登录问题">
+**如何登出 GitHub？**  
+- 打开命令面板（Ctrl/⌘ + Shift + P）  
+- 输入 **Sign Out of GitHub**，并选择该选项。
+
+**无法使用 GitHub Codespaces**  
+目前 Cursor 暂不支持 GitHub Codespaces。
+
+</Accordion>
+
+<Accordion id='ssh-issues' title="SSH 连接问题">
+**错误提示：“SSH 仅支持 Microsoft 版本的 VS Code”**  
+解决方法：  
+1. 卸载当前 Remote-SSH 扩展：  
+   - 打开扩展视图（Ctrl + Shift + X）。  
+   - 搜索 "Remote-SSH"，点击齿轮图标并选择“卸载”。  
+2. 安装 Remote-SSH 版本 0.113：  
+   - 在 Cursor Marketplace 搜索 “Remote-SSH”。  
+   - 找到 0.113 版本并安装。  
+3. 关闭所有与 SSH 相关的 VS Code 实例，重启 Cursor，重新尝试连接。
+
+如果问题仍然存在，请检查 SSH 配置和密钥设置是否正确。
+
+</Accordion>
+
+<Accordion id='proxy-issues' title="Cursor Tab 和 Cmd K 在代理下不可用">
+Cursor Tab 和 Cmd K 默认使用 HTTP/2，但某些代理（如 Zscaler）可能会阻止 HTTP/2。  
+解决方法：  
+1. 打开设置（Cmd/Ctrl + ,）。  
+2. 搜索 `http2`。  
+3. 设置 `"cursor.general.disableHttp2": true`。
+
+</Accordion>
+
+<Accordion id='pro-subscription' title="订阅 Pro 后仍显示免费计划？">
+尝试从 Cursor 设置中退出登录并重新登录。
+
+</Accordion>
+
+<Accordion id='usage-reset' title="我的使用额度何时重置？">
+- **Pro 用户**：点击仪表板中的 **Manage Subscription**，顶部会显示您的计划续订日期。  
+- **免费用户**：查看首次收到 Cursor 邮件的日期，使用额度会从该日期每月重置。
+
+</Accordion>
+
+<Accordion id='history-disappear' title="更新后聊天/编辑历史丢失？">
+如果更新后聊天或编辑历史被清除，可能是由于系统磁盘空间不足。Cursor 在更新时可能会清理历史数据以释放空间。
+
+**预防方法**：  
+1. 确保更新前有足够的磁盘空间。  
+2. 定期清理不必要的文件。  
+3. 在更新前备份重要会话记录。
+
+</Accordion>
+
+<Accordion id='uninstall-delete' title="如何卸载 Cursor 或删除账户？">
+**卸载 Cursor**：  
+将任何提及 “VS Code” 的地方替换为 “Cursor”，并将 `.vscode` 替换为 `.cursor`，即可参考对应卸载指南完成操作。
+
+**删除账户**：  
+访问仪表板，点击 **Delete Account** 按钮，即可删除账户及其所有关联数据。
+
+</Accordion>
+
+<Accordion id='open-from-cli' title="如何从命令行打开 Cursor？">
+运行 `cursor` 命令即可从终端打开 Cursor。如果缺少 `cursor` 命令：  
+1. 打开命令面板（⌘⇧P）。  
+2. 输入 **install command**。  
+3. 选择 **Install 'cursor' command**（可选安装 `code` 命令以覆盖 VS Code 的 `code` 命令）。
+
+</Accordion>
+
+<Accordion id='sign-in-issues' title="Cursor 无法登录？">
+如果点击 **Sign In** 后被重定向至 cursor.com，返回 Cursor 仍显示登录按钮：  
+- 尝试禁用防火墙或杀毒软件，可能是它们阻止了登录过程。
+
+</Accordion>
+
+</Accordions>

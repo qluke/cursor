@@ -4,60 +4,53 @@ description: Custom Api Keys
 ---
 
  
-### 指南
+## 自定义 API 密钥
 
-- 编辑器迁移
-- 语言和框架
+在 Cursor 中配置自定义 API 密钥，用于 OpenAI、Anthropic、Google 和 Azure，以使用您自己的 LLM 提供商账户。
 
-### 编辑器
+Cursor 允许您输入各类 LLM 提供商的自定义 API 密钥，以按需使用 AI 消息（费用由您自行承担）。当使用自定义 API 密钥时，我们会通过该密钥调用 LLM 提供商的服务。
 
-- 标签
-- 聊天
-- ⌘K
-- [AI 提交消息](https://docs.cursor.com/more/ai-commit-message)
-- [记事本（测试版）](https://docs.cursor.com/beta/notepads)
-- [键盘快捷键](https://docs.cursor.com/kbd)
+---
 
-### 上下文
+### 如何使用自定义 API 密钥
 
-- [代码库索引](https://docs.cursor.com/context/codebase-indexing)
-- [规则](https://docs.cursor.com/context/rules)
-- @ 符号
-- [忽略文件](https://docs.cursor.com/context/ignore-files)
-- [模型上下文协议](https://docs.cursor.com/context/model-context-protocol)
+1. **进入设置**  
+   打开 **Cursor 设置 > Models**。
 
-### 账户
+2. **输入 API 密钥**  
+   在对应的提供商字段中输入您的 API 密钥。
 
-- [计划和使用](https://docs.cursor.com/account/plans-and-usage)
-- 业务
-- [仪表板](https://docs.cursor.com/account/dashboard)
-- [计费](https://docs.cursor.com/account/billing)
-- [定价](https://cursor.com/pricing)
-- [隐私与安全](https://docs.cursor.com/account/privacy)
+3. **点击“验证”按钮**  
+   验证密钥是否有效。验证通过后，您的 API 密钥将被启用。
 
-### 设置
+**注意**：某些 Cursor 功能（如 Tab Completion）需要专用模型，无法与自定义 API 密钥一起使用。自定义 API 密钥仅适用于使用标准模型的功能，例如 OpenAI、Anthropic 和 Google 提供的模型。
 
-- [模型](https://docs.cursor.com/settings/models)
-- [自定义 API 密钥](https://docs.cursor.com/settings/api-keys)
-- [早期访问计划](https://docs.cursor.com/settings/beta)
+---
 
-### 故障排除
+### 提供商支持
 
-- [常见问题](https://docs.cursor.com/troubleshooting/common-issues)
-- [故障排除指南](https://docs.cursor.com/troubleshooting/troubleshooting-guide)
-- [获取请求 ID](https://docs.cursor.com/troubleshooting/request-reporting)
+#### **OpenAI API 密钥**  
+您可以从 OpenAI 平台获取自己的 API 密钥。  
+**注意**：OpenAI 的推理模型（如 o1、o1-mini、o3-mini）需要特殊配置，暂不支持自定义 API 密钥。
 
-设置
+#### **Anthropic API 密钥**  
+类似于 OpenAI，您可以设置自己的 Anthropic API 密钥，以使用以 Claude 为基础的模型（费用自理）。
 
-此页面是否有用？
+#### **Google API 密钥**  
+您可以设置自己的 Google API 密钥，以使用 Google 模型（如 gemini-1.5-flash-500k，费用自理）。
 
-[模式早期](https://docs.cursor.com/settings/models)[访问计划](https://docs.cursor.com/settings/beta)
+#### **Azure 集成**  
+您还可以设置自己的 Azure API 密钥，以使用 Azure OpenAI 模型（费用自理）。
 
-在此页面
+#### **AWS Bedrock**  
+现在，您可以通过访问密钥和秘密密钥连接到 AWS Bedrock。企业用户还可以通过 IAM 角色进行身份验证。
 
-- [OpenAI API 密钥](https://docs.cursor.com/settings/api-keys#openai-api-keys)
-- [人类 API 密钥](https://docs.cursor.com/settings/api-keys#anthropic-api-keys)
-- [谷歌 API 密钥](https://docs.cursor.com/settings/api-keys#google-api-keys)
-- [Azure 集成](https://docs.cursor.com/settings/api-keys#azure-integration)
-- [AWS 基岩](https://docs.cursor.com/settings/api-keys#aws-bedrock)
-- [常见问题](https://docs.cursor.com/settings/api-keys#faq)
+---
+
+### 常见问题 (FAQ)
+
+#### **我的 API 密钥会被存储或离开设备吗？**  
+您的 API 密钥不会被存储，但每次请求都会通过我们的服务器发送。所有请求都会通过我们的后台进行最终的提示构建。
+
+#### **支持哪些自定义 LLM 提供商？**  
+Cursor 仅支持与 OpenAI API 格式兼容的提供商（如 OpenRouter）。我们不支持自定义本地 LLM 设置或其他 API 格式。如果您遇到非支持提供商的自定义 API 设置问题，我们无法提供技术支持。

@@ -3,59 +3,51 @@ title: Getting Request Id
 description: Getting a Request ID
 ---
 
+## 了解如何在 Cursor 中查找和分享请求 ID，以便获得更好的技术支持和问题报告
 
+在 Cursor 团队调查技术问题时，我们可能会要求您提供“请求 ID”。
 
-### 指南
+---
 
-- 编辑器迁移
-- 语言和框架
+### 什么是请求 ID？
 
-### 编辑器
+请求 ID 是一个唯一标识符，当您向 Cursor 提交请求时会生成。它是一串用于在我们内部系统中标识请求的字符。
 
-- 选项卡
-- 聊天
-- ⌘K
-- [AI 提交消息](https://docs.cursor.com/more/ai-commit-message)
-- [记事本（测试版）](https://docs.cursor.com/beta/notepads)
-- [键盘快捷键](https://docs.cursor.com/kbd)
+通常格式如下：`8f2a5b91-4d3e-47c6-9f12-5e8d94ca7d23`。
 
-### 上下文
+---
 
-- [代码库索引](https://docs.cursor.com/context/codebase-indexing)
-- [规则](https://docs.cursor.com/context/rules)
-- @ 符号
-- [忽略文件](https://docs.cursor.com/context/ignore-files)
-- [模型上下文协议](https://docs.cursor.com/context/model-context-protocol)
+### 如何找到请求 ID？
 
-### 账户
+当启用隐私模式时，请求 ID 的可用性会受到限制。因此，在报告问题时，我们建议您禁用隐私模式。
 
-- [计划和使用](https://docs.cursor.com/account/plans-and-usage)
-- 业务
-- [仪表板](https://docs.cursor.com/account/dashboard)
-- [计费](https://docs.cursor.com/account/billing)
-- [定价](https://cursor.com/pricing)
-- [隐私与安全](https://docs.cursor.com/account/privacy)
+**注意**：对于企业计划的用户，隐私模式由组织管理员默认启用。
 
-### 设置
+---
 
-- [模型](https://docs.cursor.com/settings/models)
-- [自定义 API 密钥](https://docs.cursor.com/settings/api-keys)
-- [早期访问计划](https://docs.cursor.com/settings/beta)
+### 获取当前请求 ID
 
-### 故障排除
+如果您想报告当前或最近会话中的问题，可以按以下步骤快速获取请求 ID：
 
-- [常见问题](https://docs.cursor.com/troubleshooting/common-issues)
-- [故障排除指南](https://docs.cursor.com/troubleshooting/troubleshooting-guide)
-- [获取请求 ID](https://docs.cursor.com/troubleshooting/request-reporting)
+1. 在 Chat 侧边栏中打开相关会话。
+2. 点击右上角的上下文菜单。
+3. 在菜单中选择 **复制请求 ID (Copy Request ID)**。
 
-故障排除
+复制请求 ID 后，您可以通过论坛或电子邮件将其发送给我们，以便我们进一步调查。
 
-此页面对您有帮助吗？
+---
 
-[故障排除指南](https://docs.cursor.com/troubleshooting/troubleshooting-guide)
+### 获取先前操作的请求 ID
 
-本页内容
+您可以通过运行 **Report AI Action** 命令，从 Cursor 中检索历史请求 ID。以下是具体步骤：
 
-- [什么是请求 ID？](https://docs.cursor.com/troubleshooting/request-reporting#what-is-a-request-id%3F)
-- [如何查找请求 ID？](https://docs.cursor.com/troubleshooting/request-reporting#how-do-i-find-a-request-id%3F)
-- [获取您当前的请求 ID](https://docs.cursor.com/troubleshooting/request-reporting#getting-your-current-request-id)
+1. 打开命令面板：**⌘⇧P**（Mac）或 **Ctrl+Shift+P**（Windows/Linux）。  
+2. 输入 **Report AI Action**。  
+3. 选择 **Report AI Action** 选项。
+
+这将打开一个新弹窗，列出您最近的 AI 操作，包括 Chat、**CMD+K** 和 **Apply** 的相关活动。
+
+- 根据操作的时间和使用的功能匹配您想要报告的操作。  
+- 选择操作后，您会看到一个选项来复制请求 ID 到剪贴板。
+
+复制后，您可以将请求 ID 发送给我们，以便进一步调查！
