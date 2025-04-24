@@ -1,5 +1,74 @@
 ---
 title: Javascript Typescript
-description: guides/languages-frameworks/javascript-typescript.mdx
+description: Javascript Typescript
 ---
 
+ 
+欢迎使用 Cursor 进行 JavaScript 和 TypeScript 开发！该编辑器通过其扩展生态系统为 JS/TS 开发提供卓越支持。要充分利用 Cursor，您需要了解以下内容。
+
+## 基本扩展
+
+虽然 Cursor 可与您喜欢的任何扩展一起使用，但我们还是向刚刚入门的用户推荐以下这些扩展：
+
+- **ESLint**- Cursor 的人工智能棉绒修复功能所需的扩展。
+- **JavaScript 和 TypeScript 语言功能**- 增强语言支持和智能提示
+- **路径**智能提示--文件路径的智能路径补全
+
+## 光标功能
+
+Cursor 通过以下功能增强了您现有的 JavaScript/TypeScript 工作流程：
+
+- **选项卡补全**：上下文感知代码自动补全，了解项目结构
+- **自动导入**：只要使用库，Tab 就能自动导入库
+- **内联编辑**：在任意行上使用`CMD+K`以完美的语法进行编辑
+- **编辑器指导**：使用 Composer 在多个文件中规划和编辑代码
+
+### 通过 @Docs 实现框架智能
+
+Cursor 的 @Docs 功能可让您添加人工智能可参考的自定义文档源，从而为 JavaScript 开发增添动力。添加来自 MDN、Node.js 或您最喜欢的框架的文档，以获得更准确、更符合上下文的代码建议。
+
+## [了解有关 @Docs 的更多信息](https://docs.cursor.com/context/@-symbols/@-docs)
+
+[了解如何在 Cursor 中添加和管理自定义文档源。](https://docs.cursor.com/context/@-symbols/@-docs)
+
+### 自动林汀解析
+
+Cursor 的突出特点之一是与 Linter 扩展无缝集成。请确保您已安装 ESLint 等林特工具，并启用 "林特迭代 "设置。
+
+然后，在 Composer 中使用代理模式时，一旦人工智能尝试回答您的问题并修改了代码，它就会自动读取林特尔的输出，并尝试修复它可能不知道的任何林特尔错误。
+
+## 框架支持
+
+Cursor 可与所有主要 JavaScript 框架和库无缝协作，例如
+
+### React 和 Next.js
+
+- 完全支持 JSX/TSX，并提供智能组件建议
+- 针对 Next.js 的服务器组件和 API 路由智能
+- 推荐使用[**React 开发工具**](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)扩展
+
+### Vue.js
+
+- 通过 Volar 集成支持模板语法
+- 组件自动完成和类型检查
+- 建议使用[**Vue 语言功能**](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+### 角语言
+
+- 模板验证和 TypeScript 装饰器支持
+- 组件和服务生成
+- 建议使用[**Angular 语言服务**](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
+
+### Svelte
+
+- 组件语法高亮显示和智能补全
+- 反应式语句和存储建议
+- 推荐：Svelte for VS Code[**用于 VS 代码的 Svelte**](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)
+
+### 后端框架（Express/NestJS）
+
+- 路由和中间件智能
+- 为 NestJS 提供 TypeScript 装饰器支持
+- API 测试工具集成
+
+请记住，Cursor 的人工智能功能可与所有这些框架完美配合，了解它们的模式和最佳实践，从而提供相关建议。从组件创建到复杂的重构任务，人工智能都能在尊重项目现有模式的前提下提供帮助。

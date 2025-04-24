@@ -1,5 +1,21 @@
 ---
-title: Ask Mode
-description: editor/chat/ask-mode.mdx
+title: 提问模式
+description: Ask Mode
 ---
 
+ 
+Ask 是一种 "只读 "[聊天](https://docs.cursor.com/chat/overview)模式，用于提问、探索和了解代码库。它是 Cursor 的内置模式，默认情况下已启用[搜索工具](https://docs.cursor.com/chat/tools#search)。
+
+请务必阅读[聊天概述](https://docs.cursor.com/chat/overview)，进一步了解 Cursor 中模式的工作原理。
+
+## 与其他模式的区别
+
+Ask 与其他默认模式（代理和手动）不同，它默认情况下不会应用任何建议的更改--这使它成为一种 "只读 "模式，具有读取文件和其他上下文的全部能力，但无法自行进行任何更改。
+
+这对于了解你可能不想更改的代码库，或在实施前与人工智能一起规划解决方案来说，都是很好的选择！
+
+## 配置选项
+
+- **模型**- 为 Ask 预设一个模型
+- **按键绑定**- 设置按键绑定以切换到 "询问 "模式
+- **搜索代码库（Search Codebase**）- 允许光标搜索它自己的上下文，而无需在希望人工智能看到文件时手动@文件作为上下文。

@@ -3,3 +3,45 @@ title: CmdK
 description: editor/tools/cmdK.mdx
 ---
 
+ 
+Cmd K，在 Windows/Linux 中也称为 "Ctrl K"，可让您在编辑器窗口中生成新代码或编辑现有代码。
+
+## 提示栏
+
+在 Cursor 中，我们将按下`Ctrl/Cmd K`时出现的栏称为 "提示栏"。它的工作原理类似于聊天时的 AI 输入框，你可以在其中正常输入，也可以使用[@ 符号](https://docs.cursor.com/cmdk/context/@-symbols)来引用其他上下文。
+
+## 内联生成
+
+如果按`Ctrl/Cmd K 键时`未选择代码，Cursor 将根据您在提示栏中输入的提示生成新代码。
+
+## 内联编辑
+
+对于就地编辑，只需选择要编辑的代码并在提示栏中输入即可。
+
+## 后续说明
+
+每次生成后，您都可以在提示栏中添加更多说明，进一步完善提示，然后按`Enter 键`，人工智能就会根据您的后续说明重新生成。
+
+## 默认语境
+
+默认情况下，Cursor 会尝试查找不同类型的有用信息，以改进代码生成，此外还包括您的手动[@ 符号](https://docs.cursor.com/context/@-symbols/@-files)。
+
+附加上下文可能包括相关文件、最近查看过的文件等。收集后，Cursor 会根据与编辑/生成的相关性对上下文项目进行排序，并将排序靠前的项目保留在大语言模型的上下文中。
+
+## 快速提问
+
+如果在提示栏中按下`Option/Alt Enter 键`，Cursor 就会回答你对所选内容和所附上下文提出的任何问题。
+
+这一对话的内容可进一步用于后续生成，因此你只需在 Cursor 作出回应后输入 "照做"，即可在快速提问后生成代码。
+
+本页对您有帮助吗？
+
+[应用终端](https://docs.cursor.com/chat/apply)[Cmd K](https://docs.cursor.com/cmdk/terminal-cmdk)
+
+在本页
+
+- [提示栏](https://docs.cursor.com/cmdk/overview#prompt-bars)
+- [内联生成](https://docs.cursor.com/cmdk/overview#inline-generation)
+- [内联编辑](https://docs.cursor.com/cmdk/overview#inline-edits)
+- [后续指示](https://docs.cursor.com/cmdk/overview#follow-up-instructions)
+- [默认上下文](https://docs.cursor.com/cmdk/overview#default-context)

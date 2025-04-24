@@ -1,7 +1,4 @@
 {
-  "title": "Tools",
-  "pages": [
-    "apply",
-    "cmdK"
-  ]
+  "title": "⌘K",
+  "pages": ["overview", "cmdK"]
 }

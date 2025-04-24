@@ -20,7 +20,7 @@ export default function Home() {
           AI 代码编辑器
         </h1>
         <p className="text-xl md:text-2xl text-white font-mono mb-10">
-          旨在让你获得超凡的生产力， Cursor 是使用 AI 编写代码的最佳方式。
+          中文文档实时同步官方最新内容，翻译专业，助你无障碍上手 Cursor。
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">

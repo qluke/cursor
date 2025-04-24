@@ -1,5 +1,139 @@
 ---
 title: Java
-description: guides/languages-frameworks/java.mdx
+description: Java
 ---
 
+ 
+本指南将帮助您为 Java 开发配置 Cursor，包括设置 JDK、安装必要的扩展、调试、运行 Java 应用程序，以及集成 Maven 和 Gradle 等构建工具。它还涵盖了与 IntelliJ 或 VS Code 类似的工作流程功能。
+
+在开始之前，请确保已安装 Cursor 并更新到最新版本。
+
+### Java 安装
+
+在设置 Cursor 本身之前，您需要在机器上安装 Java。
+
+Cursor 并不附带 Java 编译器，因此如果尚未安装，则需要安装 JDK。
+
+## Windows 安装
+
+下载并安装 JDK（如 OpenJDK、Oracle JDK、Microsoft Build of OpenJDK）。
+
+设置 JAVA_HOME，并在 PATH 中添加 JAVA_HOME/bin。
+
+## macOS 安装
+
+通过 Homebrew`安装（brew install openjdk`）或`下载安装`程序。
+
+确保 JAVA_HOME 指向已安装的 JDK。
+
+## Linux 安装
+
+使用软件包管理器`（sudo apt install openjdk-17-jdk`或类似软件）或通过 SDKMAN 安装。
+
+要检查安装情况，请运行
+
+如果 Cursor 未检测到 JDK，请在 settings.json 中手动配置：
+
+重启 Cursor 以应用更改。
+
+### 光标设置
+
+Cursor 支持 VS Code 扩展。手动安装以下内容：
+
+## [Java 扩展包](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+
+[包括 Java 语言支持、调试器、测试运行器、Maven 支持和项目管理器](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+
+[**Gradle for Java**使用 Gradle 构建系统的必备工具](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle)
+
+[**Spring Boot**开发所需的 Spring Boot**扩展包**](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack)
+
+[**JavaFX 支持**JavaFX 应用程序开发所必需](https://marketplace.visualstudio.com/items?itemName=dlsc-oss.vscode-javafx)
+
+### 配置构建工具
+
+### Maven
+
+确保已安装 Maven`(mvn -version`)。如有需要，从[maven.apache.org](https://maven.apache.org/download.cgi)安装：
+
+1. 下载二进制压缩包
+2. 解压到所需位置
+3. 将 MAVEN_HOME 环境变量设置为解压缩后的文件夹
+4. 在 PATH 中添加 %MAVEN_HOME%\bin (Windows) 或 $MAVEN_HOME/bin (Unix)
+
+### Gradle
+
+确保已安装 Gradle`(gradle -version`)。必要时从[gradle.org](https://gradle.org/install/)安装：
+
+1. 下载二进制发行版
+2. 解压到所需位置
+3. 将 GRADLE_HOME 环境变量设置为解压缩后的文件夹
+4. 在 PATH 中添加 %GRADLE_HOME%\bin (Windows) 或 $GRADLE_HOME/bin (Unix)
+
+或者使用 Gradle Wrapper，它会自动下载并使用正确的 Gradle 版本：
+
+## 运行和调试
+
+现在，一切准备就绪，是时候运行和调试 Java 代码了。根据需要，可以使用以下方法：
+
+## 运行
+
+点击主方法上方的 "运行 "链接，快速执行程序
+
+## 调试
+
+打开 "运行 "和 "调试 "侧边栏面板，使用 "运行 "按钮启动应用程序
+
+## 终端
+
+使用 Maven 或 Gradlecommands 从命令行执行程序
+
+## Spring Boot
+
+直接从 Spring Boot Dashboard 扩展启动 Spring Boot 应用程序
+
+## Java x 光标工作流
+
+Cursor 的人工智能功能可显著增强 Java 开发工作流程。以下是一些利用 Cursor 专为 Java 提供的功能的方法：
+
+## 制表符补全
+
+对方法、签名和 Java 模板（如 getters/setters）进行智能补全。
+
+## 代理模式
+
+实现设计模式、重构代码或生成具有适当继承性的类。
+
+## Cmd-K
+
+快速内联编辑方法、修复错误或生成单元测试，而不会破坏流程。
+
+## 聊天
+
+获取有关 Java 概念、调试异常或了解框架功能的帮助。
+
+### 工作流程示例
+
+1. 
+    
+    **生成 Java 模板**
+    
+    使用[Tab completion](https://docs.cursor.com/tab/overview)快速生成构造函数、getters/setters、equals/hashCode 方法和其他重复的 Java 模式。
+    
+2. 
+    
+    **调试复杂的 Java 异常**
+    
+    当遇到令人费解的 Java 堆栈跟踪时，将其突出显示并使用[Ask](https://docs.cursor.com/chat/overview)来解释根本原因并提出潜在的修复建议。
+    
+3. 
+    
+    **重构旧版 Java 代码**
+    
+    使用[Agent 模式](https://docs.cursor.com/chat/agent)对旧版 Java 代码进行现代化改造--将匿名类转换为 lambdas，升级到较新的 Java 语言特性，或实现设计模式。
+    
+4. 
+    
+    **框架开发**
+    
+    使用 @docs 将您的文档添加到 Cursor 的上下文中，并在整个 Cursor 中生成特定于框架的代码。

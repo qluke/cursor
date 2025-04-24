@@ -5,6 +5,7 @@
     "agent-mode",
     "ask-mode",
     "manual-mode",
-    "custom-modes"
+    "custom-modes",
+    "apply"
   ]
 }

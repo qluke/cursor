@@ -1,5 +1,67 @@
 ---
-title: Ios Macos Swift
-description: guides/languages-frameworks/ios-macos-swift.mdx
+title: iOS & macOS (Swift)
+description: iOS & macOS (Swift)
 ---
 
+ 
+欢迎使用 Cursor 进行 Swift 开发！无论您是要构建 iOS 应用程序、macOS 应用程序还是服务器端 Swift 项目，我们都能为您提供支持。本指南将帮助您在 Cursor 中设置 Swift 环境，从基础功能开始，逐步过渡到更高级的功能。
+
+## 基本工作流程
+
+将 Cursor 与 Swift 结合使用的最简单方法就是将其作为您的主要代码编辑器，同时仍然依赖 Xcode 来构建和运行您的应用程序。您将获得以下强大功能
+
+- 智能代码自动补全
+- 人工智能编码辅助（在任意行上尝试[CMD+K）](https://docs.cursor.com/cmdk/overview)
+- 通过[@Docs](https://docs.cursor.com/context/@-symbols/@-docs)快速访问文档
+- 语法高亮
+- 基本代码导航
+
+当您需要构建或运行应用程序时，只需切换到 Xcode。这种工作流程非常适合那些既想利用 Cursor 的人工智能功能，又想使用熟悉的 Xcode 工具进行调试和部署的开发人员。
+
+### 热重载
+
+使用 Xcode 工作区或项目（而不是直接在 Xcode 中打开文件夹）时，Xcode 通常会忽略在 Cursor 中或 Xcode 之外对文件所做的更改。
+
+虽然您可以在 Xcode 中打开文件夹来解决这个问题，但您可能需要在 Swift 开发工作流程中使用一个项目。
+
+一个很好的解决方案是使用[Inject](https://github.com/krzysztofzablocki/Inject)，它是 Swift 的热重载库，可以让您的应用程序 "热重载"，并在实时更改后立即更新。这不会受到 Xcode 工作区/项目问题的副作用影响，而且允许您在 Cursor 中进行更改，并立即反映到您的应用程序中。
+
+## [Inject - Swift 的热重载](https://github.com/krzysztofzablocki/Inject)
+
+[进一步了解 Inject 以及如何在 Swift 项目中使用它。](https://github.com/krzysztofzablocki/Inject)
+
+## 高级 Swift 开发
+
+本指南的这一部分在很大程度上受到了[Thomas Ricouard](https://x.com/Dimillian)和他关于在 iOS 开发中使用 Cursor 的[文章的](https://dimillian.medium.com/how-to-use-cursor-for-ios-development-54b912c23941)启发。请查看他的文章了解更多详情，并关注他以获取更多 Swift 内容。
+
+如果你希望一次只打开一个编辑器，并避免在 Xcode 和 Cursor 之间切换，你可以使用[Sweetpad](https://sweetpad.hyzyla.dev/)这样的扩展将 Cursor 直接与 Xcode 的底层构建系统集成。
+
+Sweetpad 是一款功能强大的扩展，可让您直接在 Cursor 中构建、运行和调试 Swift 项目，而不会影响 Xcode 的功能。
+
+要开始使用 Sweetpad，您仍然需要在 Mac 上安装 Xcode，因为它是 Swift 开发的基础。你可以从[Mac App Store](https://apps.apple.com/us/app/xcode/id497799835) 下载 Xcode。安装好 Xcode 后，让我们使用一些基本工具来增强 Cursor 的开发体验。
+
+打开终端并运行：
+
+接下来，在 Cursor 中安装[Swift 语言支持](https://marketplace.visualstudio.com/items?itemName=sswg.swift-lang)扩展。这将为你提供语法高亮和基本的语言功能。
+
+然后，我们可以安装[Sweetpad](https://sweetpad.hyzyla.dev/)扩展，将 Cursor 与 Xcode 集成。Sweetpad 在`xcodebuild`CLI（还有更多）周围封装了大量快捷方式，让你可以像 Xcode 一样扫描目标、选择目标、构建和运行应用程序。除此之外，它还会为 Xcode Build Server 设置您的项目，让您获得上述所有功能。
+
+### Sweetpad 的使用
+
+安装好 Sweetpad 后，在 Cursor 中打开 Swift 项目，首先运行`Sweetpad.`Generate Build Server Configuration 命令：`生成构建服务器配置`命令。这将在你的项目根目录下生成一个`buildServer.json`文件，允许 Xcode Build Server 与你的项目协同工作。
+
+然后，你可以从命令调板或 Sweetpad 侧边栏中选择要构建和运行的目标。
+
+您需要构建一次您的项目，以启用自动完成、跳转到定义和其他语言功能。
+
+现在，你还可以点击 F5，通过调试器来构建和运行你的项目--你可能需要先创建一个启动配置，但只需在提示时从列表中选择 Sweetpad 即可！
+
+与 Cursor 中的许多扩展一样，你可以将许多 Sweetpad 命令绑定到键盘快捷键上，使工作流程更加高效。
+
+要了解有关 Sweetpad 的更多信息，请查看以下资源：
+
+## [Sweetpad 网站](https://sweetpad.hyzyla.dev/)
+
+[Sweetpad 官方网站，提供功能和安装说明](https://sweetpad.hyzyla.dev/)
+
+[**Sweetpad 指南**涵盖配置、使用和高级功能的全面指南](https://sweetpad.hyzyla.dev/docs/intro)

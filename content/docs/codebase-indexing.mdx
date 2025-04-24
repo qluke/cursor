@@ -3,3 +3,49 @@ title: Codebase Indexing
 description: context/codebase-indexing.mdx
 ---
 
+ 
+为获得更好、更准确的代码库答案，您可以对代码库进行索引。在幕后，Cursor 会计算代码库中每个文件的嵌入，并利用这些嵌入提高代码库答案的准确性。
+
+打开项目时，每个 Cursor 实例都将为该工作区初始化索引。初始索引设置完成后，Cursor 会自动索引添加到工作区的任何新文件，以保持代码库上下文的最新状态。
+
+代码库索引的状态位于 "`Cursor 设置`">"`功能`">"`代码库索引`"。
+
+### 高级设置
+
+默认情况下，Cursor 会索引代码库中的所有文件。
+
+您还可以展开 "`显示设置`"部分，访问更多高级选项。在这里，你可以决定是否要为新版本库启用自动索引，并配置 Cursor 在版本库索引过程中将忽略的文件。
+
+Cursor 使用与 VS Code 相同的软件包来处理文件忽略，这意味着它尊重所有`.gitignore`文件，包括子目录中的文件。你还可以创建一个`.cursorignore`文件，用于特定用户的忽略模式，你可能想把它添加到全局`.gitignore`文件中，以避免提交到版本库。
+
+如果你的项目中有人工智能肯定不需要读取的大型内容文件，[忽略这些文件](https://docs.cursor.com/context/ignore-files)可以提高答案的准确性。
+
+### 处理大型单词库
+
+在处理包含成百上千个文件的大型单源时，对索引内容进行策略性处理非常重要。
+
+- 使用`.cursorignore`可让每个开发人员配置在 monorepo 中工作的文件夹和路径`。`
+- 在全局`.gitignore`中添加`.cursorignore`
+
+这样，每个开发人员就可以针对自己在 monorepo 中的特定工作区域优化索引。
+
+## 常见问题
+
+### 在哪里可以看到我已索引的所有代码库？
+
+目前，您无法查看已建立索引的所有代码库列表。您需要在 Cursor 中打开项目并检查代码库索引设置，手动检查每个项目的索引状态。
+
+### 如何删除所有代码库？
+
+您可以从 "设置 "中删除您的 Cursor 账户以移除所有索引代码库，或者从每个项目的代码库索引设置中手动删除单个代码库。目前没有办法在不删除账户的情况下一次性删除所有代码库。
+
+本页对您有帮助吗？
+
+[键盘快捷键](https://docs.cursor.com/kbd)[规则](https://docs.cursor.com/context/rules)
+
+在此页面
+
+- [索引您的代码库](https://docs.cursor.com/context/codebase-indexing#index-your-codebase)
+- [高级设置](https://docs.cursor.com/context/codebase-indexing#advanced-settings)
+- [处理大型单点](https://docs.cursor.com/context/codebase-indexing#working-with-large-monorepos)
+- [常见问题](https://docs.cursor.com/context/codebase-indexing#faq)

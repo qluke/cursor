@@ -1,9 +1,4 @@
 {
-  "title": "Languages & Frameworks",
-  "pages": [
-    "python",
-    "javascript-typescript",
-    "ios-macos-swift",
-    "java"
-  ]
+  "title": "语言 & 框架",
+  "pages": ["python", "javascript-typescript", "ios-macos-swift", "java"]
 }

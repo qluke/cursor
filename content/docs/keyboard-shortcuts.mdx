@@ -1,5 +1,139 @@
 ---
-title: Keyboard Shortcuts
-description: editor/keyboard-shortcuts.mdx
+title: 快捷键
+description: Keyboard Shortcuts
+
 ---
 
+ 
+- [登录](https://www.cursor.com/api/auth/login)
+- [下载](https://cursor.com/)
+
+### 指南
+
+- 编辑器迁移
+- 语言和框架
+
+### 编辑器
+
+- 选项卡
+- 聊天
+- ⌘K
+- [AI 提交消息](https://docs.cursor.com/more/ai-commit-message)
+- [记事本（测试版）](https://docs.cursor.com/beta/notepads)
+- [键盘快捷键](https://docs.cursor.com/kbd)
+
+### 上下文
+
+- [代码库索引](https://docs.cursor.com/context/codebase-indexing)
+- [规则](https://docs.cursor.com/context/rules)
+- @ 符号
+- [忽略文件](https://docs.cursor.com/context/ignore-files)
+- [模型上下文协议](https://docs.cursor.com/context/model-context-protocol)
+
+### 账户
+
+- [计划和使用](https://docs.cursor.com/account/plans-and-usage)
+- 业务
+- [仪表板](https://docs.cursor.com/account/dashboard)
+- [计费](https://docs.cursor.com/account/billing)
+- [定价](https://cursor.com/pricing)
+- [隐私与安全](https://docs.cursor.com/account/privacy)
+
+### 设置
+
+- [模型](https://docs.cursor.com/settings/models)
+- [自定义 API 密钥](https://docs.cursor.com/settings/api-keys)
+- [早期访问计划](https://docs.cursor.com/settings/beta)
+
+### 故障排除
+
+- [常见问题](https://docs.cursor.com/troubleshooting/common-issues)
+- [故障排除指南](https://docs.cursor.com/troubleshooting/troubleshooting-guide)
+- [获取请求 ID](https://docs.cursor.com/troubleshooting/request-reporting)
+
+编辑器
+
+Cursor 中所有键盘快捷键的完整参考，包括聊天、Tab、终端和代码选择命令
+
+Cursor 中键盘快捷键和按键绑定的高级概览。按`Cmd + R`，然后按`Cmd + S`，即可查看所有键盘快捷键。
+
+要了解有关 Cursor 中键盘快捷键的更多信息，请查看《[VS 代码的按键绑定](https://code.visualstudio.com/docs/getstarted/keybindings)》，因为它是 Cursor 按键绑定的良好基准。
+
+所有 Cursor 的按键绑定，包括 Cursor 特有功能的按键绑定，都可以在键盘快捷键设置页面中重新映射。
+
+在 Windows 中，所有`Cmd`键都可以替换为`Ctrl`键。
+
+## 一般设置
+
+| 快捷键 | 操作 |
+| --- | --- |
+| Cmd + I (⌘I) | 切换副面板（除非与模式绑定） |
+| Cmd + L (⌘L) | 切换副面板（除非与模式绑定） |
+| Cmd + . (⌘.) | 打开模式菜单 |
+| Cmd + / (⌘/) | 在 AI 模式之间循环 |
+| Cmd + Shift + J (⌘⇧J) | 打开光标设置 |
+| Cmd + , (⌘,) | 打开常规设置 |
+| Cmd + Shift + P (⌘⇧P) | 打开命令调板 |
+
+## 聊天
+
+这些快捷键可在聊天输入框中使用。
+
+| 快捷键 | 操作 |
+| --- | --- |
+| 输入 | 提交 |
+| Cmd + Shift + Backspace (⌘⇧⌫) | 取消生成 |
+| Cmd + L (⌘L)，选择代码 | 将选定代码添加为上下文 |
+| Cmd + Shift + L (⌘⇧L)，选中代码 | 将选中的代码添加为上下文 |
+| Cmd + Enter (⌘⏎) | 接受所有更改 |
+| Cmd + Backspace (⌘⌫) | 拒绝所有更改 |
+| 选项卡 | 循环到下一条信息 |
+| Shift + Tab (⇧⇥) | 循环到上一条信息 |
+| Cmd + Alt + / (⌘⌥/) | 打开模型切换 |
+| Cmd + N (⌘N) / Cmd + R (⌘R) | 创建新聊天 |
+| Cmd + Shift + K (⌘⇧K) | 以栏的形式打开作曲家 |
+| Cmd + [ (⌘[) | 打开之前的聊天 |
+| Cmd + ] (⌘]) | 打开下一个聊天 |
+| Cmd + W (⌘W) | 关闭聊天 |
+| Esc | 取消字段对焦 |
+
+## Cmd+K
+
+| 快捷键 | 操作 |
+| --- | --- |
+| Cmd+K | 打开 |
+| Cmd + Shift + K | 切换输入焦点 |
+| 输入 | 提交 |
+| Cmd + Shift + Backspace (⌘⇧⌫) | 取消 |
+| 选项 + Enter | 快速提问 |
+
+## 代码选择和上下文
+
+| 快捷键 | 操作 |
+| --- | --- |
+| @ | [@ 符号](https://docs.cursor.com/context/@-symbols) |
+| # | 文件 |
+| / | 快捷命令 |
+| Cmd + Shift + L | 将选择添加到聊天 |
+| Cmd + Shift + K | 在 "编辑 "中添加选区 |
+| Cmd + L | 将选区添加到新聊天 |
+| Cmd + M | 切换文件读取策略 |
+| Cmd + → | 接受建议的下一个词 |
+| Cmd + Enter | 在聊天中搜索代码库 |
+| 选择代码，Cmd + C，Cmd + V | 添加复制的参考代码作为上下文 |
+| 选择代码、Cmd + C、Cmd + Shift + V | 将复制的代码添加为文本上下文 |
+
+## 标签
+
+| 快捷键 | 操作 |
+| --- | --- |
+| 标签 | 接受建议 |
+| Cmd + → | 接受下一个词 |
+
+## 终端
+
+| 快捷键 | 操作 |
+| --- | --- |
+| Cmd + K | 打开终端提示栏 |
+| Cmd + Enter | 运行生成的命令 |
+| Esc | 接受命令 |

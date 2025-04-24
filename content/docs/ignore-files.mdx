@@ -3,3 +3,80 @@ title: Ignore Files
 description: context/ignore-files.mdx
 ---
 
+ 
+Cursor 会读取项目代码库并编制索引，为其功能提供支持。通过在根目录中添加`.cursorignore`文件，你可以控制 Cursor 可以访问哪些目录和文件。
+
+Cursor 会尽最大努力阻止访问`.cursorignore`文件中列出的文件：
+
+- 代码库索引
+- 通过[Tab](https://docs.cursor.com/tab/overview)、[Chat](https://docs.cursor.com/chat/overview)和[⌘](https://docs.cursor.com/cmdk/overview)K访问的代码
+- 通过[@ 符号引用](https://docs.cursor.com/context/@-symbols/overview)访问的代码
+
+由Cursor的聊天功能发起的对终端和MCP服务器等服务的工具调用，目前无法阻止对`.cursorignore`代码的访问`。`
+
+## 全局忽略文件
+
+现在您可以通过用户级设置来定义适用于所有项目的忽略模式。这样就能将嘈杂或敏感文件（如构建输出或机密文件）排除在提示之外，而无需按项目进行配置。
+
+## 为什么要忽略文件？
+
+配置 Cursor 以忽略代码库中的部分文件有两个常见原因：
+
+### 安全性
+
+虽然您的代码库不会永久存储在 Cursor 服务器或支持其功能的 LLM 上，但出于安全考虑，您可能仍希望限制对某些文件的访问，例如包含 API 密钥、数据库凭证和其他机密的文件。
+
+Cursor 会尽最大努力阻止对忽略文件的访问，但由于 LLM 行为的不可预测性，我们无法保证这些文件永远不会暴露。
+
+### 性能
+
+如果您使用的是单代码或超大代码库，其中大部分代码与您正在开发的代码无关，那么您可以考虑配置 Cursor 以忽略应用程序中的这些部分。
+
+通过忽略代码库中的无关部分，Cursor 可以更快地索引大型代码库，并在搜索上下文时更快速、更准确地找到文件。
+
+Cursor 专为支持大型代码库而设计，能熟练评估文件相关性，但当使用的代码库特别大或包含与开发无关的文件时，忽略功能会很有帮助。
+
+## 配置`.cursorignore`
+
+要使用Cursor的忽略功能，请在代码库的根目录下添加一个`.cursorignore`文件，并列出要忽略的目录和文件。
+
+`.cursorignore`文件使用的模式匹配语法与`.gitignore`文件相同。
+
+### 基本模式示例
+
+### 高级模式示例
+
+### 注意事项
+
+- 
+    
+    忽略空行
+    
+- 
+    
+    以`#`开头的行被视为注释并忽略
+    
+- 
+    
+    模式相对于`.cursorignore`文件的位置进行匹配
+    
+- 
+    
+    模式将覆盖文件中先前列出的冲突模式
+    
+
+## 使用`.cursorindexingignore`限制索引
+
+要在索引中使用Cursor的忽略功能，可在代码库的根目录中添加一个`.cursorindexingignore`文件，并列出要从索引中排除的目录和文件。
+
+`.cursorindexingignore`中列出的文件将不会包含在Cursor的索引中，但仍可被Cursor的人工智能辅助功能访问，包括当Cursor搜索代码库并将其公开给LLM时。
+
+## 默认忽略的文件
+
+Cursor 还将忽略根目录中`.gitignore`文件和下面默认忽略列表中列出的所有文件。
+
+要想不忽略这些文件中列出的文件，请将其添加到`.cursorignore`文件中，并在文件前加上`!`前缀。
+
+## 故障排除
+
+要排除忽略文件的问题，可尝试使用`git check-ignore -v [file]`命令测试模式。

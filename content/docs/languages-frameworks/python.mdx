@@ -1,5 +1,90 @@
 ---
 title: Python
-description: guides/languages-frameworks/python.mdx
+description: Python
 ---
 
+ 
+本指南在很大程度上受到了[Jack Fields](https://x.com/OrdinaryInds)和他关于为 Python 开发设置 VS Code 的[文章的](https://medium.com/ordinaryindustries/the-ultimate-vs-code-setup-for-python-538026b34d94)启发。请查看他的文章了解更多详情。
+
+## 前提条件
+
+在开始之前，请确保您已
+
+- 已安装[Python](https://python.org/)（建议使用 3.8 或更高版本）
+- 用于版本控制的[Git](https://git-scm.com/)
+- 已安装 Cursor 并更新至最新版本
+
+## 基本扩展
+
+### 核心 Python 支持
+
+以下扩展为 Cursor 的 Python 开发提供了全面支持。这些扩展为你提供了语法高亮、过滤、调试和单元测试功能。
+
+### 代码质量工具
+
+### 高级 Python 工具
+
+虽然上述扩展是 Cursor 中最受欢迎的 Python 开发扩展，但我们还添加了一些额外的扩展，以帮助您从 Python 开发中获得最大收益。
+
+### `uv`- Python 环境管理器
+
+[uv](https://github.com/astral-sh/uv)是一个现代 Python 软件包管理器，除了取代 pip 作为默认软件包管理器外，还可用于创建和管理虚拟环境。
+
+要安装 uv，请在终端运行以下命令：
+
+### `ruff`- Python 内核和格式化工具
+
+[Ruff](https://docs.astral.sh/ruff/)是一款现代 Python 内核和格式化工具，可用于检查编程错误、帮助执行编码标准并提出重构建议。它可以与 Black 一起用于代码格式化。
+
+要安装 Ruff，请在终端运行以下命令：
+
+## 光标配置
+
+### 1.Python 解释器
+
+在 Cursor 中配置 Python 解释器：
+
+1. 打开命令调板（Cmd/Ctrl + Shift + P）
+2. 搜索 "Python：选择解释器
+3. 选择您的 Python 解释器（或虚拟环境，如果正在使用的话）
+
+### 2.代码格式化
+
+使用 Black 设置自动代码格式化：
+
+要安装 Black，请在终端运行以下命令：
+
+然后，在`settings.json`文件中添加以下内容，配置 Cursor 使用 Black 进行代码格式化：
+
+### 3.着色
+
+我们可以使用 PyLint 检查编程错误，帮助执行编码标准，并提出重构建议。
+
+要安装 PyLint，请在终端运行以下命令：
+
+### 4.类型检查
+
+除了语法检查，我们还可以使用 MyPy 来检查类型错误。
+
+要安装 MyPy，请在终端中运行以下命令：
+
+## 调试
+
+Cursor 为 Python 提供了强大的调试功能：
+
+1. 点击沟槽设置断点
+2. 使用调试面板（Cmd/Ctrl + Shift + D）
+3. 为自定义调试配置配置`launch.json`
+
+## 推荐功能
+
+## 框架支持
+
+Cursor 可与流行的 Python 框架无缝协作：
+
+- **网络框架**Django、Flask、FastAPI
+- **数据科学**Jupyter、NumPy、Pandas
+- **机器学习**TensorFlow、PyTorch、scikit-learn
+- **测试**：pytest、unittest
+- **应用程序接口**：请求、Aiohttp
+- **数据库**SQLAlchemy, psycopg2

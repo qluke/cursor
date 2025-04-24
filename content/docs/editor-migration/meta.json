@@ -1,7 +1,4 @@
 {
-  "title": "Editor Migration",
-  "pages": [
-    "migrate-from-vscode",
-    "migrate-from-jetbrains"
-  ]
+  "title": "编辑器迁移",
+  "pages": ["migrate-from-vscode", "migrate-from-jetbrains"]
 }
