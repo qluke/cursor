@@ -1,5 +1,45 @@
 ---
-title: Troubleshooting Guide
-description: troubleshooting/troubleshooting-guide.mdx
+title: 故障排除指南
+description: Troubleshooting Guide
 ---
 
+ 
+有时，光标可能会意外出现一些问题。原因有很多，包括扩展、应用程序数据或系统。虽然我们努力确保 Cursor 开箱即用的稳定性，但如果出现这些问题，您可以尝试以下步骤来解决。
+
+## 故障排除
+
+### 1.扩展数据
+
+如果个别扩展出现问题，可以尝试卸载并重新安装，以重置它们可能存储的任何数据。此外，还可以检查设置，看看卸载和重新安装扩展后是否会保留任何配置。
+
+### 2.清除应用程序数据
+
+为了在更新和重新安装之间恢复安装，Cursor 会将应用程序数据保存在应用程序本身之外。这意味着如果您卸载了 Cursor，可以重新安装它，它将还原之前安装的应用程序数据。
+
+如果您想清除应用程序数据，可以按照以下步骤进行：
+
+**Windows：**在命令提示符中运行以下命令：
+
+**MacOS：**在终端中运行`sudo rm -rf ~/Library/Application\ Support/Cursor`和`rm -f ~/.cursor.json`。
+
+**Linux：**在终端中运行`rm -rf ~/.cursor ~/.config/Cursor/。`
+
+### 3.卸载光标
+
+虽然我们不希望你重新安装 Cursor，但如果你遇到问题，这有时会有所帮助。
+
+卸载 Cursor 应用程序的方法如下：
+
+### 4.重新安装光标
+
+如果您已经卸载了 Cursor，可以前往[下载页面](https://www.cursor.com/download)下载最新版本重新安装。如果您没有清除应用程序数据，则应将应用程序恢复到卸载时的状态。否则，您将重新安装 Cursor。
+
+## 报告问题
+
+如果上述步骤无法解决问题，请在[论坛](https://forum.cursor.com/)上告诉我们，我们很乐意帮助您诊断问题。
+
+## [光标论坛](https://forum.cursor.com/)
+
+[在 Cursor 论坛上报告错误或问题](https://forum.cursor.com/)
+
+为获得快速解决问题的最佳机会，请尽可能提供以下信息，以帮助团队为您和其他人解决问题ß∂：
