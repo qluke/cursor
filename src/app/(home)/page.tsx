@@ -46,6 +46,12 @@ export default function Home() {
       <div className="w-full max-w-5xl mx-auto px-4 relative z-10 mb-16">
         <CodeEditor />
       </div>
+      <footer className="w-full text-center pb-8 relative z-20">
+        <p className="text-xs text-white/60 font-mono">
+          本项目仅为 Cursor 官方文档的中文翻译，与 Cursor
+          官方及其公司无任何关联。若有侵权请联系删除。
+        </p>
+      </footer>
     </main>
   );
 }
