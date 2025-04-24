@@ -1,45 +1,114 @@
 ---
 title: Welcome to Cursor
 ---
- 
-Cursor 是一款全新的智能集成开发环境，通过与人工智能的无缝集成而变得强大。
+import { BookOpen, Download } from 'lucide-react';
+import { ArrowRight, Infinity, Code2 } from 'lucide-react';
+import { Users2, MessageSquare, Headset } from 'lucide-react';
 
-Cursor 基于 VSCode 构建，上手很快，但却能让你的工作效率超乎寻常。
+开始使用 Cursor IDE 并学习核心功能：Tab 补全、Chat AI 配对编程和 Cmd-K 编辑。
+
+Cursor 是一个新的、智能的 IDE，通过与 AI 的无缝集成赋予其动力。Cursor 建立在 VSCode 之上，易于学习，但可以让您异常高效。。
 
 ## 开始使用
 
-如果您是 Cursor 的新用户，可以使用以下指南开始学习。
+如果您是 Cursor 的新用户，可以使用下面的指南开始。
 
-## [导言](https://docs.cursor.com/get-started/introduction)
+<Cards>
+  <Card
+    icon={<BookOpen />}
+    href="https://docs.cursor.com/get-started/introduction"
+    title="Introduction"
+  >
+    了解 Cursor 的核心功能和概念。
+  </Card>
+  <Card
+    icon={<Download />}
+    href="https://docs.cursor.com/get-started/installation"
+    title="Installation"
+  >
+    在几分钟内通过下载并安装适合您的平台的 Cursor 开始使用。
+  </Card>
+</Cards>
 
-[了解 Cursor 的核心功能和概念。](https://docs.cursor.com/get-started/introduction)
-
-[**安装**为你的平台下载并安装 Cursor，几分钟就能上手。](https://docs.cursor.com/get-started/installation)
 
 ## 编辑器
 
-Cursor 有许多核心功能，可以与你的工作流程无缝整合。
+Cursor 具备多项核心功能，可无缝融入您的工作流程。
 
-通过以下链接了解 Cursor 的更多功能。
+使用下面的链接了解更多关于 Cursor 能做什么。
+
+<Cards>
+  <Card
+    icon={<ArrowRight />}
+    title="Tab"
+  >
+    智能代码补全，会向你学习！可多行编辑，修复你可能遗漏的错误，并预测你的下一个操作。
+  </Card>
+  <Card
+    icon={<Infinity />}
+    title="Chat"
+  >
+    你的 AI 搭档，处理复杂代码变更。支持大规模上下文编辑和自动修复。
+  </Card>
+  <Card
+    icon={<Code2 />}
+    title="Cmd-K"
+  >
+    快速行内代码编辑与生成。非常适合在不中断工作流的情况下精确修改内容。
+  </Card>
+</Cards>
 
 ## Cursor 从何而来？
 
-代码从根本上说是文本，而我们编写代码的工具已经从简单的文本编辑器发展成为日益智能化的开发环境。
+代码本质上是文本，我们编写代码的工具已经从简单的文本编辑器发展成为越来越智能的开发环
 
-最初，我们有语法高亮等功能，以提高代码的可读性。后来，我们又有了自动完成等功能，使代码更加高效。
+最初，我们有像语法高亮这样的功能，使代码更易读。然后，我们有像自动完成这样的功能，使代码更高效。
 
-长期以来，这些功能一直是标准功能，但有了 Cursor，我们重新发明了使用代码的方式。
+这些长期以来一直是标准，但有了 Cursor，我们正在重新发明你如何与代码互动的方式。
 
 ## 它是如何工作的？
 
-Cursor 为用户提供了一些基本功能，这些功能只有通过开发 LLM（大型语言模型）才能实现。
+Cursor 通过 LLMs（大型语言模型）的开发为用户提供了几个基本功能。
 
-## 如何开始使用？
+## 我如何开始？
 
-您可以从[Cursor 网站](https://www.cursor.com/)下载适用于您所选平台的[Cursor](https://www.cursor.com/)。Cursor 基于 VS Code，非常容易上手，而且所有人工智能功能都是选择性加入的。
+您可以从[Cursor 网站](https://www.cursor.com/)下载适用于您所选平台的[Cursor](https://www.cursor.com/)。Cursor 基于 VS Code，非常容易上手，所有 AI 功能都是可选的。
 
-您还可以让 Cursor 一键导入您的所有 VS Code 扩展和设置。为了帮助您试用 Cursor，我们提供专业版 14 天免费试用，无需信用卡！
+您还可以让 Cursor 一键导入您所有的 VS Code 扩展和设置。为了帮助您试用 Cursor，我们提供 14 天的 Pro 计划免费试用，无需信用卡！
 
-## 社区和资源
+<Cards variant="button">
+  <Card
+    icon={<Download />}
+    title="安装入门"
+    href="https://docs.cursor.com/get-started/installation"
+  />
+  <Card
+    icon={<Users2 />}
+    title="企业部署"
+    href="https://docs.cursor.com/business"
+  />
+</Cards>
 
-为了帮助您更好地使用 Cursor，我们建立了一个用户和资源社区，您可以通过它获得帮助并分享自己的经验。
+## 社区与资源
+
+为了帮助你更好地使用 Cursor，我们为用户提供了丰富的社区和资源，你可以在这里获得帮助，也可以分享自己的经验。
+
+<Cards>
+  <Card
+    icon={<MessageSquare />}
+    title="论坛"
+    href="https://forum.cursor.com"
+    target="_blank"
+  >
+    针对<b>技术问题</b>，或者想要分享你的使用经验，欢迎访问我们的专属论坛，与<b>官方团队成员</b>和<b>其他 Cursor 用户</b>交流互动。
+  </Card>
+  <Card
+    icon={<Headset />}
+    title="支持"
+    href="mailto:support@cursor.com"
+    target="_blank"
+  >
+    如果你有账户、账单、商务等其他问题，请通过邮件联系我们的支持团队。
+    <b>由于咨询量较大，邮件回复可能会慢于论坛。</b>
+  </Card>
+</Cards>
