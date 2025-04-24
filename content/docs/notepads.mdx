@@ -4,7 +4,9 @@ description:  Notepads
 ---
 
  
-记事本目前处于测试阶段，将来可能会被淘汰。
+使用 Cursor 中的 Notepads 指南，以便在 Composer 和 Chat 交互之间共享上下文
+
+Notepads 目前处于测试阶段，未来可能会被废弃。
 
 # 概述
 
@@ -33,25 +35,18 @@ description:  Notepads
 
 # 常见用例
 
-1.  
-    
-    **动态模板生成**
-    
+1.  **动态模板生成**
     - 为常见代码模式创建模板
     - 存储特定于项目的脚手架规则
     - 在整个团队中保持一致的代码结构
-2.  
-    
-    **架构文档**
-    
+
+2.  **架构文档**
     - 前台规范
     - 后端设计模式
     - 数据模型文档
     - 系统架构指南
-3.  
-    
-    **开发指南**
-    
+
+3.  **开发指南**
     - 编码标准
     - 项目特定规则
     - 最佳实践
@@ -93,15 +88,29 @@ description:  Notepads
 下面是一个网络应用项目记事本的典型示例：
 
 记事本示例
+ 
 
-本页对您有帮助吗？
+```
+# API Development Guidelines
 
-[AI Commit Message 键盘](https://docs.cursor.com/more/ai-commit-message)[快捷方式](https://docs.cursor.com/kbd)
+## Endpoint Structure
+- Use RESTful conventions
+- Base URL: `/api/v1`
+- Resource naming in plural form
 
-在本页
+## Authentication
+- JWT-based authentication
+- Token format: Bearer {token}
+- Refresh token mechanism required
 
-- [概述](https://docs.cursor.com/beta/notepads#overview)
-- [开始使用](https://docs.cursor.com/beta/notepads#getting-started)
-- [主要功能](https://docs.cursor.com/beta/notepads#key-features)
-- [常见用例](https://docs.cursor.com/beta/notepads#common-use-cases)
-- [常见问题](https://docs.cursor.com/beta/notepads#faq)
+## Response Format
+{
+  "status": "success|error",
+  "data": {},
+  "message": "Optional message"
+} 
+
+## Attached References
+@api-specs.yaml
+@auth-flow.md
+```

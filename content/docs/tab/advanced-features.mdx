@@ -4,16 +4,30 @@ description: Advanced Features
 ---
 
  
-### 指南
+## 高级功能
 
-- 编辑器迁移
-- 语言和框架
+学习使用 Tab 在 Peek 视图中高效导航代码、进行预测，以及部分接受建议。
 
-### 编辑器
+---
 
-- 选项卡
-    - [概览](https://docs.cursor.com/tab/overview)
-    - [Tab 与 GitHub Copilot 的对比](https://docs.cursor.com/tab/from-gh-copilot)
-    - [自动导入](https://docs.cursor.com/tab/auto-import)
-    - [高级功能](https://docs.cursor.com/tab/advanced-features)
-- 聊天
+### Peek 视图中的 Tab 功能
+
+您还可以在 “转到定义” 或 “转到类型定义” 的 Peek 视图中使用 Cursor 的 Tab 功能。例如，当为函数调用添加新参数时，这非常有用。
+
+我们特别推荐在 vim 中结合 `gd` 使用此功能，例如修改函数定义后，一次性修复其所有用法。
+
+---
+
+### Cursor 预测功能
+
+Cursor 还能预测您在接受编辑后将前往的位置。如果预测可用，您可以按 Tab 键跳转到下一个位置，从而通过连续按 Tab 键快速完成多个编辑。
+
+Cursor 预测了下一个位置，并在那里建议了一个编辑。
+
+---
+
+### 部分接受
+
+您可以通过按下 **Ctrl/⌘ + 右箭头** 接受建议的下一个单词（或通过设置 `editor.action.inlineSuggest.acceptNextWord` 为您偏好的快捷键）。
+
+要启用部分接受，请前往 **Cursor 设置 > 功能 > Cursor Tab**。
