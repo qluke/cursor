@@ -14,7 +14,8 @@
     "recent-changes",
     "cursor-rules",
     "notepads",
-    "summarized-composers",
-    "files-command"
+    "past-chats",
+    "pill-files",
+    "slash-commands"
   ]
 }
