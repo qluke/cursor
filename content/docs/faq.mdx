@@ -3,76 +3,64 @@ title: 常见问题
 description: FAQ
 ---
 
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-- [登录](https://www.cursor.com/api/auth/login)
-- [下载](https://cursor.com/)
-- [网站](https://cursor.com/)
-- [论坛](https://forum.cursor.com/)
-- [获取帮助](mailto:hi@cursor.com)
-- [欢迎访问光标](https://docs.cursor.com/get-started/welcome)
+## 常见问题
 
-### 开始使用
+关于 Cursor 的语言支持、模型、项目限制和数据管理的常见问题，以及相关的故障排除帮助。
 
-- [光标简介](https://docs.cursor.com/get-started/introduction)
-- [安装](https://docs.cursor.com/get-started/installation)
-- [常见问题](https://docs.cursor.com/faq)
+<Accordions>
+    <Accordion id='language-support' title="Cursor 支持哪些编程语言？">
 
-### 指南
+虽然 Cursor 可以支持任何编程语言，但由于模型的丰富训练数据，它在 Python 和 JavaScript/TypeScript 上表现尤为出色。此外，它在 Swift、C 和 Rust 上也有很好的表现。您可以通过向项目中添加相关文档来增强对任何语言的支持。
+    
+    </Accordion>
+    
+    <Accordion id='model-updates' title="如何确保 AI 模型与最新文档保持同步？">
 
-- 编辑器迁移
-- 语言和框架
+Cursor 使用强大的基础模型，例如 Claude 3.5 和 GPT-4。对于最新的库信息，您可以使用我们的 @web 搜索功能。由于核心语言概念不会显著变化，这些模型在长期内仍然保持高效。
+    
+    </Accordion>
+    
+    <Accordion id='mcp-server' title="MCP 服务器的作用是什么？">
 
-### 编辑器
+MCP 服务器作为将外部上下文引入 Cursor 的桥梁。它支持连接到 Google Drive 和 Notion 等服务，帮助您将这些来源的文档和需求整合到工作流程中。
+    
+    </Accordion>
+    
+    <Accordion id='project-limits' title="项目索引是否有大小限制？">
 
-- 标签
-- 聊天
-- ⌘K
-- [AI 提交消息](https://docs.cursor.com/more/ai-commit-message)
-- [记事本（测试版）](https://docs.cursor.com/beta/notepads)
-- [键盘快捷键](https://docs.cursor.com/kbd)
+项目默认限制为 10,000 个文件，不过可以根据需要进行调整。为了优化索引性能，您可以使用 `.cursorignore` 文件排除不必要的文件。
+    
+    </Accordion>
+    
+    <Accordion id='multi-repo-context' title="如何在多个代码库之间共享上下文？">
 
-### 上下文
+目前，最简单的方法是将相关的代码库放在同一目录下，并从该目录启动 Cursor。我们正在积极开发更好的支持功能，以便管理多个项目文件夹。
+    
+    </Accordion>
+    
+    <Accordion id='cursor-updates' title="Cursor 的更新是如何进行的？">
 
-- [代码库索引](https://docs.cursor.com/context/codebase-indexing)
-- [规则](https://docs.cursor.com/context/rules)
-- @ 符号
-- [忽略文件](https://docs.cursor.com/context/ignore-files)
-- [模型上下文协议](https://docs.cursor.com/context/model-context-protocol)
+Cursor 经常发布新功能和改进。您可以在我们的[更新日志](https://cursor.com/changelog)中找到最新的更改和更新。我们定期发布更新，以增强您的体验并添加新功能。
+    
+    </Accordion>
+    
+    <Accordion id='update-delays' title="为什么还没收到最新的版本？">
 
-### 账户
+我们会分阶段逐步推出新版本，以确保稳定性。如果您尚未收到更新，很快就会出现。您还可以通过打开命令面板（Cmd/Ctrl + Shift + P）并输入 “Attempt Update” 手动检查更新。
+    
+    </Accordion>
+    
+    <Accordion id='delete-data' title="如何删除我的数据？">
 
-- [计划和使用](https://docs.cursor.com/account/plans-and-usage)
-- 业务
-- [仪表板](https://docs.cursor.com/account/dashboard)
-- [计费](https://docs.cursor.com/account/billing)
-- [定价](https://cursor.com/pricing)
-- [隐私与安全](https://docs.cursor.com/account/privacy)
+您可以通过访问仪表板并点击“删除账户”按钮来删除您的账户及其所有关联数据。
+    
+    </Accordion>
+    
+</Accordions>
 
-### 设置
+## 附加资源
 
-- [模型](https://docs.cursor.com/settings/models)
-- [自定义 API 密钥](https://docs.cursor.com/settings/api-keys)
-- [早期访问计划](https://docs.cursor.com/settings/beta)
-
-### 故障排除
-
-- [常见问题](https://docs.cursor.com/troubleshooting/common-issues)
-- [故障排除指南](https://docs.cursor.com/troubleshooting/troubleshooting-guide)
-- [获取请求 ID](https://docs.cursor.com/troubleshooting/request-reporting)
-
-开始使用
-
-# 常见问题
-
-有关 Cursor 中语言支持、模型、项目限制和数据管理的常见问题以及故障排除帮助
-
-**其他资源**
-
-- [常见问题](https://docs.cursor.com/troubleshooting/common-issues)- 经常遇到的问题的解决方案
-- [键盘快捷键](https://docs.cursor.com/kbd)-[键盘](https://docs.cursor.com/kbd)绑定和快捷键的完整列表
-
-此页面是否有用？
-
-[安装](https://docs.cursor.com/get-started/installation)[从 VS 代码](https://docs.cursor.com/guides/migration/vscode)[移植](https://docs.cursor.com/get-started/installation)
-
-[光标主页](https://docs.cursor.com/)
+- **[常见问题](https://docs.cursor.com/troubleshooting/common-issues)**：解决常见问题的方案  
+- **[键盘快捷键](https://docs.cursor.com/kbd)**：完整的快捷键和快捷方式列表

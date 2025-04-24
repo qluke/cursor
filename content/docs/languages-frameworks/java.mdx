@@ -3,16 +3,21 @@ title: Java
 description: Java
 ---
 
+在 Cursor 中设置 Java 开发的完整指南：JDK 设置、扩展、调试以及 Maven/Gradle 集成
  
-本指南将帮助您为 Java 开发配置 Cursor，包括设置 JDK、安装必要的扩展、调试、运行 Java 应用程序，以及集成 Maven 和 Gradle 等构建工具。它还涵盖了与 IntelliJ 或 VS Code 类似的工作流程功能。
+本指南将帮助您为 Java 开发配置 Cursor，包括设置 JDK，安装必要的扩展，调试，运行 Java 应用程序，以及集成构建工具如 Maven 和 Gradle。它还涵盖了类似于 IntelliJ 或 VS Code 的工作流程功能。
 
+<Callout>
 在开始之前，请确保已安装 Cursor 并更新到最新版本。
+</Callout>
 
 ### Java 安装
 
 在设置 Cursor 本身之前，您需要在机器上安装 Java。
 
+<Callout   type="warn" >
 Cursor 并不附带 Java 编译器，因此如果尚未安装，则需要安装 JDK。
+</Callout>
 
 ## Windows 安装
 
@@ -32,11 +37,29 @@ Cursor 并不附带 Java 编译器，因此如果尚未安装，则需要安装 
 
 要检查安装情况，请运行
 
+```js
+java -version
+javac -version
+```
+
 如果 Cursor 未检测到 JDK，请在 settings.json 中手动配置：
+
+```js
+{
+  "java.jdt.ls.java.home": "/path/to/jdk",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "/path/to/jdk-17",
+      "default": true
+    }
+  ]
+}
+```
 
 重启 Cursor 以应用更改。
 
-### 光标设置
+### Cursor 设置
 
 Cursor 支持 VS Code 扩展。手动安装以下内容：
 
@@ -92,7 +115,7 @@ Cursor 支持 VS Code 扩展。手动安装以下内容：
 
 直接从 Spring Boot Dashboard 扩展启动 Spring Boot 应用程序
 
-## Java x 光标工作流
+## Java x  Cursor工作流
 
 Cursor 的人工智能功能可显著增强 Java 开发工作流程。以下是一些利用 Cursor 专为 Java 提供的功能的方法：
 
@@ -116,7 +139,7 @@ Cursor 的人工智能功能可显著增强 Java 开发工作流程。以下是�
 
 1. 
     
-    **生成 Java 模板**
+    **生成 Java 样板代码**
     
     使用[Tab completion](https://docs.cursor.com/tab/overview)快速生成构造函数、getters/setters、equals/hashCode 方法和其他重复的 Java 模式。
     

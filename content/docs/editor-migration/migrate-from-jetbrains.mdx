@@ -3,63 +3,192 @@ title: 从 JetBrains 集成开发环境迁移
 description: Migrate From Jetbrains
 ---
 
+## 从 JetBrains IDEs 迁移
+
+从 JetBrains IDEs 迁移到 Cursor 的指南：设置扩展、主题、快捷键和特定语言工具。
+
+Cursor 提供了一个现代的、由 AI 驱动的编码体验，可以替代 JetBrains 的 IDEs。虽然刚开始可能感觉不同，但 Cursor 基于 VS Code 的架构提供了强大的功能和广泛的自定义选项。
+
+---
+
+### 编辑器组件
+
+#### 扩展
+
+JetBrains IDEs 是非常优秀的工具，因为它们为目标语言和框架提供了开箱即用的配置。
+
+Cursor 则不同——它起初是一个空白画布，您可以根据自己的需求进行自定义，而不受限于 IDE 为特定语言设计的功能。
+
+Cursor 拥有庞大的扩展生态系统，几乎所有 JetBrains IDEs 提供的功能（甚至更多！）都可以通过这些扩展重现。
+
+以下是一些流行扩展：
+
+- **Remote Development**: SSH、WSL 和容器支持
+- **Project Manager**: 管理多个项目
+- **GitLens**: 增强的 Git 集成
+- **Local History**: 跟踪本地文件更改
+- **Error Lens**: 内联错误高亮
+- **ESLint**: 代码检查
+- **Prettier**: 代码格式化
+- **Todo Tree**: 跟踪 TODO 和 FIXME
+
+---
+
+#### 键盘快捷键
+
+Cursor 内置快捷键管理器，允许您将喜欢的快捷键映射到操作上。
+
+通过安装扩展，您可以将 JetBrains IDEs 的快捷键直接带到 Cursor！请务必阅读扩展文档，了解如何进行配置：
+
+- **IntelliJ IDEA Keybindings**: 安装此扩展以获取 JetBrains IDEs 的快捷键。
+
+<Callout>
+一些不同的快捷键包括：
+
+- **查找操作**: ⌘/Ctrl+Shift+P （vs. ⌘/Ctrl+Shift+A）
+- **快速修复**: ⌘/Ctrl+. （vs. Alt+Enter）
+- **跳转到文件**: ⌘/Ctrl+P （vs. ⌘/Ctrl+Shift+N）
+</Callout>
+
+---
+
+#### 主题
+
+使用社区主题，在 Cursor 中重现您最喜欢的 JetBrains IDEs 的外观和感觉。
+
+您可以选择经典的 Darcula 主题，或者选择匹配 JetBrains 工具语法高亮的主题。
+
+- **JetBrains - Darcula Theme**: 体验经典的 JetBrains Darcula 暗色主题
+- **JetBrains PyCharm**
+- **JetBrains IntelliJ**
+- **JetBrains Fleet**
+- **JetBrains Rider**
+- **JetBrains Icons**: 获取熟悉的 JetBrains 文件和文件夹图标
+
+---
+
+#### 字体
+
+为了完成 JetBrains 风格的体验，您可以使用官方的 JetBrains Mono 字体：
+
+1. 下载并安装 [JetBrains Mono 字体](https://www.jetbrains.com/lp/mono/) 到您的系统。
+2. 安装后重启 Cursor。
+3. 打开 Cursor 设置（⌘/Ctrl + ,）。
+4. 搜索 “Font Family”。
+5. 将字体设置为 `'JetBrains Mono'`。
+
+<Callout>
+为了获得最佳体验，还可以在设置中启用字体连字：`"editor.fontLigatures": true`。
+</Callout>
+---
+
+### 针对特定 IDE 的迁移
+
+许多用户喜欢 JetBrains IDEs 因为其提供的开箱即用的语言和框架支持。Cursor 则不同——它起初是一个空白画布，您可以根据自己的需求进行自定义。
+
+Cursor 已经可以访问 VS Code 的扩展生态系统，几乎所有 JetBrains IDEs 的功能（甚至更多！）都可以通过这些扩展重现。
+
+以下是针对 JetBrains 各 IDE 推荐的扩展：
+
+#### IntelliJ IDEA (Java)
+- **Language Support for Java**: 核心 Java 语言支持
+- **Debugger for Java**: Java 调试支持
+- **Test Runner for Java**: 运行和调试 Java 测试
+- **Maven for Java**: Maven 支持
+- **Project Manager for Java**: 项目管理工具
+
+<Callout title="关键差异：" type="warn" >
  
-Cursor 提供现代化的人工智能编码体验，可取代您的 JetBrains IDE。虽然过渡之初可能会感觉不同，但 Cursor 基于 VS Code 的基础提供了强大的功能和广泛的自定义选项。
+- 通过 `launch.json` 管理构建/运行配置
+- Spring Boot 工具可通过 “Spring Boot Tools” 扩展获得
+- Gradle 支持通过 “Gradle for Java” 扩展提供
+</Callout>
+---
 
-## 编辑器组件
+#### PyCharm (Python)
+- **Python**: 核心 Python 支持
+- **Pylance**: 快速类型检查
+- **Jupyter**: Notebook 支持
+- **Python Test Explorer**: 测试管理
 
-### 扩展
+<Callout title="关键差异："  >
+ 
+- 虚拟环境通过命令面板管理
+- 调试配置在 `launch.json` 中
+- 使用 `requirements.txt` 或 Poetry 进行依赖管理
+</Callout>
 
-JetBrains 集成开发环境是很好的工具，因为它们已经为所使用的语言和框架进行了预配置。
+---
 
-Cursor 则不同，它是一个开箱即用的空白画布，你可以根据自己的喜好进行定制，而不受集成开发环境所适用的语言和框架的限制。
+#### WebStorm (JavaScript/TypeScript)
+- **JavaScript and TypeScript Nightly**: 最新语言功能
+- **ES7+ React/Redux Snippets**: React 开发
+- **Vue Language Features**: Vue.js 支持
+- **Angular Language Service**: Angular 开发
 
-Cursor 拥有庞大的扩展生态系统，JetBrains IDE 提供的几乎所有功能（甚至更多！）都可以通过这些扩展重新创建。
+<Callout title="大多数 WebStorm 功能已内置于 Cursor/VS Code，包括：" type="info" >
+ 
+- npm 脚本视图
+- 调试
+- Git 集成
+- TypeScript 支持
+</Callout>
+---
 
-下面就来看看其中一些流行的扩展：
+#### PhpStorm (PHP)
+- **PHP Intelephense**: PHP 语言服务器
+- **PHP Debug**: Xdebug 集成
+- **PHP Intellisense**: 代码智能
+- **PHP DocBlocker**: 文档工具
 
-### 键盘快捷键
+<Callout title="关键差异：" type="info" >
+ 
+- Xdebug 配置通过 `launch.json` 进行
+- Composer 集成通过终端完成
+- 数据库工具通过 “SQLTools” 扩展提供
+</Callout>
+---
 
-Cursor 内置了键盘快捷键管理器，可将您喜爱的键盘快捷键映射到操作中。
+#### Rider (.NET)
+- **C#**: 核心 C# 支持
+- **C# Dev Kit**: 增强的 .NET 工具
+- **Unity**: Unity 开发
+- **.NET Install Tool**: .NET SDK 管理
 
-有了这个扩展，你可以将几乎所有 JetBrains IDE 的快捷键直接引入 Cursor！请务必阅读该扩展的文档，了解如何根据自己的喜好进行配置：
+<Callout title="关键差异：" type="warn" >
+- 解决方案浏览器通过文件资源管理器实现
+- NuGet 包管理通过 CLI 或扩展实现
+- 测试运行器通过测试资源管理器集成
+</Callout>
+---
 
-## [IntelliJ IDEA 按键绑定](https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings)
+#### GoLand (Go)
+- **Go**: 官方 Go 扩展
+- **Go Test Explorer**: 测试管理
+- **Go Doc**: 文档工具
 
-[安装该扩展可将 JetBrains IDEs 的键盘快捷键引入 Cursor。](https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings)
+<Callout title="关键差异：" type="info" >
+- Go 工具会自动提示安装
+- 调试通过 `launch.json` 进行
+- 包管理集成于 `go.mod`
+</Callout>
+---
 
-### 主题
+### 平滑过渡的提示
 
-使用这些社区主题，在 Cursor 中重现您最喜爱的 JetBrains IDE 的外观和感觉。
+1. **使用命令面板**  
+   按 ⌘/Ctrl + Shift + P 查找命令
 
-您可以选择标准的 Darcula 主题，也可以选择与您的 JetBrains 工具的语法高亮相匹配的主题。
+2. **AI 功能**  
+   利用 Cursor 的 AI 功能进行代码补全和重构
 
-### 字体
+3. **自定义设置**  
+   调整 `settings.json` 以优化工作流程
 
-为了让你的 JetBrains 体验更加完美，你可以使用官方的 JetBrains Mono 字体：
+4. **终端集成**  
+   使用内置终端执行命令行操作
 
-1. 下载并在系统中安装 JetBrains Mono 字体：
-2. 安装字体后重启 Cursor
-3. 打开 Cursor 中的设置 (⌘/Ctrl + ,)
-4. 搜索 "字体家族
-5. 将字体家族设置为`"JetBrains Mono`
+5. **扩展**  
+   浏览 VS Code 市场以获取更多工具
 
-## IDE 特定迁移
-
-许多用户都喜欢 JetBrains 集成开发环境，因为它们对语言和框架提供了开箱即用的支持。而 Cursor 则不同--作为一个开箱即用的空白画布，你可以根据自己的喜好进行定制，而不会受到 IDE 适用语言和框架的限制。
-
-Cursor 已经可以访问 VS Code 的扩展生态系统，JetBrains IDE 提供的几乎所有功能（甚至更多！）都可以通过这些扩展重新创建。
-
-下面是针对每个 JetBrains IDE 的扩展建议。
-
-### IntelliJ IDEA（Java）
-
-### PyCharm（Python）
-
-### WebStorm（JavaScript/TypeScript）
-
-### PhpStorm（PHP）
-
-### Rider （.NET）
-
-### GoLand（Go）
+请记住，虽然某些工作流程可能有所不同，但 Cursor 提供的强大 AI 辅助编码功能可以提升您的生产力，超越传统 IDE 的能力。
