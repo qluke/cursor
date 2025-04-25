@@ -1,6 +1,13 @@
 import { CodeEditor } from "@/components/code-editor";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Cursor 中文文档 - 首页",
+  description: "Cursor 中文文档实时同步官方最新内容，翻译专业，助你快速上手。",
+  keywords: "Cursor, 中文文档, AI 编辑器, 翻译工具, 开发者工具",
+};
 
 export default function Home() {
   return (
