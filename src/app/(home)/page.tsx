@@ -7,6 +7,25 @@ export const metadata: Metadata = {
   title: "Cursor 中文文档 - 首页",
   description: "Cursor 中文文档实时同步官方最新内容，翻译专业，助你快速上手。",
   keywords: "Cursor, 中文文档, AI 编辑器, 翻译工具, 开发者工具",
+  openGraph: {
+    title: "Cursor 中文文档",
+    description: "实时同步官方最新内容，翻译专业，助你无障碍上手 Cursor。",
+    url: "https://cursor-cn.org",
+    siteName: "Cursor 中文文档",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Cursor 中文文档",
+      },
+    ],
+    locale: "zh_CN",
+    type: "website",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function Home() {
