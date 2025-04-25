@@ -8,8 +8,11 @@ export const metadata: Metadata = {
   description: "Cursor 中文文档实时同步官方最新内容，翻译专业，助你快速上手。",
   keywords: "Cursor, 中文文档, AI 编辑器, 翻译工具, 开发者工具",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.cursor-cn.org/"
   ),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Cursor 中文文档",
     description: "实时同步官方最新内容，翻译专业，助你无障碍上手 Cursor。",
