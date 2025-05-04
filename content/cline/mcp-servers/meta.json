@@ -1,0 +1,12 @@
+{
+  "title": "MCP Servers",
+  "pages": [
+    "mcp",
+    "mcp-quickstart",
+    "mcp-server-from-github",
+    "configuring-mcp-servers",
+    "connecting-to-a-remote-server",
+    "mcp-transport-mechanisms",
+    "mcp-server-from-scratch"
+  ]
+}

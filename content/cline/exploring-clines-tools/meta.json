@@ -1,0 +1,11 @@
+{
+  "title": "Exploring Cline's Tools",
+  "pages": [
+    "cline-tools-guide",
+    "checkpoints",
+    "plan-and-act-modes-a-guide-to-effective-ai-development",
+    "new-task-tool",
+    "slash-commands",
+    "remote-browser-support"
+  ]
+}

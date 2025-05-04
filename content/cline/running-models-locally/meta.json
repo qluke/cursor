@@ -1,0 +1,8 @@
+{
+  "title": "Running Models Locally",
+  "pages": [
+    "read-me-first",
+    "ollama",
+    "lm-studio"
+  ]
+}

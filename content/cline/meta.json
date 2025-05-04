@@ -1,0 +1,16 @@
+{
+  "title": "Cline Documentation",
+  "icon": "BookOpen",
+  "root": true,
+  "pages": [
+    "index",
+    "getting-started",
+    "improving-your-prompting-skills",
+    "exploring-clines-tools",
+    "enterprise-solutions",
+    "mcp-servers",
+    "custom-model-configs",
+    "running-models-locally",
+    "more-info"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Getting Started",
+  "pages": [
+    "what-is-cline",
+    "for-new-coders",
+    "installing-cline",
+    "installing-dev-essentials",
+    "our-favorite-tech-stack",
+    "understanding-context-management",
+    "model-selection-guide"
+  ]
+}
