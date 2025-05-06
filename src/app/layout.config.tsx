@@ -48,6 +48,10 @@ export const baseOptions: BaseLayoutProps = {
       ],
     },
     {
+      text: "Cline",
+      url: "/cline",
+    },
+    {
       text: "定价",
       url: "https://www.cursor.com/cn/pricing",
       external: true,

@@ -1,8 +1,157 @@
 ---
-title: Understanding Context Management
-description: Description for understanding-context-management
+title: 上下文管理 
 ---
 
-# Understanding Context Management
+ 
 
-Content for understanding-context-management goes here.
+上下文是高效使用 Cline 的关键
+
+<Callout title="速查">
+- 上下文 = Cline 了解的项目信息
+- 上下文窗口 = Cline 一次能记住的信息量
+- 用上下文文件维护项目知识
+- 上下文窗口满时请重置
+</Callout>
+
+## 理解上下文与上下文窗口
+ 
+
+在"无限上下文"的世界里，上下文窗口就是 Cline 当前可用的"记忆空间"。
+
+把和 Cline 协作想象成与一位细致主动的队友共事：
+
+### 上下文是如何构建的
+
+Cline 通过两种方式主动构建上下文：
+
+1. **自动上下文收集（Cline 主动）**
+    - 主动读取相关文件
+    - 探索项目结构
+    - 分析模式与依赖关系
+    - 映射依赖与导入
+    - 主动提问澄清
+2. **用户引导上下文**
+    - 主动分享特定文件
+    - 提供文档
+    - 回答 Cline 的问题
+    - 指定关注重点
+    - 分享设计思路与需求
+
+<Callout title="要点">
+Cline 不是被动的——它会主动理解你的项目。你可以让它自由探索，也可以在 [Plan 模式](https://docs.cline.bot/exploring-clines-tools/plan-and-act-modes-a-guide-to-effective-ai-development)下引导其关注重点。
+</Callout>
+
+### 上下文与上下文窗口
+
+可以把上下文想象成你和 Cline 共享的一块白板：
+
+- **上下文** 是所有可用信息：
+    - Cline 发现的内容
+    - 你主动分享的内容
+    - 对话历史
+    - 项目需求
+    - 过往决策
+- **上下文窗口** 是白板的实际大小：
+    - 以 token 计量（1 token ≈ 3/4 个英文单词）
+    - 每个模型有固定大小：
+        - Claude 3.5 Sonnet：200,000 tokens
+        - DeepSeek：64,000 tokens
+    - 白板满了就要擦掉（清空上下文）才能写新内容
+        - [Cline 如何底层管理上下文](https://cline.bot/blog/understanding-the-new-context-window-progress-bar-in-cline)
+
+<Callout type="warn" title="重要提示">
+上下文窗口再大（如 Claude 的 20 万 token），也不建议全部填满。就像白板太乱会影响专注，信息过多反而不利于聚焦重点。
+</Callout>
+
+## 理解上下文窗口进度条
+
+ 
+Cline 通过进度条可视化你的上下文窗口使用情况：
+
+ 
+### 如何读懂进度条
+
+- ↑ 表示输入 token（你发给 LLM 的内容）
+- ↓ 表示输出 token（LLM 生成的内容）
+- 进度条可视化你已用的上下文窗口比例
+- 总量显示当前模型最大容量（如 Claude 3.5-Sonnet 为 20 万）
+
+### 何时关注进度条
+
+- 长时间编程时
+- 操作多个文件时
+- 开始复杂任务前
+- 发现 Cline 丢失上下文时
+
+<Callout title="小贴士">
+当进度条达到 70-80% 时，建议开启新会话以保持最佳性能。
+</Callout>
+
+## 使用上下文文件
+
+上下文文件有助于跨会话保持理解，是专为 AI 助手设计的文档化方式。
+
+### 上下文文件的常见用法
+
+1. **常青项目上下文（如 [记忆库](https://docs.cline.bot/improving-your-prompting-skills/custom-instructions-library/cline-memory-bank)）**
+    - 随项目演进的活文档
+    - 架构和模式变化时及时更新
+    - 例如：记忆库模式下维护 `techContext.md`、`systemPatterns.md` 等
+    - 适合长期项目和团队
+2. **任务专用上下文（如 [结构化方法](https://cline.bot/blog/building-advanced-software-with-cline-a-structured-approach)）**
+    - 针对具体实现任务创建
+    - 记录需求、约束和决策
+    - 示例：
+        
+  ```
+  # auth-system-implementation.md   
+  ## 需求 
+  - OAuth2 实现 
+  - 支持 Google 和 GitHub 
+  - 授权接口限流   
+  ## 技术决策 
+  - 使用 Passport.js 集成第三方 
+  - JWT 管理会话 
+  - Redis 限流
+  ```
+        
+3. **知识转移文档**
+    - 切换到 plan 模式，让 Cline 记录已完成内容和剩余步骤到 markdown 文件
+    - 复制该 markdown 内容
+    - 新任务时用作上下文
+
+### 高效使用上下文文件
+
+1. **结构与格式**
+    - 组织清晰、格式统一
+    - 包含相关示例
+    - 关联相关概念
+    - 信息聚焦
+2. **维护**
+    - 重大变更后及时更新
+    - 用版本控制管理上下文文件
+    - 移除过时内容
+    - 记录关键决策
+
+## 实用建议
+ 
+
+1. **新项目启动**
+    - 让 Cline 探索代码库
+    - 回答其关于结构和模式的问题
+    - 建议设置基础上下文文件
+    - 记录关键设计决策
+2. **持续开发**
+    - 重大变更后更新上下文文件
+    - 分享相关文档
+    - 复杂讨论用 Plan 模式
+    - 需要时开启新会话
+3. **团队协作**
+    - 共享通用上下文文件（如项目根目录的 [.clinerules](https://docs.cline.bot/improving-your-prompting-skills/prompting)）
+    - 记录架构决策
+    - 保持模式一致
+    - 文档及时更新
+
+记住：目标是帮助 Cline 在多次会话中持续理解你的项目。
+
+ 
