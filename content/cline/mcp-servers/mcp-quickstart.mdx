@@ -1,8 +1,213 @@
 ---
-title: Mcp Quickstart
-description: Description for mcp-quickstart
+title: MCP 市场
+description: mcp-quickstart 说明
 ---
 
-# Mcp Quickstart
+# MCP 市场
 
-Content for mcp-quickstart goes here.
+---
+
+## 什么是 MCP 服务器？
+
+MCP 服务器是专为增强 Cline 能力而设计的扩展。它们让 Cline 能执行更多任务，如抓取网页、处理图片、访问 API 等等。
+
+---
+
+## MCP 市场快速上手
+
+MCP 市场为各类 MCP 服务器提供一键安装体验，涵盖多个类别，数量众多。
+
+### 1. 访问市场
+
+- 在 Cline 中，点击顶部工具栏的“扩展”按钮（方形图标）
+- MCP 市场将打开，按类别展示可用服务器
+
+### 2. 浏览与选择服务器
+
+- 按类别浏览服务器（如搜索、文件系统、浏览器自动化、数据研究等）
+- 点击某个服务器可查看其功能和需求详情
+
+### 3. 安装与配置
+
+- 点击所选服务器的安装按钮
+- 若服务器需要 API Key（大多数需要），Cline 会引导你：
+  - 如何获取 API Key
+  - 如何安全输入 API Key
+- 服务器会自动添加到你的 MCP 设置中
+
+### 4. 验证安装
+
+- 安装完成后，Cline 会显示确认信息
+- 可在 Cline 的 MCP 设置界面检查服务器状态
+
+### 5. 使用新服务器
+
+- 安装成功后，Cline 会自动集成该服务器的能力
+- 你会在 Cline 的系统提示中看到新工具和资源
+- 只需直接请求 Cline 使用新服务器的能力即可
+- 例如：“使用 Perplexity 搜索最新的 React 资讯”
+
+> **企业用户提示**：如在企业环境下使用 Cline，请确保有权限根据组织安全政策安装第三方 MCP 服务器。
+
+---
+
+## 背后发生了什么？
+
+安装 MCP 服务器时，Cline 会自动完成以下步骤：
+
+### 1. 安装流程
+
+- 服务器代码会被克隆/安装到 `/Users/<用户名>/Documents/Cline/MCP/`
+- 安装依赖
+- 构建服务器（TypeScript/JavaScript 编译或 Python 包安装）
+
+### 2. 配置
+
+- MCP 设置文件会更新服务器配置
+- 设置文件路径：`/Users/<用户名>/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+- 环境变量（如 API Key）会被安全存储
+- 注册服务器路径
+
+### 3. 启动服务器
+
+- Cline 检测到配置变更
+- 以独立进程启动服务器
+- 通过 stdio 或 HTTP 建立通信
+
+### 4. 与 Cline 集成
+
+- 服务器能力会添加到 Cline 的系统提示中
+- 工具可通过 `use_mcp_tool` 命令调用
+- 资源可通过 `access_mcp_resource` 命令访问
+- 用户请求时，Cline 可自动使用这些能力
+
+---
+
+## 故障排查
+
+### 系统要求
+
+请确保你的系统满足以下要求：
+
+- **Node.js 18.x 或更高版本**
+  - 检查：`node --version`
+  - 安装：https://nodejs.org/
+  - JavaScript/TypeScript 实现必需
+
+- **Python 3.10 或更高版本**
+  - 检查：`python --version`
+  - 安装：https://python.org/
+  - 某些特殊实现可能需 Python 3.11+
+
+- **UV 包管理器**
+  - 现代 Python 包管理器，用于依赖隔离
+  - 安装命令：
+    ```sh
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+    或：`pip install uv`
+  - 验证：`uv --version`
+
+如上述命令失败或版本过低，请先安装/升级！
+
+### 常见安装问题
+
+- 确保网络连接稳定
+- 检查是否有安装新软件的权限
+- 若需 API Key，确认输入无误
+- 在 MCP 设置界面检查服务器状态及错误信息
+
+### 如何移除 MCP 服务器
+
+如需彻底移除有问题的 MCP 服务器：
+
+1. 打开 MCP 设置文件：`/Users/<用户名>/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+2. 从 `mcpServers` 对象中删除对应服务器条目
+3. 保存文件
+4. 重启 Cline
+
+### 仍有错误？
+
+如使用 MCP 服务器时遇到错误，可尝试：
+
+- 检查 MCP 设置文件有无错误
+- 使用 Claude Sonnet 模型进行安装
+- 确认服务器文件路径正确
+- 检查所有必需环境变量是否已设置
+- 检查是否有其他进程占用同一端口（HTTP 服务器）
+- 尝试移除并重新安装服务器（同时从 `cline_mcp_settings.json` 和 `/Users/<用户名>/Documents/Cline/MCP/` 目录中删除）
+- 在终端直接运行命令及参数，观察与 Cline 相同的错误输出
+
+---
+
+## MCP 服务器规则
+
+Cline 会自动识别你已启用的 MCP 服务器及其用途，但当启用服务器较多时，可通过规则文件定义各服务器的使用场景。
+
+建议使用 `.clinerules` 文件或自定义指令，通过关键词触发智能激活 MCP 服务器，让 Cline 工具选择更直观、上下文感知更强。
+
+### MCP 规则工作原理
+
+MCP 规则将已连接的 MCP 服务器分组，并定义触发关键词。当对话中出现这些关键词时，自动激活对应服务器。
+
+```json
+{
+  "mcpRules": {
+    "webInteraction": {
+      "servers": ["firecrawl-mcp-server", "fetch-mcp"],
+      "triggers": ["web", "scrape", "browse", "website"],
+      "description": "用于网页浏览和抓取的工具"
+    }
+  }
+}
+```
+
+### 配置结构
+
+1. **类别**：将相关服务器分组（如 "webInteraction", "mediaAndDesign"）
+2. **服务器**：每组内服务器名称列表
+3. **触发词**：激活该组服务器的关键词
+4. **描述**：人类可读的类别说明
+
+### MCP 规则优势
+
+- **上下文工具选择**：Cline 可根据对话内容自动选用合适工具
+- **减少操作摩擦**：无需手动指定使用哪个工具
+- **能力有序管理**：逻辑分组相关工具和服务器
+- **优先级排序**：可通过显式优先级处理歧义场景
+
+### 示例用法
+
+如你输入“能帮我抓取这个网站吗？”，Cline 会检测到“抓取”“网站”等关键词，自动选择网页相关 MCP 服务器。
+
+对于金融任务，如“苹果公司的股价是多少？”，关键词“股价”“股票”会触发金融相关服务器。
+
+### 快速上手模板
+
+```json
+{
+  "mcpRules": {
+    "category1": {
+      "servers": ["server-name-1", "server-name-2"],
+      "triggers": ["keyword1", "keyword2", "phrase1", "phrase2"],
+      "description": "这些工具的用途描述"
+    },
+    "category2": {
+      "servers": ["server-name-3"],
+      "triggers": ["keyword3", "keyword4", "phrase3"],
+      "description": "这些工具的用途描述"
+    },
+    "category3": {
+      "servers": ["server-name-4", "server-name-5"],
+      "triggers": ["keyword5", "keyword6", "phrase4"],
+      "description": "这些工具的用途描述"
+    }
+  },
+  "defaultBehavior": {
+    "priorityOrder": ["category1", "category2", "category3"],
+    "fallbackBehavior": "询问用户应使用哪个工具"
+  }
+}
+```
+
+将上述内容添加到 `.clinerules` 文件或自定义指令中，即可让 Cline 的 MCP 服务器选择更智能、上下文感知更强。

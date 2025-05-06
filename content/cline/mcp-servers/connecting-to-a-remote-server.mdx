@@ -1,8 +1,140 @@
 ---
-title: Connecting To A Remote Server
-description: Description for connecting-to-a-remote-server
+title: 连接远程服务器
+description: 远程 MCP 服务器连接说明
 ---
 
-# Connecting To A Remote Server
+# 连接远程服务器
 
-Content for connecting-to-a-remote-server goes here.
+---
+
+## 添加和管理远程 MCP 服务器
+
+---
+
+模型上下文协议（MCP）允许 Cline 与外部服务器通信，这些服务器可为 Cline 提供额外工具和资源，扩展其能力。本指南介绍如何通过 MCP Servers 界面添加和连接远程 MCP 服务器。
+
+### 访问 MCP Servers 界面
+
+在 Cline 中访问 MCP Servers 界面的方法：
+
+1. 点击 VSCode 侧边栏的 Cline 图标
+2. 打开 Cline 面板右上角菜单（⋮）
+3. 在下拉菜单中选择 "MCP Servers"
+
+### MCP Servers 界面说明
+
+MCP Servers 界面分为三个主要标签页：
+
+- **Marketplace**：发现和安装预配置的 MCP 服务器（如已启用）
+- **Remote Servers**：通过 URL 端点连接现有 MCP 服务器
+- **Installed**：管理已连接的 MCP 服务器
+
+### 添加远程 MCP 服务器
+
+"Remote Servers" 标签页允许你通过 URL 端点连接任意可访问的 MCP 服务器：
+
+1. 在 MCP Servers 界面点击 "Remote Servers" 标签
+2. 填写所需信息：
+   - **Server Name**：为服务器提供唯一且有描述性的名称
+   - **Server URL**：输入 MCP 服务器的完整 URL 端点（如 `https://example.com/mcp-sse`）
+3. 点击 "Add Server" 发起连接
+4. Cline 会尝试连接服务器并显示连接状态
+
+> **注意**：连接远程服务器时请确保信任来源，MCP 服务器可在你的环境中执行代码。
+
+### 远程服务器发现
+
+如需查找可连接的 MCP 服务器，部分第三方市场提供了各种能力的服务器目录。
+
+> **警告**：以下第三方市场仅供参考。Cline 不对这些市场上的服务器进行背书、验证或承担责任。这些服务器为云托管服务，会处理你的请求并可能访问你共享的数据。连接第三方服务前请务必查阅其隐私政策和使用条款。
+
+#### Composio MCP 集成
+
+[Composio 的 MCP 市场](https://mcp.composio.dev/) 提供了丰富的第三方 MCP 服务器，支持 GitHub、Notion、Slack 等服务的 API。每个服务器都包含配置说明和内置认证支持（如 OAuth 或 API Key）。要连接，请在市场中找到所需服务并按其集成步骤操作。
+
+#### 通过 Smithery 连接
+
+Smithery 是第三方 MCP 服务器市场，用户可发现并连接多种 MCP 服务器。若你使用 MCP 兼容客户端（如 Cursor、Claude Desktop 或 Cline），可浏览可用服务器并直接集成到工作流。
+
+访问 Smithery 市场：[https://smithery.ai](https://smithery.ai)
+
+注意：Smithery 独立维护，与本项目无关，请自行甄别使用。
+
+### 管理已安装的 MCP 服务器
+
+添加后，MCP 服务器会出现在 "Installed" 标签页，你可以：
+
+#### 查看服务器状态
+
+每个服务器会显示当前状态：
+
+- **绿色点**：已连接，可用
+- **黄色点**：正在连接中
+- **红色点**：断开或出错
+
+#### 配置服务器设置
+
+点击服务器可展开设置面板：
+
+1. **工具与资源**：
+   - 查看服务器提供的所有工具和资源
+   - 配置工具的自动批准（如已启用）
+2. **请求超时**：
+   - 设置 Cline 等待服务器响应的时间，范围 30 秒至 1 小时
+3. **服务器管理**：
+   - **重启服务器**：服务器无响应时可重连
+   - **删除服务器**：从配置中移除该服务器
+
+#### 启用/禁用服务器
+
+切换每个服务器旁的开关即可单独启用或禁用：
+
+- **启用**：Cline 可使用该服务器的工具和资源
+- **禁用**：服务器保留在配置中但不激活
+
+### 连接问题排查
+
+如服务器连接失败：
+
+1. 会显示错误信息，说明失败原因
+2. 检查服务器 URL 是否正确、服务器是否在运行
+3. 使用 "Restart Server" 按钮尝试重连
+4. 若问题持续，可删除服务器后重新添加
+
+### 高级配置
+
+高级用户可直接编辑 Cline 存储的 MCP 服务器配置 JSON 文件：
+
+1. 在 "Installed" 标签页点击 "Configure MCP Servers" 进入设置文件
+2. 每个服务器的配置格式如下：
+
+```json
+{
+  "mcpServers": {
+    "exampleServer": {
+      "url": "https://example.com/mcp-sse",
+      "disabled": false,
+      "autoApprove": ["tool1", "tool2"],
+      "timeout": 30
+    }
+  }
+}
+```
+
+主要配置项：
+
+- **url**：远程服务器端点 URL
+- **disabled**：当前是否启用（true/false）
+- **autoApprove**：无需确认的工具名列表
+- **timeout**：等待服务器响应的最大秒数
+
+如需更多 MCP 设置，可点击 "Advanced MCP Settings" 进入 VSCode 设置。
+
+### 使用 MCP 服务器工具
+
+连接后，Cline 可使用 MCP 服务器提供的工具和资源。当 Cline 建议使用 MCP 工具时：
+
+1. 会弹出工具批准提示（如未自动批准）
+2. 审查工具详情和参数后批准
+3. 工具执行并将结果返回给 Cline
+

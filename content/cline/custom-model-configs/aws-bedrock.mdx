@@ -1,8 +1,120 @@
 ---
-title: Aws Bedrock
-description: Description for aws-bedrock
+title: AWS Bedrock  
+description: aws-bedrock 说明
 ---
 
-# Aws Bedrock
+# AWS Bedrock 凭证认证配置
 
-Content for aws-bedrock goes here.
+---
+
+## 概述
+
+- **AWS Bedrock：** 一项完全托管的服务，通过 AWS 提供主流生成式 AI 模型（如 Anthropic Claude、Amazon Titan）。[了解更多 AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+- **Cline：** 一款 VS Code 扩展，作为编程助手集成 AI 模型，帮助开发者生成代码、调试和分析数据。
+- **企业重点：** 本指南面向已建立 AWS 环境的企业（使用 IAM 角色、AWS SSO、AWS Organizations 等），确保安全合规使用。
+
+---
+
+## 步骤 1：准备 AWS 环境
+
+### 1.1 创建或使用 IAM 角色/用户
+
+1. **登录 AWS 管理控制台：** [AWS 控制台](https://aws.amazon.com/console/)
+2. **访问 IAM：**
+   - 在 AWS 控制台搜索 **IAM（身份与访问管理）**
+   - 可新建 IAM 用户，或通过企业 AWS SSO 假设专用 Bedrock 访问角色
+   - [AWS IAM 用户指南](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
+
+### 1.2 关联所需权限策略
+
+1. **附加托管策略：**
+   - 为你的用户/角色附加 `AmazonBedrockFullAccess` 托管策略。[查看策略详情](https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html)
+2. **确认额外权限：**
+   - 确保策略包含模型调用（如 `bedrock:InvokeModel`、`bedrock:InvokeModelWithResponseStream`）、模型列表和 AWS Marketplace 操作（如 `aws-marketplace:Subscribe`）权限。
+   - _企业建议：_ 遵循最小权限原则，限定资源 ARN，并通过 [服务控制策略（SCP）](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) 进行必要限制。
+
+---
+
+## 步骤 2：验证区域与模型访问
+
+### 2.1 选择并确认区域
+
+1. **选择区域：** AWS Bedrock 支持多个区域（如美国东部、欧洲、亚太）。选择符合延迟和合规需求的区域。[AWS 全球基础设施](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)
+2. **验证模型访问：**
+   - 在 AWS Bedrock 控制台，确认所需模型（如 Anthropic Claude、Amazon Titan）已标记为“已授权访问”。
+   - **注意：** 某些高级模型如未开放按需访问，可能需 [推理配置文件（Inference Profile）](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-prereq.html)。
+
+### 2.2 设置 AWS Marketplace 订阅（如需）
+
+1. **订阅第三方模型：**
+   - 进入 AWS Bedrock 控制台，找到模型订阅部分。
+   - 对于第三方模型（如 Anthropic），需接受条款完成订阅。
+   - [AWS Marketplace](https://aws.amazon.com/marketplace/)
+2. **企业建议：**
+   - 模型订阅通常由云团队集中管理。请与云团队确认是否有标准订阅流程。
+
+---
+
+## 步骤 3：配置 Cline VS Code 扩展
+
+### 3.1 安装并打开 Cline
+
+1. **安装 VS Code：** [官方下载](https://code.visualstudio.com/)
+2. **安装 Cline 扩展：**
+   - 打开 VS Code
+   - 进入扩展市场（`Ctrl+Shift+X` 或 `Cmd+Shift+X`）
+   - 搜索 **Cline** 并安装
+
+### 3.2 配置 Cline 设置
+
+1. **打开 Cline 设置：**
+   - 点击设置按钮 ⚙️，选择 API Provider
+2. **选择 AWS Bedrock 作为 API Provider：**
+   - 在下拉菜单中选择 **AWS Bedrock**
+3. **输入 AWS 凭证：**
+   - 填写 **Access Key** 和 **Secret Key**（如用 AWS SSO，可用临时凭证）
+   - 指定正确的 **AWS 区域**（如 `us-east-1` 或企业指定区域）
+4. **选择模型：**
+   - 选择按需模型（如 **anthropic.claude-3-5-sonnet-20241022-v2:0**）
+5. **保存并测试：**
+   - 点击 **Done/Save** 应用设置
+   - 发送简单提示测试集成（如“生成一个判断数字是否为质数的 Python 函数”）
+
+---
+
+## 步骤 4：安全、监控与最佳实践
+
+1. **安全访问：**
+   - 优先使用 AWS SSO/联合角色，避免长期有效的 IAM 凭证
+   - [AWS IAM 最佳实践](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
+2. **加强网络安全：**
+   - 可考虑配置 [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html) 安全连接 Bedrock
+3. **监控与日志：**
+   - 启用 AWS CloudTrail 记录 Bedrock API 调用
+   - 用 CloudWatch 监控调用次数、延迟、Token 使用等指标
+   - 设置异常活动告警
+4. **错误处理与成本管理：**
+   - 对限流错误实现指数退避重试
+   - 使用 AWS Cost Explorer 并设置账单告警追踪用量。[AWS 成本管理](https://docs.aws.amazon.com/cost-management/latest/userguide/what-is-aws-cost-management.html)
+5. **定期审计与合规：**
+   - 定期审查 IAM 角色和 CloudTrail 日志
+   - 遵循内部数据隐私和治理政策
+
+---
+
+## 总结
+
+按照上述步骤，你的企业团队可安全地将 AWS Bedrock 集成到 Cline VS Code 扩展中，加速开发：
+
+1. **准备 AWS 环境：** 创建/使用安全的 IAM 角色/用户，附加 `AmazonBedrockFullAccess` 策略，并确保必要权限
+2. **验证区域与模型访问：** 确认所选区域支持所需模型，并通过 AWS Marketplace 订阅
+3. **在 VS Code 配置 Cline：** 安装并设置 Cline，填写 AWS 凭证并选择合适模型
+4. **实施安全与监控：** 遵循 IAM、网络安全、监控和成本管理最佳实践
+
+如需更多细节，请查阅 [AWS Bedrock 官方文档](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)，并与内部云团队协作。祝你编码愉快！
+
+---
+
+_本指南会随着 AWS Bedrock 和 Cline 的发展持续更新。请始终参考最新官方文档和企业内部政策。_
+
+---

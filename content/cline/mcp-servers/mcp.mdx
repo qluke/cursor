@@ -1,8 +1,127 @@
 ---
-title: Mcp
-description: Description for mcp
+title: MCP 概览
 ---
 
-# Mcp
+# MCP 概览
 
-Content for mcp goes here.
+**快速链接：**
+
+- [从 GitHub 构建 MCP 服务器](/mcp-servers/mcp-server-from-github)
+- [从零自定义构建 MCP 服务器](/mcp-servers/mcp-server-from-scratch)
+
+本文档介绍了模型上下文协议（MCP）服务器的原理、能力，以及 Cline 如何帮助你构建和使用 MCP 服务器。
+
+---
+
+## 概述
+
+模型上下文协议（Model Context Protocol, MCP）是一个开放协议，用于标准化应用如何为大语言模型（LLM）提供上下文。可以把 MCP 想象成 AI 应用的 USB-C 接口——它为 AI 模型连接不同数据源和工具提供了统一标准。MCP 服务器充当大语言模型（如 Claude）与外部工具或数据源之间的中介。它们是小型程序，向 LLM 暴露功能，使其能通过 MCP 与外部世界交互。MCP 服务器本质上就像 LLM 可用的 API。
+
+---
+
+## 核心概念
+
+MCP 服务器定义了一组“**工具**”，即 LLM 可调用的函数。这些工具可实现丰富的能力。
+
+**MCP 的工作方式如下：**
+
+- **MCP 主机**会发现已连接服务器的能力，并加载其工具、提示和资源。
+- **资源**为只读数据提供一致访问方式，类似于文件路径或数据库查询。
+- **安全性**通过服务器隔离凭证和敏感数据实现。所有交互都需用户明确批准。
+
+---
+
+## 应用场景
+
+MCP 服务器的潜力非常广泛，可用于多种场景。
+
+**以下是 MCP 服务器的具体应用示例：**
+
+- **Web 服务与 API 集成：**
+  - 监控 GitHub 仓库新问题
+  - 根据特定触发条件向 Twitter 发布更新
+  - 获取实时天气数据用于定位服务
+
+- **浏览器自动化：**
+  - 自动化 Web 应用测试
+  - 抓取电商网站进行价格比对
+  - 生成网站监控用的截图
+
+- **数据库查询：**
+  - 生成每周销售报告
+  - 分析客户行为模式
+  - 创建实时业务指标仪表盘
+
+- **项目与任务管理：**
+  - 根据代码提交自动创建 Jira 工单
+  - 生成每周进度报告
+  - 按项目需求自动创建任务依赖
+
+- **代码库文档化：**
+  - 从代码注释生成 API 文档
+  - 根据代码结构生成架构图
+  - 保持 README 文件实时更新
+
+---
+
+## 快速开始
+
+Cline 默认不自带任何 MCP 服务器，你需要自行查找并安装。
+
+**根据需求选择合适方式：**
+
+- **社区仓库：** 在 GitHub 上查找社区维护的 MCP 服务器列表。参见 [从 GitHub 添加 MCP 服务器](/mcp-servers/mcp-server-from-github)
+- **Cline 市场：** 通过 Cline 的 [MCP 市场](/mcp-servers/mcp-quickstart) 安装
+- **询问 Cline：** 你可以让 Cline 帮你查找或创建 MCP 服务器
+- **自建服务器：** 使用 [MCP SDK](https://github.com/modelcontextprotocol/) 自定义开发
+- **定制现有服务器：** 修改已有服务器以满足你的特定需求
+
+---
+
+## 与 Cline 集成
+
+Cline 通过其 AI 能力简化了 MCP 服务器的构建与使用。
+
+### 构建 MCP 服务器
+
+- **自然语言理解：** 你只需用自然语言描述 MCP 服务器的功能，Cline 会理解并生成所需代码。
+- **克隆与构建：** Cline 可自动从 GitHub 克隆现有 MCP 服务器仓库并完成构建。
+- **配置与依赖管理：** Cline 负责配置文件、环境变量和依赖管理。
+- **故障排查与调试：** Cline 可帮助你定位并解决开发过程中的错误。
+
+### 使用 MCP 服务器
+
+- **工具执行：** Cline 可无缝集成 MCP 服务器，允许你直接调用其定义的工具。
+- **上下文感知交互：** Cline 能根据对话内容智能推荐相关工具。
+- **动态集成：** 可组合多个 MCP 服务器能力完成复杂任务。例如，Cline 可用 GitHub 服务器获取数据，再用 Notion 服务器生成格式化报告。
+
+---
+
+## 安全注意事项
+
+使用 MCP 服务器时，请务必遵循安全最佳实践：
+
+- **认证：** 始终使用安全的 API 认证方式
+- **环境变量：** 敏感信息应存储在环境变量中
+- **访问控制：** 限制服务器访问仅授权用户
+- **数据校验：** 校验所有输入，防止注入攻击
+- **日志记录：** 实现安全日志，避免泄露敏感数据
+
+---
+
+## 资源推荐
+
+以下是查找和学习 MCP 服务器的相关资源：
+
+- **GitHub 仓库：**  
+  [https://github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)  
+  [https://github.com/punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers)
+- **在线目录：**  
+  [https://mcpservers.org/](https://mcpservers.org/)  
+  [https://mcp.so/](https://mcp.so/)  
+  [https://glama.ai/mcp/servers](https://glama.ai/mcp/servers)
+- **PulseMCP：**  
+  [https://www.pulsemcp.com/](https://www.pulsemcp.com/)
+- **YouTube 教程（AI-Driven Coder）：**  
+  [https://www.youtube.com/watch?v=b5pqTNiuuJg](https://www.youtube.com/watch?v=b5pqTNiuuJg)
+ 

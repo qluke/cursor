@@ -1,8 +1,73 @@
 ---
-title: Mcp Server From Github
-description: Description for mcp-server-from-github
+title: 从 GitHub 添加 MCP 服务器
 ---
 
-# Mcp Server From Github
+# 从 GitHub 添加 MCP 服务器
 
-Content for mcp-server-from-github goes here.
+本指南将逐步介绍如何使用 Cline 从 GitHub 仓库构建并集成现有的 MCP 服务器。
+
+---
+
+## 寻找 MCP 服务器
+
+你可以通过多种途径在线查找 MCP 服务器：
+
+- **Cline 可自动将 MCP 服务器添加到其列表中，之后你可以进行编辑。**Cline 能直接从 GitHub 克隆仓库并为你构建服务器。
+- **GitHub：** 最常见的两个 MCP 服务器仓库：
+  - [官方 MCP 服务器仓库](https://github.com/modelcontextprotocol/servers)
+  - [Awesome-MCP 服务器仓库](https://github.com/punkpeye/awesome-mcp-servers)
+- **在线目录：** 多个网站收录了 MCP 服务器，包括：
+  - [mcpservers.org](https://mcpservers.org/)
+  - [mcp.so](https://mcp.so/)
+  - [glama.ai/mcp/servers](https://glama.ai/mcp/servers)
+  
+  这些目录允许用户按下载量、日期、星标、用例等多种标准筛选服务器。每个条目都提供功能、工具和配置说明等信息。
+- **PulseMCP：** 该网站有一篇关于 AI 如何利用 MCP 服务器取代网站的博客，并包含 MCP 服务器常见问题解答：[https://www.pulsemcp.com/](https://www.pulsemcp.com/)
+
+---
+
+## 使用 Cline 构建 MCP 服务器
+
+1. **发起流程：** 向 Cline 提供以下信息：
+   - **GitHub 仓库地址：** 服务器仓库的 URL。
+   - **README.md 内容：** 可选，但有助于 Cline 理解服务器用途和配置。你可以从 GitHub 仓库复制 README.md 文件内容。
+
+2. **与 Cline 的示例交互：**
+
+   ```text
+   用户：“Cline，我想添加 Brave 浏览器控制的 MCP 服务器。GitHub 链接如下：@https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search 你能帮我添加吗？”
+   Cline：“好的。正在将仓库克隆到 MCP 目录。检测到有 package.json 文件，需要构建。是否运行 'npm run build'？”
+   用户：“是的，构建吧。”
+   Cline：“构建完成。该服务器需要浏览器路径。你的 Brave 浏览器可执行文件在哪里？”
+   用户：“在 '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'。”
+   Cline：“好的，已将该路径写入服务器配置，并添加到 'cline_mcp_settings.json'。还需要做什么吗？”
+   用户：“不用了，就这样。我们测试一下吧。”
+   Cline：“好的！正在启动 MCP Inspector 测试服务器连接。之后我们可以尝试用 Cline 控制浏览器。”
+   ```
+
+3. **Cline 的操作：** 根据你的指令，Cline 会自动完成以下步骤：
+
+   - **克隆仓库：** Cline 会将仓库克隆到本地，通常在你配置的目录下。
+   - **配置调整：** 你可以引导 Cline 修改服务器配置。例如：
+     - 用户：“该服务器需要 API key，你能找到应该加在哪里吗？”
+     - Cline 可能会自动更新 `cline_mcp_settings.json` 或其他相关文件。
+   - **构建服务器：** Cline 会运行适当的构建命令，通常为 `npm run build`。
+   - **添加到设置：** Cline 会将服务器配置添加到 `cline_mcp_settings.json` 文件中。
+
+---
+
+## 测试与故障排查
+
+1. **测试服务器：** Cline 完成构建后，请测试服务器确保其正常工作。如遇问题，Cline 可协助排查。
+2. **MCP Inspector：** 你可以使用 MCP Inspector 测试服务器的连接和功能。
+
+---
+
+## 最佳实践
+
+- **了解基础知识：** 虽然 Cline 简化了流程，但建议你对服务器代码、MCP 协议及服务器配置有基本了解，这有助于更有效地排查和自定义。
+- **指令清晰：** 在整个流程中，向 Cline 提供清晰、具体的指令。
+- **充分测试：** 安装和配置后务必彻底测试服务器，确保其功能正常。
+- **版本控制：** 使用版本控制系统（如 Git）跟踪服务器代码的更改。
+- **保持更新：** 定期更新 MCP 服务器，以获得最新功能和安全补丁。
+

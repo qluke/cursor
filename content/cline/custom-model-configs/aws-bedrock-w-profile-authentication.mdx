@@ -1,8 +1,43 @@
 ---
-title: Aws Bedrock W Profile Authentication
-description: Description for aws-bedrock-w-profile-authentication
+title: 使用 AWS Profile 认证配置 Bedrock
 ---
 
-# Aws Bedrock W Profile Authentication
+# 使用 AWS Profile 认证配置 Bedrock
 
-Content for aws-bedrock-w-profile-authentication goes here.
+---
+
+## 配置 AWS Bedrock 以使用 AWS Profile 进行认证
+
+---
+
+Cline 支持通过 AWS 凭证或 AWS Profile 访问 AWS Bedrock 服务。推荐使用 SSO/联合角色（Federated roles）而非传统 IAM 配置。本文将介绍如何配置环境，使 Cline 通过 SSO 角色进行认证。
+
+---
+
+1. **安装 [最新版 AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)**
+
+   - 按照 AWS 官方文档，安装适用于你操作系统的 AWS CLI 版本。
+
+2. **使用 AWS CLI [配置 IAM 认证](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html)**
+
+   - 如果你还没有通过 IAM Identity Center 获取 AWS 访问权限，请参考 [IAM 用户指南](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html) 设置 IAM 用户和角色。确保你拥有 `PowerUserAccess` 角色。
+   - 如果你通过公司获得 AWS 访问权限，请打开 AWS 访问门户，找到对应账号，并确保拥有 `PowerUserAccess` 权限。
+   - 打开“Access keys”链接，记录 `SSO start URL` 和 `SSO region`，后续步骤需要用到。
+
+3. **继续使用 [`aws configure sso` CLI 向导](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#cli-configure-sso-configure) 配置 Profile**
+
+   - 配置完成后，使用以下命令认证 AWS CLI：
+     ```sh
+     aws sso login --profile <AWS-profile-name>
+     ```
+   - 记下你为 AWS 账号绑定的 Profile 名称，后续配置 Cline 时需要用到。
+
+4. **如尚未安装 VSCode 和 Cline 插件，请先安装。可参考“快速开始”页面。**
+
+5. **打开 Cline 插件，点击设置按钮 ⚙️，选择 API Provider。**
+
+   - 在 API Provider 下拉菜单中选择 AWS Bedrock
+   - 选择 AWS Profile 单选项，并输入第 3 步中配置的 AWS Profile 名称
+   - 从下拉菜单中选择你的 AWS 区域（Region）
+   - 某些模型需要勾选跨区域推理（cross-region inference）选项
+

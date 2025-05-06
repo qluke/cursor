@@ -1,8 +1,627 @@
 ---
-title: Mcp Server From Scratch
-description: Description for mcp-server-from-scratch
+title: 从零开发 MCP 服务器  
+description: mcp-server-from-scratch 说明
 ---
 
-# Mcp Server From Scratch
+# MCP 服务器开发协议
 
-Content for mcp-server-from-scratch goes here.
+本协议旨在规范和简化使用 Cline 构建 MCP 服务器的开发流程。
+
+> 🚀 **构建并分享你的 MCP 服务器。** 当你完成一个优秀的 MCP 服务器后，欢迎提交到 [Cline MCP 市场](https://github.com/cline/mcp-marketplace)，让成千上万的开发者一键发现和安装。
+
+---
+
+## 什么是 MCP 服务器？
+
+模型上下文协议（MCP）服务器为 Cline 等 AI 助手扩展能力，使其能够：
+
+- 访问外部 API 和服务
+- 获取实时数据
+- 控制应用和本地系统
+- 执行文本提示无法完成的操作
+
+没有 MCP，AI 助手虽强大但孤立；有了 MCP，它们可以与几乎所有数字系统交互。
+
+---
+
+## 开发协议
+
+高效开发 MCP 服务器的核心在于遵循结构化协议。该协议通过 `.clinerules` 文件实现，需放在 MCP 工作目录（如 `/Users/your-name/Documents/Cline/MCP`）根目录下。
+
+### 使用 `.clinerules` 文件
+
+`.clinerules` 是 Cline 自动读取的特殊配置文件，作用包括：
+
+- 配置 Cline 行为，强制最佳实践
+- 切换 Cline 至专用 MCP 开发模式
+- 提供分步开发协议
+- 实现安全措施（如防止未测试提前完成）
+- 指导你完成规划、实现、测试等阶段
+
+**完整 MCP 服务器开发协议（应放入 `.clinerules` 文件）：**
+
+```md
+# MCP 服务器开发协议
+⚠️ 重要：未测试前禁止使用 attempt_completion
+
+## 步骤 1：规划（PLAN MODE）
+- 该工具解决什么问题？
+- 将使用哪个 API/服务？
+- 认证需求？
+  □ 标准 API key
+  □ OAuth（需单独脚本）
+  □ 其他凭证
+
+## 步骤 2：实现（ACT MODE）
+1. 初始化
+   - Web 服务/JS/Node.js 环境：
+     ```bash
+     npx @modelcontextprotocol/create-server my-server
+     cd my-server
+     npm install
+     ```
+   - 数据科学/ML/Python 环境：
+     ```bash
+     pip install mcp
+     # 或推荐用 uv
+     uv add "mcp[cli]"
+     ```
+2. 核心实现
+   - 使用 MCP SDK
+   - 实现全面日志
+   - TypeScript 示例：
+     ```typescript
+     console.error('[Setup] Initializing server...');
+     console.error('[API] Request to endpoint:', endpoint);
+     console.error('[Error] Failed with:', error);
+     ```
+   - Python 示例：
+     ```python
+     import logging
+     logging.error('[Setup] Initializing server...')
+     logging.error(f'[API] Request to endpoint: {endpoint}')
+     logging.error(f'[Error] Failed with: {str(error)}')
+     ```
+   - 添加类型定义
+   - 错误处理需有上下文
+   - 如需限流，务必实现
+
+3. 配置
+   - 如需凭证，向用户获取
+   - 添加到 MCP 设置：
+     - TypeScript 项目：
+       ```json
+       {
+         "mcpServers": {
+           "my-server": {
+             "command": "node",
+             "args": ["path/to/build/index.js"],
+             "env": { "API_KEY": "key" },
+             "disabled": false,
+             "autoApprove": []
+           }
+         }
+       }
+       ```
+     - Python 项目：
+       ```bash
+       # 命令行直接安装
+       mcp install server.py -v API_KEY=key
+       ```
+       或在 settings.json：
+       ```json
+       {
+         "mcpServers": {
+           "my-server": {
+             "command": "python",
+             "args": ["server.py"],
+             "env": { "API_KEY": "key" },
+             "disabled": false,
+             "autoApprove": []
+           }
+         }
+       }
+       ```
+
+## 步骤 3：测试（BLOCKER ⛔️）
+<thinking>
+使用 attempt_completion 前，必须确认：
+□ 是否测试了每个工具？
+□ 是否每项测试都获得用户确认？
+□ 是否记录了测试结果？
+如有一项为“否”，禁止使用 attempt_completion。
+</thinking>
+1. 测试每个工具（必需）
+   □ 用有效输入测试每个工具
+   □ 验证输出格式正确
+⚠️ 所有工具未测试前禁止继续
+
+## 步骤 4：完成
+❗ 停止并核查：
+□ 每个工具均已用有效输入测试
+□ 每个工具输出格式正确
+全部通过后方可使用 attempt_completion
+
+## 关键要求
+- ✓ 必须使用 MCP SDK
+- ✓ 必须有全面日志
+- ✓ 必须单独测试每个工具
+- ✓ 必须优雅处理错误
+- ⛔️ 禁止跳过测试直接完成
+```
+
+当该 `.clinerules` 文件存在于工作目录时，Cline 会：
+
+1. 以 **PLAN MODE** 启动，先设计服务器
+2. 在 **ACT MODE** 强制规范实现
+3. 要求所有工具测试通过后才允许完成
+4. 全程引导你完成开发生命周期
+
+---
+
+## 快速开始
+
+开发 MCP 服务器只需几个简单步骤：
+
+### 1. 创建 `.clinerules` 文件（🚨 重要）
+
+首先，将上述协议内容保存为 `.clinerules` 文件，放在 MCP 工作目录根目录。此文件会让 Cline 按开发协议工作。
+
+### 2. 发起清晰描述的对话
+
+在 Cline 聊天中，明确描述你要构建的内容，包括：
+
+- 服务器用途
+- 需集成的 API 或服务
+- 所需工具或功能
+
+示例：
+
+```text
+我想为 AlphaAdvantage 金融 API 构建一个 MCP 服务器，能获取实时股票数据、做技术分析、查询公司财报信息。
+```
+
+### 3. 按协议推进
+
+Cline 会自动进入 PLAN MODE，引导你：
+
+- 讨论问题范围
+- 审查 API 文档
+- 规划认证方式
+- 设计工具接口
+
+准备好后，可在聊天底部切换到 ACT MODE 开始实现。
+
+### 4. 尽早提供 API 文档
+
+最有效的做法是，一开始就将官方 API 文档发给 Cline：
+
+```text
+这是该服务的 API 文档：[粘贴 API 文档]
+```
+
+详细的 API 说明（端点、认证、数据结构）能极大提升 Cline 的开发效率。
+
+---
+
+## 理解两种模式
+
+### PLAN MODE
+
+在此协作阶段，你与 Cline 共同设计 MCP 服务器：
+
+- 明确问题范围
+- 选择合适 API
+- 规划认证方式
+- 设计工具接口
+- 确定数据格式
+
+### ACT MODE
+
+规划完成后，Cline 协助你实现服务器：
+
+- 搭建项目结构
+- 编写实现代码
+- 配置相关设置
+- 彻底测试每个组件
+- 完善文档
+
+---
+
+## 案例：AlphaAdvantage 股票分析服务器
+
+以下是 AlphaAdvantage MCP 服务器的开发流程示例，具备股票数据分析与报告能力。
+
+### 规划阶段
+
+在规划阶段，我们：
+
+1. **定义问题**：用户需通过 AI 助手获取金融数据、股票分析和市场洞察
+2. **选择 API**：AlphaAdvantage 金融市场数据 API
+   - 标准 API key 认证
+   - 免费版限流 5 次/分钟
+   - 多种数据端点
+3. **设计所需工具**：
+   - 股票概览（当前价格、公司信息）
+   - 技术分析（RSI、MACD 等指标）
+   - 基本面分析（财报、比率）
+   - 盈利报告数据
+   - 新闻与情绪分析
+4. **规划数据格式**：
+   - 干净、结构化的 Markdown 输出
+   - 表格展示结构化数据
+   - 趋势符号（↑/↓）
+   - 财务数字格式化
+
+### 实现阶段
+
+我们首先初始化项目：
+
+```bash
+npx @modelcontextprotocol/create-server alphaadvantage-mcp
+cd alphaadvantage-mcp
+npm install axios node-cache
+```
+
+项目结构示例：
+
+```text
+src/
+  ├── api/
+  │   └── alphaAdvantageClient.ts   # API 客户端，含限流与缓存
+  ├── formatters/
+  │   └── markdownFormatter.ts      # Markdown 格式化输出
+  └── index.ts                      # MCP 服务器主实现
+```
+
+**API 客户端实现要点：**
+
+- 限流：强制 5 次/分钟
+- 缓存：减少 API 调用
+- 错误处理：健壮的异常检测与报告
+- 类型定义：所有数据均有明确 TypeScript 类型
+
+关键实现片段：
+
+```typescript
+/** 管理免费版限流（每分钟 5 次） */
+private async enforceRateLimit() {
+  if (this.requestsThisMinute >= 5) {
+    console.error("[Rate Limit] Rate limit reached. Waiting for next minute...");
+    return new Promise<void>((resolve) => {
+      const remainingMs = 60 * 1000 - (Date.now() % (60 * 1000));
+      setTimeout(resolve, remainingMs + 100); // 加 100ms 缓冲
+    });
+  }
+  this.requestsThisMinute++;
+  return Promise.resolve();
+}
+```
+
+**Markdown 格式化示例：**
+
+```typescript
+/** 将公司概览格式化为 markdown */
+export function formatStockOverview(overviewData: any, quoteData: any): string {
+  // 提取数据
+  const overview = overviewData;
+  const quote = quoteData["Global Quote"];
+  // 计算价格变动
+  const currentPrice = parseFloat(quote["05. price"] || "0");
+  const priceChange = parseFloat(quote["09. change"] || "0");
+  const changePercent = parseFloat(quote["10. change percent"]?.replace("%", "") || "0");
+  // 格式化 markdown
+  let markdown = `# ${overview.Symbol} (${overview.Name}) - ${formatCurrency(currentPrice)} ${addTrendIndicator(priceChange)}${changePercent > 0 ? '+' : ''}${changePercent.toFixed(2)}%\n\n`;
+  // 更多细节...
+  return markdown;
+}
+```
+
+**工具实现示例：**
+
+```typescript
+server.setRequestHandler(ListToolsRequestSchema, async () => {
+  console.error("[Setup] Listing available tools");
+  return {
+    tools: [
+      {
+        name: "get_stock_overview",
+        description: "获取股票代码的公司信息和当前报价",
+        inputSchema: {
+          type: "object",
+          properties: {
+            symbol: { type: "string", description: "股票代码（如 'AAPL')" },
+            market: { type: "string", description: "可选市场（如 'US')", default: "US" }
+          },
+          required: ["symbol"]
+        }
+      }
+      // 其他工具...
+    ]
+  };
+});
+```
+
+每个工具的处理器都包含：
+
+- 输入校验
+- API 客户端调用与错误处理
+- Markdown 格式化响应
+- 全面日志
+
+### 测试阶段
+
+此阶段需系统性测试每个工具：
+
+1. 先在设置中配置 MCP 服务器：
+
+```json
+{
+  "mcpServers": {
+    "alphaadvantage-mcp": {
+      "command": "node",
+      "args": ["/path/to/alphaadvantage-mcp/build/index.js"],
+      "env": { "ALPHAVANTAGE_API_KEY": "YOUR_API_KEY" },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+```
+
+2. 逐一测试每个工具：
+
+- **get_stock_overview**：获取 AAPL 股票概览
+  ```markdown
+  # AAPL (Apple Inc) - $241.84 ↑+1.91%
+  **Sector:** TECHNOLOGY
+  **Industry:** ELECTRONIC COMPUTERS
+  **Market Cap:** 3.63T
+  **P/E Ratio:** 38.26
+  ...
+  ```
+- **get_technical_analysis**：获取价格走势与 RSI
+  ```markdown
+  # Technical Analysis: AAPL
+  ## Daily Price Action
+  Current Price: $241.84 (↑$4.54, +1.91%)
+  ### Recent Daily Prices
+  | Date | Open | High | Low | Close | Volume |
+  |------|------|------|-----|-------|--------|
+  | 2025-02-28 | $236.95 | $242.09 | $230.20 | $241.84 | 56.83M |
+  ...
+  ```
+- **get_earnings_report**：获取 MSFT 盈利历史
+  ```markdown
+  # Earnings Report: MSFT (Microsoft Corporation)
+  **Sector:** TECHNOLOGY
+  **Industry:** SERVICES-PREPACKAGED SOFTWARE
+  **Current EPS:** $12.43
+  ## Recent Quarterly Earnings
+  | Quarter | Date | EPS Estimate | EPS Actual | Surprise % |
+  |---------|------|-------------|------------|------------|
+  | 2024-12-31 | 2025-01-29 | $3.11 | $3.23 | ↑4.01% |
+  ...
+  ```
+
+### 开发中遇到的挑战与解决方案
+
+1. **API 限流**
+   - 挑战：免费版每分钟仅 5 次
+   - 解决：实现队列、强制限流、增加缓存
+2. **数据格式化**
+   - 挑战：API 原始数据不友好
+   - 解决：自定义格式化工具，统一输出
+3. **超时问题**
+   - 挑战：复杂工具多次 API 调用易超时
+   - 解决：建议拆分工具、优化缓存
+
+### 经验总结
+
+- 规划 API 限流策略
+- 智能缓存提升性能
+- 投资于数据格式化，提升体验
+- 每个工具都要单独测试
+- 复杂 API 需简化工具设计
+
+---
+
+## 核心实现最佳实践
+
+### 全面日志
+
+日志对调试 MCP 服务器至关重要：
+
+```typescript
+// 启动日志
+console.error('[Setup] Initializing AlphaAdvantage MCP server...');
+// API 请求日志
+console.error(`[API] Getting stock overview for ${symbol}`);
+// 错误处理日志
+console.error(`[Error] Tool execution failed: ${error.message}`);
+// 缓存操作日志
+console.error(`[Cache] Using cached data for: ${cacheKey}`);
+```
+
+### 强类型定义
+
+类型定义可防止错误并提升可维护性：
+
+```typescript
+export interface AlphaAdvantageConfig {
+  apiKey: string;
+  cacheTTL?: Partial<typeof DEFAULT_CACHE_TTL>;
+  baseURL?: string;
+}
+
+/** 校验股票代码有效性 */
+function validateSymbol(symbol: unknown): asserts symbol is string {
+  if (typeof symbol !== "string" || symbol.trim() === "") {
+    throw new McpError(ErrorCode.InvalidParams, "A valid stock symbol is required");
+  }
+  // 基本校验
+  const symbolRegex = /^[A-Za-z0-9.]+$/;
+  if (!symbolRegex.test(symbol)) {
+    throw new McpError(ErrorCode.InvalidParams, `Invalid stock symbol: ${symbol}`);
+  }
+}
+```
+
+### 智能缓存
+
+减少 API 调用、提升性能：
+
+```typescript
+// 默认缓存时间（秒）
+const DEFAULT_CACHE_TTL = {
+  STOCK_OVERVIEW: 60 * 60, // 1小时
+  TECHNICAL_ANALYSIS: 60 * 30, // 30分钟
+  FUNDAMENTAL_ANALYSIS: 60 * 60 * 24, // 24小时
+  EARNINGS_REPORT: 60 * 60 * 24, // 24小时
+  NEWS: 60 * 15, // 15分钟
+};
+
+// 先查缓存
+const cachedData = this.cache.get<T>(cacheKey);
+if (cachedData) {
+  console.error(`[Cache] Using cached data for: ${cacheKey}`);
+  return cachedData;
+}
+
+// 缓存成功响应
+this.cache.set(cacheKey, response.data, cacheTTL);
+```
+
+### 优雅的错误处理
+
+实现健壮的错误处理，保障用户体验：
+
+```typescript
+try {
+  switch (request.params.name) {
+    case "get_stock_overview": {
+      // 实现...
+    }
+    // 其他工具...
+    default:
+      throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: ${request.params.name}`);
+  }
+} catch (error) {
+  console.error(`[Error] Tool execution failed: ${error instanceof Error ? error.message : String(error)}`);
+  if (error instanceof McpError) {
+    throw error;
+  }
+  return {
+    content: [{ type: "text", text: `Error: ${error instanceof Error ? error.message : String(error)}` }],
+    isError: true
+  };
+}
+```
+
+---
+
+## MCP 资源
+
+MCP 资源让你的服务器无需执行代码即可向 Cline 暴露数据，适合提供文件、API 响应、数据库记录等上下文信息。
+
+### 添加资源
+
+1. **定义资源：**
+
+```typescript
+server.setRequestHandler(ListResourcesRequestSchema, async () => {
+  return {
+    resources: [
+      {
+        uri: "file:///project/readme.md",
+        name: "Project README",
+        mimeType: "text/markdown"
+      }
+    ]
+  };
+});
+```
+
+2. **实现读取处理器：**
+
+```typescript
+server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+  if (request.params.uri === "file:///project/readme.md") {
+    const content = await fs.promises.readFile("/path/to/readme.md", "utf-8");
+    return {
+      contents: [
+        {
+          uri: request.params.uri,
+          mimeType: "text/markdown",
+          text: content
+        }
+      ]
+    };
+  }
+  throw new Error("Resource not found");
+});
+```
+
+资源让 MCP 服务器更具上下文感知能力，Cline 可直接引用，无需手动粘贴。详见[官方文档](https://modelcontextprotocol.io/docs/concepts/resources)。
+
+---
+
+## 常见挑战与解决方案
+
+### API 认证复杂性
+
+**挑战**：API 认证方式多样  
+**解决方案**：
+
+- API key 用环境变量配置
+- OAuth 需单独脚本获取 refresh token
+- 敏感 token 安全存储
+
+```typescript
+// 用环境变量认证
+const API_KEY = process.env.ALPHAVANTAGE_API_KEY;
+if (!API_KEY) {
+  console.error("[Error] Missing ALPHAVANTAGE_API_KEY environment variable");
+  process.exit(1);
+}
+// 初始化 API 客户端
+const apiClient = new AlphaAdvantageClient({ apiKey: API_KEY });
+```
+
+### API 功能缺失或有限
+
+**挑战**：API 可能不提供所有所需功能  
+**解决方案**：
+
+- 用可用端点实现兜底
+- 必要时模拟功能
+- 转换 API 数据以满足需求
+
+### API 限流
+
+**挑战**：大多数 API 有限流，易导致失败  
+**解决方案**：
+
+- 实现限流
+- 增加智能缓存
+- 优雅降级
+- 明确提示限流错误
+
+```typescript
+if (this.requestsThisMinute >= 5) {
+  console.error("[Rate Limit] Rate limit reached. Waiting for next minute...");
+  return new Promise<void>((resolve) => {
+    const remainingMs = 60 * 1000 - (Date.now() % (60 * 1000));
+    setTimeout(resolve, remainingMs + 100); // 加 100ms 缓冲
+  });
+}
+```
+
+---
+
+## 相关资源
+
+- [MCP 协议文档](https://github.com/modelcontextprotocol/mcp)
+- [MCP SDK 文档](https://github.com/modelcontextprotocol/sdk-js)
+- [MCP 服务器示例](https://github.com/modelcontextprotocol/servers)
+

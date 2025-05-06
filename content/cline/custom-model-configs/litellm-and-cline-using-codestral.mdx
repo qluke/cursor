@@ -1,8 +1,81 @@
 ---
-title: Litellm And Cline Using Codestral
-description: Description for litellm-and-cline-using-codestral
+title: 使用 LiteLLM 与 Cline 集成 Codestral  
+description: litellm-and-cline-using-codestral 说明
 ---
 
-# Litellm And Cline Using Codestral
+# 使用 LiteLLM 与 Cline 集成 Codestral
 
-Content for litellm-and-cline-using-codestral goes here.
+---
+
+## 使用 LiteLLM 配合 Cline
+
+本指南演示如何以 Codestral 模型为例，运行 LiteLLM 的演示环境并在 Cline 中使用。
+
+---
+
+### 前置条件
+
+- 已安装 [Docker CLI 或 Docker Desktop](https://www.docker.com/get-started/) 以本地运行 LiteLLM 镜像
+- 本示例需准备 Codestral API Key（与 Mistral API Key 不同）
+
+---
+
+### 环境搭建
+
+1. **创建 `.env` 文件并填写相关字段**
+
+   ```
+   # 提示：可用以下命令生成随机密钥：
+   # openssl rand -base64 32 | tr -dc 'A-Za-z0-9' | head -c 32
+   LITELLM_MASTER_KEY=YOUR_LITELLM_MASTER_KEY
+   CODESTRAL_API_KEY=YOUR_CODESTRAL_API_KEY
+   ```
+
+   _注意：虽然仅限本地使用，LITELLM_MASTER_KEY 仍建议设置为安全值_
+
+2. **配置文件**
+
+   需要创建 `config.yaml` 文件以存放 LiteLLM 配置。本例只配置一个模型 'codestral-latest'，并命名为 'codestral'。
+
+   ```yaml
+   model_list:
+     - model_name: codestral
+       litellm_params:
+         model: codestral/codestral-latest
+         api_key: os.environ/CODESTRAL_API_KEY
+   ```
+
+---
+
+### 运行演示
+
+1. **启动 LiteLLM Docker 容器**
+
+   ```sh
+   docker run \
+     --env-file .env \
+     -v $(pwd)/config.yaml:/app/config.yaml \
+     -p 127.0.0.1:4000:4000 \
+     ghcr.io/berriai/litellm:main-latest \
+     --config /app/config.yaml --detailed_debug
+   ```
+
+2. **配置 Cline**
+
+   当 LiteLLM 服务器启动后，可在 Cline 中进行如下设置：
+
+   - Base URL 填写为 `http://0.0.0.0:4000/v1`
+   - API Key 填写 `.env` 文件中设置的 LITELLM_MASTER_KEY
+   - Model ID 填写为 `codestral`（或你在 `config.yaml` 中自定义的名称）
+
+---
+
+### 获取帮助
+
+- [LiteLLM 官方文档](https://docs.litellm.ai/)
+- [Mistral AI 控制台](https://console.mistral.ai/)
+- [Cline Discord 社区](https://discord.gg/cline)
+
+---
+
+作者：mdp

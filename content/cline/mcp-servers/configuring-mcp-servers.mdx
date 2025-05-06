@@ -1,8 +1,155 @@
 ---
-title: Configuring Mcp Servers
-description: Description for configuring-mcp-servers
+title: 配置 MCP 服务器
 ---
 
-# Configuring Mcp Servers
+# 配置 MCP 服务器
 
-Content for configuring-mcp-servers goes here.
+---
+
+### 全局 MCP 服务器启用模式
+
+使用 MCP 服务器会增加 token 使用量。Cline 支持根据需要限制或禁用 MCP 服务器功能。
+
+1. 点击 Cline 扩展顶部导航栏的 “MCP Servers” 图标。
+2. 选择 “Installed” 标签页，然后点击底部的 “Advanced MCP Settings” 链接。
+3. Cline 会打开新的设置窗口，找到 `Cline>Mcp:Mode`，在下拉菜单中选择所需模式。
+
+---
+
+### 管理单个 MCP 服务器
+
+每个 MCP 服务器都有独立的配置面板，可修改设置、管理工具并控制其运行。访问方法：
+
+1. 点击 Cline 扩展顶部导航栏的 “MCP Servers” 图标。
+2. 在列表中找到要管理的 MCP 服务器，点击其名称进入详情。
+
+#### 删除服务器
+
+1. 点击 MCP 服务器旁的垃圾桶图标，或在配置框底部点击红色 “Delete Server” 按钮。
+
+注意：删除操作无确认弹窗。
+
+#### 重启服务器
+
+1. 点击 MCP 服务器旁的 “Restart” 按钮，或在配置框底部点击灰色 “Restart Server” 按钮。
+
+#### 启用/禁用服务器
+
+1. 点击 MCP 服务器旁的开关按钮，可单独启用或禁用服务器。
+
+#### 网络超时设置
+
+要设置调用 MCP 服务器工具后等待响应的最大时间：
+
+1. 在单个 MCP 服务器配置框底部点击 `Network Timeout` 下拉菜单，修改时间。默认 1 分钟，可设置为 30 秒至 1 小时。
+
+---
+
+### 编辑 MCP 设置文件
+
+所有已安装 MCP 服务器的设置都保存在 `cline_mcp_settings.json` 文件中：
+
+1. 点击 Cline 面板顶部导航栏的 MCP Servers 图标。
+2. 选择 “Installed” 标签页。
+3. 点击底部的 “Configure MCP Servers” 按钮。
+
+该文件为 JSON 格式，`mcpServers` 对象包含各服务器配置：
+
+```json
+{
+  "mcpServers": {
+    "your-mcp-identifier": {
+      "command": "your-command",
+      "args": ["arg1", "arg2"],
+      "env": { "YOUR_API_KEY_NAME": "your_api_key" },
+      "autoApprove": ["tool1", "tool2"],
+      "disabled": false
+    }
+  }
+}
+```
+
+_本地（STDIO 传输）MCP 服务器配置示例_
+
+---
+
+### 传输类型说明
+
+MCP 支持两种服务器通信传输类型：
+
+#### STDIO 传输
+
+用于本地服务器：
+
+- 通过标准输入/输出流通信
+- 延迟低（无网络开销）
+- 安全性高（无网络暴露）
+- 配置简单（无需 HTTP 服务器）
+- 作为本地子进程运行
+
+更多 STDIO 传输机制详见 [MCP 传输机制](/mcp-servers/mcp-transport-mechanisms)
+
+STDIO 配置示例：
+
+```json
+{
+  "mcpServers": {
+    "your-mcp-identifier": {
+      "command": "your-command",
+      "args": ["arg1", "arg2"],
+      "env": { "YOUR_API_KEY_NAME": "your_api_key" },
+      "autoApprove": ["tool1", "tool2"],
+      "disabled": false
+    }
+  }
+}
+```
+
+#### SSE 传输
+
+用于通过 HTTP/HTTPS 访问的远程服务器：
+
+- 通过 Server-Sent Events 协议通信
+- 可部署在其他机器
+- 支持多客户端连接
+- 需网络访问
+- 便于集中部署和管理
+
+更多 SSE 传输机制详见 [MCP 传输机制](/mcp-servers/mcp-transport-mechanisms)
+
+SSE 配置示例：
+
+```json
+{
+  "mcpServers": {
+    "remote-server": {
+      "url": "https://your-server-url.com/mcp",
+      "headers": { "Authorization": "Bearer your-token" },
+      "autoApprove": ["tool3"],
+      "disabled": false
+    }
+  }
+}
+```
+
+---
+
+### 在工作流中使用 MCP 工具
+
+配置好 MCP 服务器后，Cline 会自动检测可用工具和资源。使用方法：
+
+1. 在 Cline 对话窗口输入你的请求
+2. Cline 会识别何时可用 MCP 工具协助任务
+3. 按提示批准工具调用（或使用自动批准）
+
+示例：“分析我的 API 性能” 可能会用到测试 API 端点的 MCP 工具。
+
+---
+
+### MCP 服务器常见问题排查
+
+- **服务器无响应**：检查服务器进程是否在运行，确认网络连通性
+- **权限错误**：确保 `mcp_settings.json` 文件中配置了正确的 API 密钥和凭证
+- **工具不可用**：确认服务器已正确实现该工具，且未在设置中禁用
+- **性能慢**：尝试调整该 MCP 服务器的网络超时设置
+
