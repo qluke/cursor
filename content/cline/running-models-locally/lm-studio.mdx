@@ -1,8 +1,73 @@
 ---
 title: Lm Studio
-description: Description for lm-studio
+description: Lm Studio 本地模型快速指南
 ---
 
 # Lm Studio
 
-Content for lm-studio goes here.
+Cline 本地 AI 模型运行环境 Lm Studio 快速上手指南。
+
+## 🤖 Lm Studio 与 Cline 配置说明
+
+使用 Lm Studio 可在本地运行 AI 模型并配合 Cline 使用。
+
+## 📋 前置条件
+
+- 支持 AVX2 指令集的 Windows、macOS 或 Linux 电脑
+- 已在 VS Code 中安装 Cline
+
+## 🚀 安装步骤
+
+### 1. 安装 Lm Studio
+
+- 访问 [lmstudio.ai](https://lmstudio.ai)
+- 下载并安装适合你操作系统的版本
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252FRvFLNS5tw6DaSvy8zXTs%252Fimage.png%3Falt%3Dmedia%26token%3D2ed4ec25-6d07-4473-8651-9147d95e2ddc&width=768&dpr=4&quality=100&sign=29051378&sv=2)
+
+### 2. 启动 Lm Studio
+
+- 打开已安装的 Lm Studio 应用
+- 左侧有四个标签页：**Chat**、**Developer**（用于启动服务）、**My Models**（已下载模型）、**Discover**（添加新模型）
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252FbSblxWvzuHLvMxJNM5M2%252Fimage.png%3Falt%3Dmedia%26token%3D9d75c1e0-dabb-4df1-85fc-273613583569&width=768&dpr=4&quality=100&sign=47537a1e&sv=2)
+
+### 3. 下载模型
+
+- 在"Discover"页面浏览模型
+- 选择并下载你喜欢的模型
+- 等待下载完成
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252Fg9uhK6FRszeSiD0dhsrs%252Flm-studio-download-model.gif%3Falt%3Dmedia%26token%3Dce3559a3-6e71-4b02-a13a-accbfebb145d&width=768&dpr=4&quality=100&sign=57d2f15f&sv=2)
+
+### 4. 启动服务
+
+- 切换到"Developer"标签页
+- 打开服务开关至"Running"状态
+- 注意：服务默认运行在 `http://localhost:1234`
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252FXrW4ISm1n2YUizKATv8s%252Flm-studio-starting-server.gif%3Falt%3Dmedia%26token%3D95b00607-954b-422b-a5d5-463d29619323&width=768&dpr=4&quality=100&sign=1cb44155&sv=2)
+
+### 5. 配置 Cline
+
+1. 打开 VS Code
+2. 点击 Cline 设置图标
+3. 选择 "LM Studio" 作为 API 提供商
+4. 从可用模型中选择你下载的模型
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252F1uiE7q2OruZAd3jx9Oi1%252Flm-studio-select-model-cline.gif%3Falt%3Dmedia%26token%3D87045a08-f6f0-4291-aefb-3b10dbc0f0e7&width=768&dpr=4&quality=100&sign=adfb72&sv=2)
+
+## ⚠️ 注意事项
+
+- 使用 Cline 前请先启动 Lm Studio
+- 保持 Lm Studio 在后台运行
+- 首次下载模型可能需要几分钟，取决于模型大小
+- 模型下载后会保存在本地
+
+## 🔧 故障排查
+
+1. 如果 Cline 无法连接 Lm Studio：
+2. 检查 Lm Studio 服务是否已在"Developer"标签页运行
+3. 确认已加载模型
+4. 检查你的系统是否满足硬件要求
+

@@ -1,8 +1,71 @@
 ---
 title: Ollama
-description: Description for ollama
+description: Ollama 本地模型快速指南
 ---
 
 # Ollama
 
-Content for ollama goes here.
+Cline 本地 AI 模型运行环境 Ollama 快速上手指南。
+
+## 📋 前置条件
+
+- Windows、macOS 或 Linux 电脑
+- 已在 VS Code 中安装 Cline
+
+## 🚀 安装步骤
+
+### 1. 安装 Ollama
+
+- 访问 [ollama.com](https://ollama.com)
+- 下载并安装适合你操作系统的版本
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252F8z5yfpC0EHIHSKaSkKQk%252Fimage.png%3Falt%3Dmedia%26token%3D04a389e5-76bd-46d7-a54d-68ecbb5dee5e&width=768&dpr=4&quality=100&sign=27783f58&sv=2)
+
+### 2. 选择并下载模型
+
+- 在 [ollama.com/search](https://ollama.com/search) 浏览模型
+- 选择模型并复制命令：
+
+```shell
+ollama run [模型名]
+```
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252F5qasRAyYhybTUUqf3oC4%252Follama-model-grab.gif%3Falt%3Dmedia%26token%3D4af97fbf-b43c-46d7-bd42-19d0696fd57d&width=768&dpr=4&quality=100&sign=96346b63&sv=2)
+
+- 打开终端并运行命令，例如：
+
+```shell
+ollama run llama2
+```
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252FJKxtNSs0rV7EdEpnYqHJ%252Fstarting-ollama-terminal.gif%3Falt%3Dmedia%26token%3D0c48b366-eef5-46fc-a97d-b87310ed83c5&width=768&dpr=4&quality=100&sign=f354b3f5&sv=2)
+
+**✨ 现在你的模型已可在 Cline 中使用！**
+
+### 3. 配置 Cline
+
+1. 打开 VS Code
+2. 点击 Cline 设置图标
+3. 选择 "Ollama" 作为 API 提供商
+4. 输入配置：
+   - Base URL: `http://localhost:11434/`（默认值，可保持不变）
+   - 从可用模型中选择你下载的模型
+
+![](https://docs.cline.bot/~gitbook/image?url=https%3A%2F%2F3321249260-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252Ff8Oh1Lcy6yWYq1caYESV%252Fuploads%252F9tGgGtdYlMhc1KNmEwcw%252Fselecting-ollama-model-cline.gif%3Falt%3Dmedia%26token%3Dcdc4792a-9a0b-4016-9b46-8d98e7b10bf3&width=768&dpr=4&quality=100&sign=ae75d61c&sv=2)
+
+## ⚠️ 注意事项
+
+- 使用 Cline 前请先启动 Ollama
+- 保持 Ollama 在后台运行
+- 首次下载模型可能需要几分钟
+
+## 🔧 故障排查
+
+如果 Cline 无法连接 Ollama：
+
+1. 确认 Ollama 已启动
+2. 检查 Base URL 是否正确
+3. 确认模型已下载
+
+需要更多信息？请阅读 [Ollama 官方文档](https://github.com/ollama/ollama/blob/main/docs/api.md)。
+

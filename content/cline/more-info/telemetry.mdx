@@ -1,8 +1,38 @@
 ---
-title: Telemetry
-description: Description for telemetry
+title: 遥测（Telemetry）
+description: Cline 遥测功能说明
 ---
 
-# Telemetry
+# 遥测（Telemetry）
 
-Content for telemetry goes here.
+## 概述
+
+为了让 Cline 更好地服务所有用户，我们会收集匿名的使用数据，帮助我们了解开发者如何使用这款开源 AI 编码助手。这一反馈机制对于提升 Cline 的能力和用户体验至关重要。
+
+我们使用 PostHog（一款开源分析平台）进行数据收集与分析。我们的遥测实现完全透明，您可以在[源代码](https://github.com/cline/cline/blob/main/src/services/telemetry/TelemetryService.ts)中查看我们具体追踪了哪些内容。
+
+## 追踪政策
+
+隐私是我们的首要任务。所有收集的数据在发送到 PostHog 之前都会进行匿名化处理，不包含任何个人身份信息（PII）。您的代码、提示词和对话内容始终保持私密，绝不会被收集。
+
+## 我们追踪的内容
+
+我们收集的基础匿名使用数据包括：
+
+- **任务交互：** 任务的开始与结束、对话流程（不含具体内容）
+- **模式与工具使用：** 在 plan/act 模式间切换、使用了哪些工具
+- **Token 使用：** 关于对话长度的基础指标，用于估算成本（不涉及实际 token 内容）
+- **系统环境：** 操作系统类型与 VS Code 环境信息
+- **界面活动：** 页面导航与功能使用情况
+
+为确保完全透明，您可以随时查阅我们的[遥测实现](https://github.com/cline/cline/blob/main/src/services/telemetry/TelemetryService.ts)，了解我们具体追踪的事件。
+
+## 如何选择退出
+
+Cline 的遥测功能完全可选，且需要您明确同意：
+
+- 当您安装或更新 VS Code 扩展时，会弹出提示："帮助改进 Cline"，您可以选择允许或拒绝
+- 您可随时在设置中更改偏好
+
+Cline 也会遵循 VS Code 的全局遥测设置。如果您在 VS Code 层面禁用了遥测，Cline 的遥测也会自动禁用。
+
