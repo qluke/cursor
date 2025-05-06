@@ -1,5 +1,5 @@
 ---
-title: 什么是 Cline？
+title: Cline 文档
 description: 欢迎阅读 Cline 文档的中文翻译版 - 这是您使用和扩展 Cline 功能的全面指南。在这里，您将找到帮助您入门、提升技能和为项目做出贡献的资源。
 ---
 
