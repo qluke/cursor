@@ -1,8 +1,32 @@
 ---
-title: Custom Instructions
-description: Description for custom-instructions
+title: 自定义指令
 ---
 
-# Custom Instructions
+## 自定义指令
 
-Content for custom-instructions goes here.
+### 为团队构建自定义指令
+
+---
+
+**制定标准化的项目指令，确保所有团队成员都在一致的规范下协作。首先记录项目的技术基础，然后明确哪些信息需要纳入指令。具体范围可根据团队需求调整，但通常建议尽可能详尽。通过制定所有成员都遵循的全面指令，可以建立对代码编写、测试和部署方式的共同理解，从而让项目更易维护、更具一致性。**
+
+---
+
+以下是为团队自定义指令时可考虑的一些主题和示例：
+
+1. **测试框架与具体命令**
+   - "所有组件必须包含 Jest 测试，覆盖率不低于 85%。在提交任何 pull request 前，需运行 `npm run test:coverage`。"
+
+2. **明确的库选择偏好**
+   - "数据获取和状态管理统一使用 React Query。除非全局状态极其复杂，否则避免使用 Redux。样式统一采用 Tailwind CSS，主题配置见 `src/styles/theme.js`。"
+
+3. **文档查阅位置**
+   - "所有 API 文档可在内部 Notion 工作区 'Engineering > API Reference' 查阅。组件用法示例见我们的 Storybook 实例：`https://storybook.internal.company.com`。"
+
+4. **MCP 服务器的用途与配置**
+   - "数据库操作请使用 Postgres MCP 服务器，凭证存放于 1Password 'Development > Database'。部署请用 AWS MCP 服务器，需 IAM 部署角色。配置说明见 `docs/mcp-setup.md`。"
+
+5. **项目专属代码规范**
+   - "所有 React 组件命名用 PascalCase，辅助函数用 camelCase。组件放在 `src/components`，按功能分文件夹而非按类型。Props 类型定义一律用 TypeScript 接口。"
+
+ 

@@ -1,8 +1,154 @@
 ---
-title: Cline Tools Guide
-description: Description for cline-tools-guide
+title: 探索 Cline 的工具
 ---
 
-# Cline Tools Guide
+# Cline 工具指南
 
-Content for cline-tools-guide goes here.
+## Cline 能做什么？
+
+Cline 是你的 AI 助手，可以：
+
+- 编辑和创建项目中的文件
+- 运行终端命令
+- 搜索和分析你的代码
+- 协助调试和修复问题
+- 自动化重复性任务
+- 集成外部工具
+
+---
+
+## 入门步骤
+
+### 1. 开始一个任务
+
+- 在聊天框输入你的请求
+- 示例：“创建一个名为 Header 的 React 组件”
+
+### 2. 提供上下文
+
+- 使用 @ 引用文件、文件夹或 URL
+- 示例：“@file:src/components/App.tsx”
+
+### 3. 审查更改
+
+- Cline 会在更改前展示 diff
+- 你可以编辑或拒绝更改
+
+---
+
+## 主要功能
+
+### 文件编辑
+
+- 创建新文件
+- 修改现有代码
+- 跨文件搜索与替换
+
+### 终端命令
+
+- 运行 npm 命令
+- 启动开发服务器
+- 安装依赖
+
+### 代码分析
+
+- 查找并修复错误
+- 重构代码
+- 添加文档注释
+
+### 浏览器集成
+
+- 测试网页
+- 截图
+- 检查控制台日志
+
+---
+
+## 可用工具
+
+如需最新实现细节，可在 [Cline 源码仓库](https://github.com/cline/cline/blob/main/src/core/Cline.ts) 查看完整源码。
+
+Cline 可访问以下工具以完成各类任务：
+
+### 文件操作
+
+- `write_to_file`：创建或覆盖文件
+- `read_file`：读取文件内容
+- `replace_in_file`：对文件进行定向编辑
+- `search_files`：用正则搜索文件
+- `list_files`：列出目录内容
+
+### 终端操作
+
+- `execute_command`：运行 CLI 命令
+- `list_code_definition_names`：列出代码定义
+
+### MCP 工具
+
+- `use_mcp_tool`：使用 MCP 服务器上的工具
+- `access_mcp_resource`：访问 MCP 服务器资源
+- 用户可自定义 MCP 工具，Cline 可调用
+- 示例：创建天气 API 工具，Cline 可用来获取天气预报
+
+### 交互工具
+
+- `ask_followup_question`：向用户追问澄清
+- `attempt_completion`：展示最终结果
+
+---
+
+每个工具有特定参数和用法。以下是一些示例：
+
+#### 创建新文件（write_to_file）
+
+```xml
+<write_to_file>
+  <path>src/components/Header.tsx</path>
+  <content>
+    // Header component code
+  </content>
+</write_to_file>
+```
+
+#### 搜索模式（search_files）
+
+```xml
+<search_files>
+  <path>src</path>
+  <regex>function\\s+\\w+\\(</regex>
+  <file_pattern>*.ts</file_pattern>
+</search_files>
+```
+
+#### 运行命令（execute_command）
+
+```xml
+<execute_command>
+  <command>npm install axios</command>
+  <requires_approval>false</requires_approval>
+</execute_command>
+```
+
+---
+
+## 常见任务
+
+- **创建新组件**  
+  “创建一个名为 Footer 的 React 组件”
+
+- **修复 bug**  
+  “修复 src/utils/format.ts 中的错误”
+
+- **重构代码**  
+  “将 Button 组件重构为 TypeScript”
+
+- **运行命令**  
+  “运行 npm install 安装 axios”
+
+---
+
+## 获取帮助
+
+- [加入 Discord 社区](https://discord.gg/cline)
+- 查阅文档
+- 提交反馈，帮助 Cline 持续改进

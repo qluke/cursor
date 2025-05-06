@@ -1,8 +1,136 @@
 ---
-title: Remote Browser Support
-description: Description for remote-browser-support
+title: 远程浏览器支持
+icon: Globe
+
 ---
 
-# Remote Browser Support
 
-Content for remote-browser-support goes here.
+1.  [探索 Cline 工具](/exploring-clines-tools)
+
+# 远程浏览器支持
+
+远程浏览器支持允许 Cline 利用远程 Chrome 实例，结合认证 token 和会话 cookie，适用于某些 Web 开发测试场景。
+
+Cline 的远程浏览器功能让 AI 助手可以直接通过受控浏览器实例与网页内容交互。这带来了多种强大能力：
+
+- 浏览和交互网站内容
+- 测试本地运行的 Web 应用
+- 监控控制台日志和错误
+- 执行点击、输入、滚动等浏览器操作
+
+---
+
+## 什么是远程浏览器？
+
+远程浏览器让 Cline 能直接浏览和交互网站。该功能使 Cline 可以：
+
+- 访问网站并查看其内容
+- 测试你本地运行的 Web 应用
+- 填写表单、点击页面元素
+- 截图所见内容
+- 滚动页面查看更多内容
+
+---
+
+## 如何使用远程浏览器
+
+### 基本指令
+
+你可以用简单的自然语言让 Cline 使用浏览器：
+
+- **打开网站**：
+  > 用浏览器访问 [https://example.com](https://example.com/)
+- **点击元素**：
+  > 点击登录按钮
+- **输入文本**：
+  > 在搜索框输入 'Hello world'
+- **滚动页面**：
+  > 向下滚动查看更多内容
+- **关闭浏览器**：
+  > 现在关闭浏览器
+
+### 示例工作流
+
+**测试 Web 应用：**
+
+```text
+你能用 "npm start" 启动我的 React 应用，然后检查 http://localhost:3000 是否正常吗？
+```
+
+**分析网站：**
+
+```text
+你能访问 https://example.com 并告诉我你对其设计和布局的看法吗？
+```
+
+**填写表单：**
+
+```text
+请访问 https://example.com/contact，填写联系表单并提交测试数据。
+```
+
+---
+
+## 重要须知
+
+### 一次只能有一个浏览器
+
+Cline 每次只能使用一个浏览器。如果你想访问其他网站，可以：
+
+- 让 Cline 在同一浏览器会话中跳转新网址
+- 让 Cline 关闭当前浏览器后再打开新浏览器
+
+### 使用其他工具前需关闭浏览器
+
+如果你希望 Cline 在用浏览器后编辑文件或运行命令，必须先让它关闭浏览器：
+
+```text
+关闭浏览器，然后更新 CSS 文件以修复我们看到的对齐问题。
+```
+
+### Cline 所见内容
+
+浏览器视口固定为 900x600 像素，类似小型笔记本屏幕。Cline 每次操作后会分享截图，让你看到它所见内容。
+
+### 控制台日志
+
+Cline 会捕获浏览器控制台日志，这对调试 Web 应用很有帮助。每次截图时会附带这些日志。
+
+---
+
+## 常见用例
+
+- **Web 开发**：测试你的网站和 Web 应用
+- **UI/UX 评审**：获取网站设计和可用性反馈
+- **内容调研**：让 Cline 浏览网站收集信息
+- **表单测试**：验证表单功能是否正常
+- **响应式设计测试**：检查网站在不同屏幕尺寸下的表现
+
+---
+
+## 故障排查
+
+- **网站无法加载**：请确保网址带有 http:// 或 https:// 前缀
+- **点击无效**：请更精确描述元素位置
+- **浏览器卡住**：让 Cline 关闭浏览器后重试
+
+---
+
+## 在 WSL 下用 VS Code 使用远程浏览器
+
+在 WSL 下运行 VS Code 时，需要配置 Windows 允许 WSL 连接 Chrome。步骤如下：
+
+### 以管理员身份打开 PowerShell 并运行：
+
+```powershell
+# 允许 WSL 连接 Chrome 调试端口
+New-NetFirewallRule -DisplayName "WSL Chrome Debug" -Direction Inbound -LocalPort 9222 -Protocol TCP -Action Allow
+```
+
+### 在 VS Code 配置 Cline：
+
+1. 打开 VS Code 设置
+2. 搜索 "Cline: Chrome Executable Path"
+3. 设置为 Chrome 可执行文件路径（如 `C:\Program Files\Google\Chrome\Application\chrome.exe`）
+
+配置完成后，Cline 即可在 WSL 环境下使用远程浏览器功能。
