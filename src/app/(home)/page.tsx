@@ -5,8 +5,10 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Cursor 中文文档 - 首页",
-  description: "Cursor 中文文档实时同步官方最新内容，翻译专业，助你快速上手。",
-  keywords: "Cursor, 中文文档, AI 编辑器, 翻译工具, 开发者工具",
+  description:
+    "Cursor 中文文档为你实时同步官方最新内容，专业翻译助你无障碍上手 Cursor IDE。体验基于 AI 的智能代码编辑器，支持 Tab 智能补全、Chat AI 编程配对、Cmd-K 快速编辑，轻松导入 VSCode 配置，快速提升开发效率。",
+  keywords:
+    "Cursor, 中文文档, AI 代码编辑器, VSCode, 智能补全, 编程助手, 开发工具, 快速上手, 安装指南, 配置迁移",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.cursor-cn.org/"
   ),
