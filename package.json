@@ -7,7 +7,8 @@
     "dev": "next dev --turbo",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
-    "submit": "node scripts/submit-indexnow.js"
+    "submit-indexnow": "node script/submit-indexnow.js",
+    "submit-indexnow:prod": "node script/submit-indexnow-prod.js"
   },
   "dependencies": {
     "fumadocs-core": "15.2.10",

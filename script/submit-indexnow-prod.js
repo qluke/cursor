@@ -1,15 +1,15 @@
 const fetch = require("node-fetch");
 
 /**
- * Script to submit URLs to IndexNow using the API endpoint
- * This script replaces the old hardcoded URL list with the dynamically generated list from clinesSource
+ * Script to submit URLs to IndexNow using the production API endpoint
+ * This script is meant to be used in production environments
  */
 async function submitToIndexNow() {
   try {
-    console.log("Submitting URLs to IndexNow...");
+    console.log("Submitting URLs to IndexNow in production environment...");
 
-    // Call the IndexNow API endpoint
-    const response = await fetch("http://localhost:3000/api/indexnow");
+    // Call the IndexNow API endpoint on the production site
+    const response = await fetch("https://www.cursor-cn.org/api/indexnow");
     const data = await response.json();
 
     if (data.success) {
@@ -24,9 +24,6 @@ async function submitToIndexNow() {
     }
   } catch (error) {
     console.error("❌ Error submitting to IndexNow:", error.message || error);
-    console.error(
-      "Make sure the development server is running on http://localhost:3000"
-    );
   }
 }
 
