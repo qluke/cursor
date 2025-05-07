@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev --turbo",
     "start": "next start",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "submit": "node scripts/submit-indexnow.js"
   },
   "dependencies": {
     "fumadocs-core": "15.2.10",
@@ -25,6 +26,7 @@
     "@types/react-dom": "^19.1.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "node-fetch": "^2.6.7"
   }
 }
