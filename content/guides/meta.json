@@ -1,0 +1,25 @@
+{
+  "title": "Guides",
+  "description": "Cursor 使用指南",
+  "icon": "BookOpen",
+  "root": true,
+  "pages": [
+    "[Globe][网站](https://cursor.com/)",
+    "[Newspaper][论坛](https://forum.cursor.com/)",
+    "[Headset][寻求帮助](mailto:hi@cursor.com)",
+    "---Core---",
+    "index",
+    "---Tutorials---",
+    "./tutorials/web-development",
+    "---Advanced---",
+    "./advanced/large-codebases",
+    "---Editor Migration---",
+    "./migration/vscode",
+    "./migration/jetbrains",
+    "---Languages & Frameworks---",
+    "./languages/python",
+    "./languages/javascript",
+    "./languages/swift",
+    "./languages/java"
+  ]
+}

@@ -1,12 +1,12 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import type { ReactNode } from "react";
 import { baseOptions } from "./layout.config";
-import { source } from "@/lib/source";
+import { sourceGuides } from "@/lib/source-guides";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <DocsLayout
-      tree={source.pageTree}
+      tree={sourceGuides.pageTree}
       {...baseOptions}
       sidebar={{
         tabs: [

@@ -1,0 +1,5 @@
+{
+  "title": "Editor Migration",
+  "icon": "BookOpen",
+  "pages": ["vscode", "jetbrains"]
+}

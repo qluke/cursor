@@ -9,6 +9,10 @@ export const cline = defineDocs({
   dir: "content/cline",
 });
 
+export const guides = defineDocs({
+  dir: "content/guides",
+});
+
 export default defineConfig({
   mdxOptions: {
     // MDX options

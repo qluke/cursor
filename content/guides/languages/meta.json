@@ -1,0 +1,5 @@
+{
+  "title": "Languages & Frameworks",
+  "icon": "BookOpen",
+  "pages": ["python", "javascript", "swift", "java"]
+}
