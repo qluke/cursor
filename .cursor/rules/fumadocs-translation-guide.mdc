@@ -64,3 +64,119 @@ Reference: [fumadocs-page-conventions.mdx](mdc:script/fumadocs-page-conventions.
 const code = "Don't translate this";
 ```
 
+## Additional Components
+
+When translating documents that use the following components, follow these specific guidelines:
+
+### Accordion
+```mdx
+<Accordion title="Translated Title">
+  Translated content here
+</Accordion>
+```
+
+### Auto Type Table
+```mdx
+<AutoTypeTable
+  of={Component}
+  title="Translated Title" 
+  description="Translated description"
+/>
+```
+
+### Banner
+```mdx
+<Banner 
+  title="Translated Title"
+  description="Translated description"
+  action="Translated action text"
+/>
+```
+
+### Dynamic Codeblock
+```mdx
+<DynamicCodeBlock 
+  title="Translated Title"
+  language="tsx"
+>
+  {`
+    // Translate only comments
+    const code = "Don't translate this";
+  `}
+</DynamicCodeBlock>
+```
+
+### Files
+```mdx
+<Files>
+  <Folder name="Translated Folder Name" defaultOpen>
+    <File name="Translated File Name" />
+  </Folder>
+</Files>
+```
+
+### GitHub Info
+```mdx
+<GitHubInfo
+  repo="username/repo"
+  branch="main"
+  title="Translated Title"
+  description="Translated description"
+/>
+```
+
+### Image Zoom
+```mdx
+<ImageZoom 
+  src="/path/to/image.png" 
+  alt="Translated alt text"
+  width={500}
+  height={300}
+/>
+```
+
+### Inline TOC
+```mdx
+<InlineTOC title="Translated Table of Contents" />
+```
+
+### Steps
+```mdx
+<Steps>
+  <Step title="Translated Step 1">
+    Translated content for step 1
+  </Step>
+  <Step title="Translated Step 2">
+    Translated content for step 2
+  </Step>
+</Steps>
+```
+
+### Tabs
+```mdx
+<Tabs items={['Translated Tab 1', 'Translated Tab 2']}>
+  <Tab>
+    Translated content for tab 1
+  </Tab>
+  <Tab>
+    Translated content for tab 2
+  </Tab>
+</Tabs>
+```
+
+### Type Table
+```mdx
+<TypeTable
+  title="Translated Title"
+  types={[
+    {
+      name: 'propName',
+      type: 'string',
+      description: 'Translated description'
+    }
+  ]}
+/>
+```
+
+
+
