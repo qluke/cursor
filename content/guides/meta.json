@@ -13,13 +13,7 @@
     "./tutorials/web-development",
     "---Advanced---",
     "./advanced/large-codebases",
-    "---Editor Migration---",
-    "./migration/vscode",
-    "./migration/jetbrains",
-    "---Languages & Frameworks---",
-    "./languages/python",
-    "./languages/javascript",
-    "./languages/swift",
-    "./languages/java"
+    "editor-migration",
+    "languages-frameworks"
   ]
 }
