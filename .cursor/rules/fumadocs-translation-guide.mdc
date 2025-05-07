@@ -1,0 +1,66 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Fumadocs Translation Guide
+
+This rule provides guidelines for translating Fumadocs documentation while maintaining proper formatting and conventions.
+
+## Markdown Syntax
+
+When translating Fumadocs documentation, preserve all of the following elements:
+
+- **Frontmatter**: Keep all frontmatter properties (`title`, `description`, etc.) but translate their values
+- **MDX Components**: Don't modify component names like `<Cards>`, `<Callout>`, etc.
+- **Codeblocks**: Do not translate code inside triple backticks unless they contain comments
+- **Links**: Preserve all link structures while translating the link text
+- **Images**: Keep image references intact, only translate alt text
+
+Reference: [fumadocs-markdown.mdx](mdc:script/fumadocs-markdown.mdx)
+
+## Page Conventions
+
+When translating page-related files, follow these guidelines:
+
+- **Meta Files**: Translate values in `meta.json` files but preserve all keys and special syntax
+- **Folder Structure**: Maintain the folder structure and naming as in the original documentation
+- **Slugs**: Don't modify file paths that affect page slugs
+- **Root Folders**: Maintain root folder designations and their properties
+
+Reference: [fumadocs-page-conventions.mdx](mdc:script/fumadocs-page-conventions.mdx)
+
+## Translation Workflow
+
+1. Create translated versions of `.mdx` files with the same filename structure
+2. Translate content while preserving all Markdown and MDX syntax
+3. Ensure all component props and attributes remain functional
+4. Translate frontmatter values but keep all original frontmatter keys
+5. Translate text in tables but maintain table structure
+
+## Special Elements
+
+### Cards
+```mdx
+<Cards>
+  <Card 
+    href="/path" 
+    title="Translated Title">
+    Translated content here
+  </Card>
+</Cards>
+```
+
+### Callouts
+```mdx
+<Callout title="Translated Title" type="info">
+  Translated callout content
+</Callout>
+```
+
+### Codeblocks
+```jsx title="Translated Title"
+// Translate only comments
+const code = "Don't translate this";
+```
+
