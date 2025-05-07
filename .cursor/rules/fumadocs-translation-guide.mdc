@@ -38,49 +38,12 @@ Reference: [fumadocs-page-conventions.mdx](mdc:script/fumadocs-page-conventions.
 4. Translate frontmatter values but keep all original frontmatter keys
 5. Translate text in tables but maintain table structure
 
-## Special Elements
-
-### Cards
-```mdx
-<Cards>
-  <Card 
-    href="/path" 
-    title="Translated Title">
-    Translated content here
-  </Card>
-</Cards>
-```
-
-### Callouts
-```mdx
-<Callout title="Translated Title" type="info">
-  Translated callout content
-</Callout>
-
-<Callout>Translated callout content</Callout>
-
-<Callout title="Title">Translated callout content</Callout>
-
-<Callout title="Title" type="error">
- Translated callout content
-</Callout>
-
-<Callout title="warn" type="warn" >
- Translated callout content
-</Callout>
-
-```
-
-### Codeblocks
-```jsx title="Translated Title"
-// Translate only comments
-const code = "Don't translate this";
-```
 
 ## Additional Components
 
 When translating documents that use the following components, follow these specific guidelines:
 
+---
 
 ### Accordion
 
@@ -109,32 +72,17 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 - By default, the Accordion value is the `title`. If `id` is set, it will be used instead.
 
 **Recommended for:** FAQs, grouped information, or expandable sections in documentation.
- 
 
-### Banner
-```mdx
-<Banner 
-  title="Translated Title"
-  description="Translated description"
-  action="Translated action text"
-/>
-```
-
-### Dynamic Codeblock
-```mdx
-<DynamicCodeBlock 
-  title="Translated Title"
-  language="tsx"
->
-  {`
-    // Translate only comments
-    const code = "Don't translate this";
-  `}
-</DynamicCodeBlock>
-```
+---
 
 ### Files
+
+To show a file structure, use the `Files`, `Folder`, and `File` components from `fumadocs-ui/components/files`.
+
+**Example:**
 ```mdx
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
 <Files>
   <Folder name="Translated Folder Name" defaultOpen>
     <File name="Translated File Name" />
@@ -142,17 +90,37 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 </Files>
 ```
 
+- Use the `name` prop to provide the translated folder or file name.
+- Use `defaultOpen` to expand a folder by default.
+- Nest `<Folder>` and `<File>` as needed.
+
+---
+
 ### GitHub Info
+
+To display GitHub repository information, use the `GithubInfo` component from `fumadocs-ui/components/github-info`.
+
+**Example:**
 ```mdx
-<GitHubInfo
-  repo="username/repo"
-  branch="main"
-  title="Translated Title"
-  description="Translated description"
+import { GithubInfo } from 'fumadocs-ui/components/github-info';
+
+<GithubInfo
+  owner="username"
+  repo="repo-name"
+  // token is optional, for authenticated requests
+  token={process.env.GITHUB_TOKEN}
 />
 ```
 
+- Recommended: Add to your docs layout via the `links` option.
+
+---
+
 ### Image Zoom
+
+To enable zoom-in on images, replace the default image component with `ImageZoom`.
+
+**Example (MDX usage):**
 ```mdx
 <ImageZoom 
   src="/path/to/image.png" 
@@ -162,25 +130,91 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 />
 ```
 
-### Inline TOC
-```mdx
-<InlineTOC title="Translated Table of Contents" />
+**Example (global MDX integration):**
+```tsx
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import defaultComponents from 'fumadocs-ui/mdx';
+import type { MDXComponents } from 'mdx/types';
+
+export function getMDXComponents(components?: MDXComponents): MDXComponents {
+  return {
+    ...defaultComponents,
+    img: (props) => <ImageZoom {...(props as any)} />,
+    ...components,
+  };
+}
 ```
 
-### Steps
+- All images will be zoomable after this replacement.
+- Next.js `<Image />` will have a default `sizes` prop if not specified.
+
+---
+
+### Inline TOC
+
+To add an inline Table of Contents, use the `InlineTOC` component and pass TOC items.
+
+**Example:**
 ```mdx
+import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
+
+<InlineTOC items={toc} />
+```
+
+- For use within a page:
+  ```tsx
+  <DocsPage>
+    ...
+    <InlineTOC items={toc} />
+    ...
+  </DocsPage>
+  ```
+
+---
+
+### Steps
+
+To show sequential steps, wrap `Step` components inside a `Steps` container.
+
+**Example:**
+```mdx
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 <Steps>
-  <Step title="Translated Step 1">
+  <Step>
+    ### Translated Step 1
     Translated content for step 1
   </Step>
-  <Step title="Translated Step 2">
+  <Step>
+    ### Translated Step 2
     Translated content for step 2
   </Step>
 </Steps>
 ```
 
+- You can use Tailwind CSS classes for custom step visuals:
+  ```mdx
+  <div className="fd-steps">
+    <div className="fd-step" />
+  </div>
+  ```
+- To style only specific headings as steps:
+  ```mdx
+  <div className='fd-steps [&_h3]:fd-step'>
+    ### Translated Heading
+  </div>
+  ```
+
+---
+
 ### Tabs
+
+To use tabbed content, import `Tab` and `Tabs` from `fumadocs-ui/components/tabs`.
+
+**Example:**
 ```mdx
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
 <Tabs items={['Translated Tab 1', 'Translated Tab 2']}>
   <Tab>
     Translated content for tab 1
@@ -191,20 +225,22 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 </Tabs>
 ```
 
-### Type Table
-```mdx
-<TypeTable
-  title="Translated Title"
-  types={[
-    {
-      name: 'propName',
-      type: 'string',
-      description: 'Translated description'
-    }
-  ]}
-/>
-```
+- Assign `value` to each `<Tab>` or omit for index-based detection.
+- Use `groupId` to share value across multiple Tabs.
+- Enable `persist` to save the selected tab in `localStorage`.
+- Set `defaultIndex` to choose the default active tab.
+- Use `id` on `<Tab>` for URL hash linking (e.g., `#tab-cpp`).
+- `updateAnchor` on `<Tabs>` updates the URL hash when a new tab is selected.
 
+**Advanced:**
+You may use Radix UI primitives directly if needed.
+
+---
+
+> **Note:** Always translate visible text, such as `title`, tab labels, folder/file names, alt text, and content within the components.  
+> Preserve component structure and logic while making documentation accessible and localized.
+
+---
 
 
 
