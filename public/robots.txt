@@ -1,3 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-Sitemap: https://cursor-cn.org/sitemap.xml
+
+# Sitemap files
+Sitemap: https://www.cursor-cn.org/sitemap.xml
