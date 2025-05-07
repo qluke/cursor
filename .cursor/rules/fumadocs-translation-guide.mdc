@@ -1,44 +1,81 @@
 ---
-description: 
+description: Guidelines for translating documentation using Fumadocs, focusing on Markdown, MDX, and UI component conventions.
 globs: 
 alwaysApply: true
 ---
 # Fumadocs Translation Guide
 
-This rule provides guidelines for translating Fumadocs documentation while maintaining proper formatting and conventions.
-
-## Markdown Syntax
-
-When translating Fumadocs documentation, preserve all of the following elements:
-
-- **Frontmatter**: Keep all frontmatter properties (`title`, `description`, etc.) but translate their values
-- **MDX Components**: Don't modify component names like `<Cards>`, `<Callout>`, etc.
-- **Codeblocks**: Do not translate code inside triple backticks unless they contain comments
-- **Links**: Preserve all link structures while translating the link text
-- **Images**: Keep image references intact, only translate alt text
+This document provides **clear rules for translating documentation** using Fumadocs, ensuring formatting, structure, and component usage remain correct and consistent.
 
 Reference: [fumadocs-markdown.mdx](mdc:script/fumadocs-markdown.mdx)
 
-## Page Conventions
+---
 
-When translating page-related files, follow these guidelines:
+## Markdown & MDX Syntax
 
-- **Meta Files**: Translate values in `meta.json` files but preserve all keys and special syntax
-- **Folder Structure**: Maintain the folder structure and naming as in the original documentation
-- **Slugs**: Don't modify file paths that affect page slugs
-- **Root Folders**: Maintain root folder designations and their properties
+When translating documentation, **always preserve the following**:
+
+- **Frontmatter**  
+  - **Keep all keys unchanged** (e.g. `title`, `description`, etc.)  
+  - **Translate only values**.
+- **MDX Components**  
+  - **Do not rename or alter component tags** (`<Cards>`, `<Callout>`, etc.).  
+  - **Only translate text content or props that are meant to be visible** (e.g. `title`, `description`, `alt`).
+- **Codeblocks**  
+  - **Never translate code inside triple backticks** (```) **unless there are inline comments**.  
+  - **Translate comments if present and visible**.
+- **Links**  
+  - **Preserve all link URLs and structure**.  
+  - **Translate the link text** only.
+- **Images**  
+  - **Do not change image paths**.  
+  - **Translate only the alt text**.
+
+---
+
+### Cards
+
+**Recommended usage:**  
+For displaying related links, feature highlights, navigation, grouped information, etc. Common on homepages or overview pages.
+
+---
+
+### Callout
+
+**Recommended usage:**  
+For tips, important notes, warnings, or errors. Use for operational advice, risks, or emphasizing critical content.
+
+---
+
+## Page & Folder Conventions
+
+When translating or creating page-related files:
+
+- **Meta Files:**  
+  - Translate values in `meta.json` (such as `title`, `description`).
+  - **Do not change keys or the structure.**
+- **Folder Structure:**  
+  - Keep folder and file names unchanged to preserve routing and slugs.
+- **Slugs:**  
+  - Do not alter file or folder names that determine page slugs.
+- **Root Folders:**  
+  - Maintain root folder designations and their properties in meta files.
 
 Reference: [fumadocs-page-conventions.mdx](mdc:script/fumadocs-page-conventions.mdx)
 
+---
+
 ## Translation Workflow
 
-1. Create translated versions of `.mdx` files with the same filename structure
-2. Translate content while preserving all Markdown and MDX syntax
-3. Ensure all component props and attributes remain functional
-4. Translate frontmatter values but keep all original frontmatter keys
-5. Translate text in tables but maintain table structure
+1. **Copy and translate source `.mdx` files** using the same filenames and structure.
+2. **Translate visible content** but preserve all MDX and Markdown syntax.
+3. **Retain all component props and attributes** so components function as intended.
+4. **Translate frontmatter values only**, leaving keys unchanged.
+5. **Translate table content** but keep table structure intact.
 
+---
 
+ 
 ## Additional Components
 
 When translating documents that use the following components, follow these specific guidelines:
@@ -225,23 +262,20 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 </Tabs>
 ```
 
-- Assign `value` to each `<Tab>` or omit for index-based detection.
-- Use `groupId` to share value across multiple Tabs.
-- Enable `persist` to save the selected tab in `localStorage`.
-- Set `defaultIndex` to choose the default active tab.
-- Use `id` on `<Tab>` for URL hash linking (e.g., `#tab-cpp`).
-- `updateAnchor` on `<Tabs>` updates the URL hash when a new tab is selected.
-
-**Advanced:**
-You may use Radix UI primitives directly if needed.
+- Translate tab labels and content.
+- Assign `value` to each `<Tab>`, or omit for index-based selection.
+- Use `groupId` to sync tab selection across groups.
+- Use `persist` to store selection in `localStorage`.
+- Set `defaultIndex` for default active tab.
+- Use `id` on `<Tab>` for URL hash linking.
+- `updateAnchor` updates the URL hash when a tab is selected.
 
 ---
 
-> **Note:** Always translate visible text, such as `title`, tab labels, folder/file names, alt text, and content within the components.  
-> Preserve component structure and logic while making documentation accessible and localized.
-
----
-
-
-
-
+> **Note:**  
+> Always translate visible text inside components:  
+> `title`, tab labels, folder/file names, alt text, and inner content.  
+> **Never change component names, logic, or structure.**  
+> Your translation must keep the documentation fully functional, accessible, and localized.
+ 
+ 
