@@ -1,82 +1,238 @@
 ---
 title: 忽略文件
-description: Ignore Files
+description: 使用.cursorignore和.cursorindexinggnore控制Cursor的AI功能和索引可以访问哪些文件
 ---
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
+概述
+----
+
+Cursor 会读取并索引您的项目代码库，以支持其各项功能。您可以通过在根目录添加 `.cursorignore` 文件，控制 Cursor 可以访问哪些目录和文件。
+
+Cursor 会尽最大努力阻止对 `.cursorignore` 文件中列出的文件的访问，包括：
+
+* 代码库索引
+* 通过 [Tab](https://docs.cursor.com/tab/overview)、[Chat](https://docs.cursor.com/chat/overview) 和 [⌘K](https://docs.cursor.com/cmdk/overview) 访问的代码
+* 通过 [@ 符号引用](https://docs.cursor.com/context/@-symbols/overview) 访问的代码
+
+<Callout type="warn" >
+由 Cursor 聊天功能发起的对终端和 MCP 服务器等服务的工具调用，目前无法阻止对 .cursorignore 管控的代码的访问。
+</Callout>
+
+全局忽略文件
+------------
+
+现在，您可以通过用户级设置定义适用于所有项目的忽略模式。这样可以将嘈杂或敏感的文件（如构建输出或机密文件）排除在提示之外，而无需为每个项目单独配置。
  
-Cursor 会读取项目代码库并编制索引，为其功能提供支持。通过在根目录中添加`.cursorignore`文件，你可以控制 Cursor 可以访问哪些目录和文件。
 
-Cursor 会尽最大努力阻止访问`.cursorignore`文件中列出的文件：
+为什么要忽略文件？
+------------------
 
-- 代码库索引
-- 通过[Tab](https://docs.cursor.com/tab/overview)、[Chat](https://docs.cursor.com/chat/overview)和[⌘](https://docs.cursor.com/cmdk/overview)K访问的代码
-- 通过[@ 符号引用](https://docs.cursor.com/context/@-symbols/overview)访问的代码
-
-由Cursor的聊天功能发起的对终端和MCP服务器等服务的工具调用，目前无法阻止对`.cursorignore`代码的访问`。`
-
-## 全局忽略文件
-
-现在您可以通过用户级设置来定义适用于所有项目的忽略模式。这样就能将嘈杂或敏感文件（如构建输出或机密文件）排除在提示之外，而无需按项目进行配置。
-
-## 为什么要忽略文件？
-
-配置 Cursor 以忽略代码库中的部分文件有两个常见原因：
+配置 Cursor 忽略部分代码库的常见原因有两个：
 
 ### 安全性
 
 虽然您的代码库不会永久存储在 Cursor 服务器或支持其功能的 LLM 上，但出于安全考虑，您可能仍希望限制对某些文件的访问，例如包含 API 密钥、数据库凭证和其他机密的文件。
 
-Cursor 会尽最大努力阻止对忽略文件的访问，但由于 LLM 行为的不可预测性，我们无法保证这些文件永远不会暴露。
+Cursor 会尽最大努力阻止对被忽略文件的访问，但由于 LLM 行为的不可预测性，我们无法保证这些文件永远不会被暴露。
 
 ### 性能
 
-如果您使用的是单代码或超大代码库，其中大部分代码与您正在开发的代码无关，那么您可以考虑配置 Cursor 以忽略应用程序中的这些部分。
+如果您在单体仓库或超大代码库中工作，其中大部分内容与您正在开发的代码无关，则可以考虑配置 Cursor 忽略这些部分。
 
-通过忽略代码库中的无关部分，Cursor 可以更快地索引大型代码库，并在搜索上下文时更快速、更准确地找到文件。
+通过排除无关部分，Cursor 可以更快地索引大型代码库，并在搜索上下文时更快、更准确地找到文件。
 
-Cursor 专为支持大型代码库而设计，能熟练评估文件相关性，但当使用的代码库特别大或包含与开发无关的文件时，忽略功能会很有帮助。
+Cursor 专为支持大型代码库而设计，能够熟练评估文件相关性，但当代码库特别大或包含与开发无关的文件时，忽略功能会很有帮助。
 
-## 配置`.cursorignore`
+## 配置 `.cursorignore`
 
-要使用Cursor的忽略功能，请在代码库的根目录下添加一个`.cursorignore`文件，并列出要忽略的目录和文件。
+要启用 Cursor 的忽略功能，请在代码库根目录下添加 `.cursorignore` 文件，并列出要忽略的目录和文件。
 
-`.cursorignore`文件使用的模式匹配语法与`.gitignore`文件相同。
+`.cursorignore` 文件使用的模式匹配语法与 `.gitignore` 文件相同。
+
+### 分层忽略
+
+默认情况下，Cursor 只会在当前工作区查找 `.cursorignore` 文件。当您在「Cursor 设置」>「功能」>「编辑器」>「分层 Cursor Ignore」中启用该功能后，Cursor 会沿文件树向上查找所有 `.cursorignore` 文件，从而支持跨嵌套项目目录的更灵活配置。
 
 ### 基本模式示例
 
+```bash
+# 忽略特定文件 `config.json`
+config.json
+
+# 忽略 `dist` 目录及其所有文件
+dist/
+
+# 忽略所有以 `.log` 结尾的文件
+*.log
+```
+
 ### 高级模式示例
+
+```bash
+# 忽略整个代码库
+*
+
+# 不忽略 `app` 目录
+!app/
+
+# 忽略任意目录下的 logs 目录
+**/logs
+```
 
 ### 注意事项
 
-- 
-    
-    忽略空行
-    
-- 
-    
-    以`#`开头的行被视为注释并忽略
-    
-- 
-    
-    模式相对于`.cursorignore`文件的位置进行匹配
-    
-- 
-    
-    模式将覆盖文件中先前列出的冲突模式
-    
+*   忽略空行
+*   以 `#` 开头的行为注释并被忽略
+*   模式相对于 `.cursorignore` 文件的位置进行匹配
+*   后续模式会覆盖文件中先前列出的冲突模式
 
-## 使用`.cursorindexingignore`限制索引
+使用 `.cursorindexingignore` 限制索引
+-------------------------------------
 
-要在索引中使用Cursor的忽略功能，可在代码库的根目录中添加一个`.cursorindexingignore`文件，并列出要从索引中排除的目录和文件。
+要仅对索引使用 Cursor 的忽略功能，请在代码库根目录下添加 `.cursorindexingignore` 文件，并列出要从索引中排除的目录和文件。
 
-`.cursorindexingignore`中列出的文件将不会包含在Cursor的索引中，但仍可被Cursor的人工智能辅助功能访问，包括当Cursor搜索代码库并将其公开给LLM时。
+`.cursorindexingignore` 中列出的文件不会包含在 Cursor 的索引中，但仍可被 Cursor 的 AI 辅助功能访问，包括当 Cursor 搜索代码库并将其暴露给 LLM 时。
 
-## 默认忽略的文件
+默认忽略的文件
+----------------
 
-Cursor 还将忽略根目录中`.gitignore`文件和下面默认忽略列表中列出的所有文件。
+Cursor 还会忽略根目录下 `.gitignore` 文件和下方默认忽略列表中列出的所有文件。
 
-要想不忽略这些文件中列出的文件，请将其添加到`.cursorignore`文件中，并在文件前加上`!`前缀。
+如果您不希望忽略这些文件，请将其添加到 `.cursorignore` 文件中，并在文件前加上 `!` 前缀。
 
-## 故障排除
+<Accordions>
+  <Accordion title="默认忽略列表">
+    仅用于索引时，除了 `.gitignore`、`.cursorignore` 和 `.cursorindexignore` 文件中指定的文件外，以下文件也会被忽略：
 
-要排除忽略文件的问题，可尝试使用`git check-ignore -v [file]`命令测试模式。
+    ```
+   package-lock.json
+    pnpm-lock.yaml
+    yarn.lock
+    composer.lock
+    Gemfile.lock
+    bun.lockb
+    .env*
+    .git/
+    .svn/
+    .hg/
+    *.lock
+    *.bak
+    *.tmp
+    *.bin
+    *.exe
+    *.dll
+    *.so
+    *.lockb
+    *.qwoff
+    *.isl
+    *.csv
+    *.pdf
+    *.doc
+    *.doc
+    *.xls
+    *.xlsx
+    *.ppt
+    *.pptx
+    *.odt
+    *.ods
+    *.odp
+    *.odg
+    *.odf
+    *.sxw
+    *.sxc
+    *.sxi
+    *.sxd
+    *.sdc
+    *.jpg
+    *.jpeg
+    *.png
+    *.gif
+    *.bmp
+    *.tif
+    *.mp3
+    *.wav
+    *.wma
+    *.ogg
+    *.flac
+    *.aac
+    *.mp4
+    *.mov
+    *.wmv
+    *.flv
+    *.avi
+    *.zip
+    *.tar
+    *.gz
+    *.7z
+    *.rar
+    *.tgz
+    *.dmg
+    *.iso
+    *.cue
+    *.mdf
+    *.mds
+    *.vcd
+    *.toast
+    *.img
+    *.apk
+    *.msi
+    *.cab
+    *.tar.gz
+    *.tar.xz
+    *.tar.bz2
+    *.tar.lzma
+    *.tar.Z
+    *.tar.sz
+    *.lzma
+    *.ttf
+    *.otf
+    *.pak
+    *.woff
+    *.woff2
+    *.eot
+    *.webp
+    *.vsix
+    *.rmeta
+    *.rlib
+    *.parquet
+    *.svg
+    .egg-info/
+    .venv/
+    node_modules/
+    __pycache__/
+    .next/
+    .nuxt/
+    .cache/
+    .sass-cache/
+    .gradle/
+    .DS_Store/
+    .ipynb_checkpoints/
+    .pytest_cache/
+    .mypy_cache/
+    .tox/
+    .git/
+    .hg/
+    .svn/
+    .bzr/
+    .lock-wscript/
+    .Python/
+    .jupyter/
+    .history/
+    .yarn/
+    .yarn-cache/
+    .eslintcache/
+    .parcel-cache/
+    .cache-loader/
+    .nyc_output/
+    .node_repl_history/
+    .pnp.js/
+    .pnp/
+    ```
+  </Accordion>
+</Accordions>
+
+故障排除
+--------
+
+要排查忽略文件的问题，可尝试使用 `git check-ignore -v [file]` 命令测试模式。

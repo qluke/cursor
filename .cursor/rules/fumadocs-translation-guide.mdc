@@ -56,6 +56,19 @@ Reference: [fumadocs-page-conventions.mdx](mdc:script/fumadocs-page-conventions.
 <Callout title="Translated Title" type="info">
   Translated callout content
 </Callout>
+
+<Callout>Translated callout content</Callout>
+
+<Callout title="Title">Translated callout content</Callout>
+
+<Callout title="Title" type="error">
+ Translated callout content
+</Callout>
+
+<Callout title="warn" type="warn" >
+ Translated callout content
+</Callout>
+
 ```
 
 ### Codeblocks
@@ -68,21 +81,35 @@ const code = "Don't translate this";
 
 When translating documents that use the following components, follow these specific guidelines:
 
+
 ### Accordion
+
+To use the Accordion component, import both `Accordion` and `Accordions` from `fumadocs-ui/components/accordion`.  
+Wrap your `<Accordion>` items within an `<Accordions>` container.
+
+**Example:**
 ```mdx
-<Accordion title="Translated Title">
-  Translated content here
-</Accordion>
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+<Accordions type="single">
+  <Accordion title="Translated Title">
+    Translated content here
+  </Accordion>
+</Accordions>
 ```
 
-### Auto Type Table
-```mdx
-<AutoTypeTable
-  of={Component}
-  title="Translated Title" 
-  description="Translated description"
-/>
-```
+- Use the `title` prop for the header text.
+- The content goes inside the `<Accordion>` tag.
+- To enable deep-linking (auto-opening via URL hash), add an `id` prop:
+  ```mdx
+  <Accordion title="Translated Title" id="section-id">
+    Translated content here
+  </Accordion>
+  ```
+- By default, the Accordion value is the `title`. If `id` is set, it will be used instead.
+
+**Recommended for:** FAQs, grouped information, or expandable sections in documentation.
+ 
 
 ### Banner
 ```mdx
@@ -177,6 +204,8 @@ When translating documents that use the following components, follow these speci
   ]}
 />
 ```
+
+
 
 
 
