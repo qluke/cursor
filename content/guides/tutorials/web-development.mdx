@@ -1,9 +1,138 @@
 ---
-title: Web 开发
-description: 本页介绍 Web 开发相关的教程和实践。
+title: Web 开发设置指南
+description: 如何为web开发设置Cursor
 full: false
 ---
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-## 这里开始写正文内容
+Web 开发通常涉及快速迭代和 Cursor 与 Figma 或浏览器等外部工具之间的紧密反馈循环。在 Cursor，我们发现了能够紧密衔接这个循环的工作流程。明确的任务范围界定、重用组件和利用设计系统有助于保持开发过程快速一致。
 
-欢迎阅读 Web 开发教程。本页内容待补充。 
+本指南介绍如何设置 Cursor 以支持 Web 开发并缩短反馈循环。
+
+<Mermaid
+  chart="
+graph LR;
+  项目 --> 设计;
+  设计 --> 代码;
+  代码 -- 测试 --> 验证;
+  验证 -- 反馈 --> 代码;
+  "
+/>
+
+## 在 Cursor 中开始编排
+
+**聊天**功能非常适合引导变更。一旦主要部分就位，切换到**CMD K**和**Tab**可以帮助保持流畅状态。
+
+设置好 Cursor 后，您将能够协调不同工具之间的工作流程。下面是一个可能性的演示：通过结合 Linear、Figma 和浏览器工具创建的贪吃蛇游戏。虽然实际项目通常更加复杂，但这个例子展示了这些集成工作流程的潜力。
+
+## 连接到您的项目管理工具
+
+您可以使用不同的工具将 Cursor 集成到现有的项目管理软件中。在本指南中，我们将探讨如何通过 MCP 服务器与 Linear 集成。
+
+### 安装
+
+1. 将 Linear MCP 服务器添加到 `mcp.json`
+
+```
+{
+  "mcpServers": {
+    "linear": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ]
+    }
+  }
+}
+```
+
+2. 确保从 MCP 设置中启用 Linear
+3. 网页浏览器将打开，系统会提示您授权 Linear
+
+<Callout type="warn">
+  由于 MCP 的当前状态，设置可能需要多次尝试。如果集成不起作用，请尝试从 Cursor 设置中"重新加载"服务器。
+</Callout>
+
+### 在 Cursor 中使用 Linear
+
+Linear MCP 服务器提供了不同的工具，Cursor 可以用来读取和管理问题。前往 MCP 设置并找到 Linear 服务器，查看所有工具的列表。要验证，请在聊天中尝试以下提示：
+
+```
+列出与此项目相关的所有问题
+```
+
+
+如果集成设置正确，它应该返回问题列表。
+
+## 引入您的 Figma 设计
+
+设计和模型是 Web 开发的核心。使用社区构建的 Figma MCP 服务器，您可以直接在 Cursor 中访问和使用设计文件。要开始使用，请按照[https://www.framelink.ai/docs/quickstart](https://www.framelink.ai/docs/quickstart)中的设置说明进行操作。
+
+### 安装
+
+```
+{
+  "mcpServers": {
+	  ...,
+    "figma": {
+	    "command": "npx",
+	    "args": [
+	      "-y",
+	      "figma-developer-mcp",
+	      "--figma-api-key=YOUR-KEY",
+	      "--stdio"
+	    ]
+	  }
+  },
+}
+```
+
+### 使用方法
+
+此 MCP 服务器要求您传递要访问的 Figma 图层或框架的链接。在[文档](https://www.framelink.ai/docs/quickstart#implement-design)中了解更多信息。
+
+ 
+## 保持代码脚手架一致性
+
+您可能已经有了现有的代码、设计系统或已建立的惯例想要重用。使用模型时，参考代码库中已有的模式很有帮助，比如下拉菜单或其他常见组件。
+
+在我们自己的大型 Web 代码库中工作时，我们发现声明式代码效果特别好，尤其是对于 React 和 JSX。
+
+如果您有设计系统，可以通过提供规则来帮助代理发现它。以下是一个 `ui-components.mdc` 文件，我们尝试在可能的情况下强制重用组件：
+
+
+```ts tab="components.mdc"
+---
+description: 实现设计和构建 UI
+---
+- 重用 `/src/components/ui` 中的现有 UI 组件。这些是我们可以用来构建的基础组件
+- 如果找不到任何解决问题的现有组件，通过编排 UI 组件创建新组件
+- 当缺少组件和设计时，询问人类他们希望如何进行
+```
+
+随着组件库的增长，相应地添加新规则。当规则变得过多时，考虑将它们分成更具体的类别，例如"仅在处理用户输入时应用"。
+
+ 
+## 让 Cursor 访问浏览器
+
+要扩展 Cursor 的功能，您可以设置浏览器工具 MCP 服务器，它提供对控制台日志和网络请求的访问。配置完成后，您可以通过监控控制台输出和网络活动来验证您的更改。这种设置有助于确保您的实现符合您的意图。按照这里的说明设置 MCP 服务器：[https://browsertools.agentdesk.ai/installation](https://browsertools.agentdesk.ai/installation)
+
+<Callout type="info">
+ 我们正在努力使这种集成在 Cursor 中更加容易原生实现。
+</Callout>
+
+## 要点总结
+
+* Web 开发中紧密的反馈循环至关重要。将 Cursor 与 Figma、Linear 和浏览器等工具一起使用，可以快速行动并保持流畅。
+* MCP 服务器允许您将外部系统直接集成到 Cursor 中，减少上下文切换并改善任务执行。
+* 重用组件和设计系统有助于模型生成更清晰、更一致的代码和输出。
+* 明确范围的任务会带来更好的结果。对如何提示以及要求什么要有意识。
+* 如果您没有获得良好的输出，请尝试调整：
+  * **说明：** 使用规则、提示，并通过例如 MCP 服务器提供更多上下文的访问权限。
+  * **系统：** 模式、抽象和清晰度使模型更容易理解、帮助并更自主地工作
+* 您可以通过包含运行时信息（如控制台日志、网络请求和 UI 元素数据）来扩展模型的上下文。
+* 并非所有内容都需要自动化。如果您的系统变得太复杂，请回退到使用 Tab 和 CMD K 进行更精确的编辑。
+* 当 Cursor 是副驾驶而非自动驾驶时，其功能最强大。使用它来改进而不是替代您自己的决策。
+

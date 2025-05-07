@@ -1,9 +1,117 @@
 ---
-title: 大型代码库
-description: 本页介绍大型代码库的管理与实践。
+title: 大型代码库工作指南
+description: 如何在Cursor中处理大型代码库
 full: false
 ---
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-## 这里开始写正文内容
 
-欢迎阅读大型代码库指南。本页内容待补充。 
+处理大型代码库与小型项目相比会带来一系列新的挑战。根据我们在扩展 Cursor 自身代码库的经验以及来自管理大规模代码库的客户的见解，我们发现了一些有用的模式来处理增加的复杂性。
+
+在本指南中，我们将介绍一些我们发现对大型代码库有用的技术。
+
+<Mermaid
+  chart="
+graph LR;
+  构建代码库理解 --> 定义结果/差异;
+  定义结果/差异 --> 规划变更;
+  规划变更 --> 实施变更;
+  "
+/>
+
+## 使用对话功能快速了解不熟悉的代码
+
+导航大型代码库，尤其是对您来说是新的代码库，可能具有挑战性。您经常需要进行 grep 搜索并四处点击以找到您正在寻找的代码库的特定部分。借助 [Chat](https://docs.cursor.com/chat/overview)，您可以开始提问以找到您要找的内容，并获得关于其工作原理的详细解释。
+
+在这里，我们正在寻求帮助，以找到 Cursor 中代码库索引的实现细节，甚至请求一些示例以便更容易理解。
+
+为了让 Cursor 更好地理解您代码库的结构，请确保从**设置**中启用**包含项目结构**以提高性能。
+
+## 为领域知识编写规则
+
+如果您要让新的协作者熟悉您的代码库，您会提供什么上下文以确保他们能够开始做出有意义的贡献？
+
+您对这个问题的回答对于 Cursor 理解您的代码库也可能是有价值的信息。对于每个组织或项目，都有可能没有完全在文档中捕获的潜在知识。有效使用规则是确保 Cursor 获得完整图景的最佳方式。
+
+例如，如果您正在编写有关如何实现新功能或服务的说明，请考虑编写一个简短的规则以将其永久记录下来。
+
+```ts tab="Boilerplate"
+---
+description: Add a new VSCode frontend service
+---
+
+1. **Interface Definition:**
+   - Define a new service interface using `createDecorator` and ensure `_serviceBrand` is included to avoid errors.
+
+2. **Service Implementation:**
+   - Implement the service in a new TypeScript file, extending `Disposable`, and register it as a singleton with `registerSingleton`.
+
+3. **Service Contribution:**
+   - Create a contribution file to import and load the service, and register it in the main entrypoint.
+
+4. **Context Integration:**
+   - Update the context to include the new service, allowing access throughout the application.
+```
+
+如果有您希望确保 Cursor 遵守的常见格式模式，请考虑基于 glob 模式自动附加规则。
+
+```ts tab="Formatting"
+---
+globs: *.ts
+---
+- Use bun as package manager. See [package.json](mdc:backend/reddit-eval-tool/package.json) for scripts
+- Use kebab-case for file names
+- Use camelCase for function and variable names
+- Use UPPERCASE_SNAKE_CASE for hardcoded constants
+- Prefer `function foo()` over `const foo = () =>`
+- Use `Array<T>` instead of `T[]`
+- Use named exports over default exports, e.g (`export const variable ...`, `export function `)
+```
+
+## 紧密参与计划制定过程
+
+对于较大的变更，花费高于平均水平的思考来创建精确、范围明确的计划可以显著改善 Cursor 的输出。
+
+如果您发现在尝试了同一提示的几种不同变体后仍未获得想要的结果，请考虑放大视角，从头开始创建更详细的计划，就像您正在为同事创建 PRD 一样。通常**难点在于弄清楚应该**进行什么样的更改，这是一项非常适合人类的任务。有了正确的指示，我们可以将实施的某些部分委托给 Cursor。
+
+使用 AI 来增强计划创建过程的一种方法是使用问答模式。要创建计划，请在 Cursor 中打开问答模式，并导入您从项目管理系统、内部文档或零散想法中收集的任何上下文。考虑一下您在代码库中已经知道要包含的文件和依赖项。这可能是一个包含您想要集成的代码片段的文件，或者可能是整个文件夹。
+
+以下是一个示例提示：
+
+我们要求模型通过向人类提问来创建计划并收集上下文，参考任何早期的探索提示以及工单描述。建议使用诸如 `claude-3.7-sonnet`、`gemini-2.5-pro` 或 `o3` 之类的思考型模型，因为它们可以理解更改的意图并更好地综合出计划。
+
+从这里开始，您可以在开始实施之前，在 Cursor 的帮助下迭代地制定计划。
+
+<Mermaid
+  chart="
+graph LR;
+  上下文((上下文)) --> |提问| 计划((计划));
+  计划 --> |代理| 实施((实施)); 
+  "
+/>
+
+## 选择合适的工具完成工作
+
+有效使用 Cursor 的最重要技能之一是为工作选择正确的工具。思考您想要完成的任务，并选择能让您保持流畅工作状态的方法。
+
+| **工具** | **使用场景** | **优势** | **局限性** |
+| --- | --- | --- | --- |
+| **[Tab](https://docs.cursor.com/tab/overview)** | 快速手动更改 | 完全控制，快速 | 单文件 |
+| **[Cmd K](https://docs.cursor.com/cmdk/overview)** | 单文件中的范围性更改 | 专注的编辑 | 单文件 |
+| **[Chat](https://docs.cursor.com/chat/overview)** | 更大型、多文件更改 | 自动收集上下文，深度编辑 | 较慢，上下文较重 |
+
+每个工具都有其最佳应用场景：
+
+* Tab 是您进行快速编辑的首选，您可以完全掌控
+* Cmd K 在您需要对代码的特定部分进行专注更改时表现出色
+* Chat 非常适合那些需要 Cursor 理解更广泛上下文的大型更改
+
+当您使用 Chat 模式时（可能感觉稍慢但功能强大），通过提供良好的上下文来帮助它。使用 [@files](https://docs.cursor.com/context/@-symbols/@-files) 指向您想要模仿的类似代码，或使用 [@folder](https://docs.cursor.com/context/@-symbols/@-folders) 让它更好地理解您的项目结构。不要害怕将大型更改分解为更小的块 - 开始新的聊天有助于保持专注和高效。
+
+## 要点总结
+
+* 缩小更改范围，不要一次尝试做太多
+* 尽可能包含相关上下文
+* 根据各自的优势使用 Chat、Cmd K 和 Tab
+* 经常创建新的聊天
+* 使用[问答模式](https://docs.cursor.com/chat/ask)规划，使用[代理模式](https://docs.cursor.com/chat/agent)实施 
