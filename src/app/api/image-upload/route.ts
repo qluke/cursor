@@ -18,11 +18,23 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const imageBuffer = Buffer.from(arrayBuffer); // 将 ArrayBuffer 转换为 Buffer
 
-    // 使用 sharp 处理图像
+    // 使用 sharp 处理图像 - 提高质量，不固定尺寸
     const resizedImage = await sharp(imageBuffer)
-      .toFormat("webp")
-      .resize(800, 450, { position: "top" })
+      .toFormat("webp", {
+        quality: 80, // 更高的质量设置 (0-100)
+        effort: 6, // 压缩效率 (0-6)，较高值提供更好的压缩但处理更慢
+        lossless: false, // 有损压缩，但保持较高质量
+      })
+      // 不再强制固定尺寸，而是保持原图比例，仅在必要时缩小
+      .resize({
+        width: 1920, // 最大宽度
+        height: 1080, // 最大高度
+        fit: "inside", // 确保图片完全适合指定的尺寸，保持宽高比
+        withoutEnlargement: true, // 不放大小图片
+      })
       .toBuffer();
+
+    console.log(`图片处理完成，转换为WebP格式，质量:80`);
 
     // 确保 endpoint 格式正确（必须包含 https://）
     const endpoint = process.env.NEXT_PUBLIC_MINIO_ENDPOINT || "";

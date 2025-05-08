@@ -12,6 +12,8 @@ Token（标记）是这些模型的输入和输出。它们是文本的片段，
 
 要查看一段文本如何被分词，你可以使用像[这个](https://tiktokenizer.vercel.app/)这样的分词器。
 
+![tokenizer.webp](https://cursor.codekv.com/1746671287219.webp)
+
 ## 什么是上下文？
 
 在 Cursor 中生成代码建议时，"上下文"指的是提供给模型的信息（以"输入 token"的形式），模型随后利用这些信息预测后续内容（以"输出 token"的形式"）。
@@ -55,7 +57,8 @@ flowchart LR
 | `@file` | `cache.ts` | 你知道需要读取或编辑哪个文件，但不确定具体位置 | 对于较大的文件，可能包含许多与任务无关的上下文 |
 | `@folder` | `utils/` | 文件夹中的所有或大部分文件都相关 | 可能包含许多无关上下文 |
 
- 
+![context-menu.webp](https://cursor.codekv.com/1746671666769.webp)
+
 
 规则
 -----
@@ -64,7 +67,8 @@ flowchart LR
 
 规则也可以通过 `/Generate Cursor Rules` 从现有对话生成。如果你有一段长时间的对话，包含大量提示，里面很可能有一些有用的指令或通用规则，值得后续复用。
 
- 
+![rule.webp](https://cursor.codekv.com/1746671800645.webp)
+
 MCP
 ---
 
@@ -77,7 +81,9 @@ MCP
 
 如果你已经有通过 API 访问上下文和执行操作的工具，可以为其构建 MCP 服务器。这里有一份简短的构建指南：[https://modelcontextprotocol.io/tutorials/building-mcp-with-llms](https://modelcontextprotocol.io/tutorials/building-mcp-with-llms)。
 
- 
+  
+![mcp.webp](https://cursor.codekv.com/1746673323098.webp)
+
 自我收集上下文
 ----------------------
 
@@ -91,6 +97,8 @@ MCP
 2.  使用终端运行代码或测试
 
 - Agent 会读取终端输出并决定下一步操作。核心思想是让 Agent 能够访问实际的运行时行为，而不仅仅是静态代码。
+
+![self-gathering.webp](https://cursor.codekv.com/1746672148590.webp)
 
 要点总结
 --------
