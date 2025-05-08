@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
 interface ImageUploadProps {
-  onChange: (value: string) => void;
+  onChange: (value: string, originalFileName?: string) => void;
   value: string;
   onError?: (error: any) => void;
 }
@@ -22,8 +22,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       const file = event.target.files?.[0];
       if (!file) return;
 
+      // 提取原始文件名（不含扩展名）
+      const originalFileName = file.name.replace(/\.[^/.]+$/, "");
+
       const formData = new FormData();
       formData.append("file", file);
+      // 传递原始文件名
+      formData.append("originalFileName", originalFileName);
 
       setIsUploading(true);
 
@@ -35,7 +40,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
         if (response.ok) {
           const data = await response.json();
-          onChange(data.url); // 获取并设置上传后的图片 URL
+          // 传递URL和原始文件名
+          onChange(data.url, originalFileName);
         } else {
           const errorData = await response.text();
           console.error("上传失败:", errorData);

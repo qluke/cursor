@@ -7,6 +7,9 @@ export async function POST(req: NextRequest) {
     // 读取请求中的文件数据
     const formData = await req.formData();
     const file = formData.get("file") as Blob;
+    // 获取原始文件名
+    const originalFileName =
+      (formData.get("originalFileName") as string) || "material";
 
     if (!file) {
       return NextResponse.json({ message: "未找到文件" }, { status: 400 });
@@ -63,7 +66,8 @@ export async function POST(req: NextRequest) {
       forcePathStyle: true,
     });
 
-    const fileName = `${Date.now()}.webp`;
+    const timestamp = Date.now();
+    const fileName = `${timestamp}.webp`;
 
     const params = {
       Bucket: bucketName,
@@ -100,6 +104,8 @@ export async function POST(req: NextRequest) {
       success: true,
       message: "上传成功",
       fileName,
+      originalFileName,
+      timestamp,
     });
   } catch (error) {
     console.error("上传失败:", error);

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 export default function MaterialUploadAdmin() {
   const [imageUrl, setImageUrl] = useState("");
+  const [originalFileName, setOriginalFileName] = useState("material");
   const [error, setError] = useState("");
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -19,6 +20,14 @@ export default function MaterialUploadAdmin() {
   const handleUploadError = (err: any) => {
     console.error("上传错误:", err);
     setError(typeof err === "string" ? err : JSON.stringify(err, null, 2));
+  };
+
+  // 处理图片上传完成
+  const handleImageChange = (url: string, fileName?: string) => {
+    setImageUrl(url);
+    if (fileName) {
+      setOriginalFileName(fileName);
+    }
   };
 
   // 复制文本到剪贴板
@@ -34,10 +43,9 @@ export default function MaterialUploadAdmin() {
     );
   };
 
-  // 生成Markdown格式的图片链接
+  // 生成Markdown格式的图片链接，使用原始文件名
   const getMarkdownLink = () => {
-    const filename = imageUrl.split("/").pop() || "image";
-    return `![${filename}](${imageUrl})`;
+    return `![${originalFileName}.webp](${imageUrl})`;
   };
 
   // 处理图片URL更新
@@ -80,7 +88,7 @@ export default function MaterialUploadAdmin() {
           <h2 className="text-lg font-semibold mb-2">上传图片</h2>
           <ImageUpload
             value={imageUrl}
-            onChange={setImageUrl}
+            onChange={handleImageChange}
             onError={handleUploadError}
           />
         </div>
@@ -102,7 +110,7 @@ export default function MaterialUploadAdmin() {
                   {/* unoptimized 属性允许加载任何域的图片 */}
                   <Image
                     src={imageUrl}
-                    alt="已上传图片"
+                    alt={`${originalFileName}.webp`}
                     fill
                     className="object-contain rounded border shadow"
                     onError={handleImageError}
@@ -177,6 +185,30 @@ export default function MaterialUploadAdmin() {
                     )}
                   </button>
                 </div>
+              </div>
+
+              {/* 文件名编辑区域 */}
+              <div className="flex flex-col space-y-2">
+                <label
+                  htmlFor="file-name"
+                  className="font-medium text-sm text-gray-700"
+                >
+                  自定义描述名称:
+                </label>
+                <div className="flex items-center">
+                  <input
+                    id="file-name"
+                    type="text"
+                    value={originalFileName}
+                    onChange={(e) => setOriginalFileName(e.target.value)}
+                    aria-label="文件名"
+                    placeholder="输入自定义描述名称"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm"
+                  />
+                </div>
+                <p className="text-xs text-gray-500">
+                  修改此名称将更改Markdown格式中的图片描述，但不会更改实际URL
+                </p>
               </div>
 
               {copySuccess && (
