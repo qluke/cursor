@@ -1,6 +1,7 @@
 import { clinesSource } from "@/lib/source-cline";
 import { source } from "@/lib/source";
 import { NextResponse } from "next/server";
+import { sourceGuides } from "@/lib/source-guides";
 
 const HOST = "www.cursor-cn.org";
 const CURRENT_DATE = new Date().toISOString().split("T")[0];
@@ -10,6 +11,7 @@ export async function GET() {
     // Get all pages from sources
     const clinesPages = clinesSource.getPages();
     const docsPages = source.getPages();
+    const sourcePages = sourceGuides.getPages();
 
     // Generate URLs from clinesPages
     const clinesUrls = clinesPages.map((page) => {
@@ -31,18 +33,29 @@ export async function GET() {
       };
     });
 
+    // Generate URLs from sourcePages
+    const guidesUrls = sourcePages.map((page) => {
+      const slugPath = page.slugs.join("/");
+      return {
+        url: `https://${HOST}/guides${slugPath ? `/${slugPath}` : ""}`,
+        lastmod: CURRENT_DATE,
+        priority: "0.8",
+      };
+    });
+
     // Add main pages
     const mainUrls = [
       { url: `https://${HOST}/`, lastmod: CURRENT_DATE, priority: "1.0" },
       { url: `https://${HOST}/cline`, lastmod: CURRENT_DATE, priority: "0.9" },
       { url: `https://${HOST}/docs`, lastmod: CURRENT_DATE, priority: "0.9" },
+      { url: `https://${HOST}/guides`, lastmod: CURRENT_DATE, priority: "0.9" },
     ];
 
     // Combine all URLs and make sure there are no duplicates
     const allUrls = [...mainUrls];
 
-    // Add docs and cline URLs without duplicates
-    [...clinesUrls, ...docsUrls].forEach((item) => {
+    // Add docs, cline and guides URLs without duplicates
+    [...clinesUrls, ...docsUrls, ...guidesUrls].forEach((item) => {
       if (!allUrls.some((existing) => existing.url === item.url)) {
         allUrls.push(item);
       }
